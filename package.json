@@ -1,0 +1,21 @@
+{
+  "name": "nexora-commerce",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Nexora Commerce - AI-Powered Full-Stack E-Commerce Platform",
+  "packageManager": "pnpm@12.15.0",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "clean": "turbo run clean"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.2",
+    "turbo": "^2.4.4"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
