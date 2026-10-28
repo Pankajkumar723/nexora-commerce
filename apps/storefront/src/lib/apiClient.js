@@ -57,3 +57,12 @@ export const catalogApi = {
     return apiRequest('/categories');
   },
 };
+
+export const aiApi = {
+  getRecommendations: (data) => {
+    return apiRequest('/ai/recommendations', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+};

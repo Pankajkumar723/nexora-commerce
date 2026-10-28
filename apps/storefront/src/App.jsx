@@ -5,6 +5,7 @@ import { HomePage } from './routes/HomePage';
 import { ProductsPage } from './routes/ProductsPage';
 import { ProductDetailPage } from './routes/ProductDetailPage';
 import { CartDrawer } from './features/cart/CartDrawer';
+import { AiAssistantDrawer, AiAssistantTrigger } from './features/ai-assistant/AiAssistantDrawer';
 import { useProducts, useCategories } from './hooks/useCatalog';
 import { useDebounce } from './hooks/useDebounce';
 
@@ -32,6 +33,7 @@ export function App() {
     }
   });
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isAiOpen, setIsAiOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -207,6 +209,15 @@ export function App() {
         onCheckout={() => {
           alert('Razorpay Checkout integration initiates in Phase E! Cart total calculated server-side.');
         }}
+      />
+
+      {/* Floating AI Assistant Trigger & Drawer */}
+      <AiAssistantTrigger onClick={() => setIsAiOpen(true)} />
+      <AiAssistantDrawer
+        isOpen={isAiOpen}
+        onClose={() => setIsAiOpen(false)}
+        onAddToCart={(product) => handleAddToCart({ product, variant: product.variants?.[0], quantity: 1 })}
+        onSelectProduct={handleSelectProduct}
       />
 
       {/* Global Footer */}
