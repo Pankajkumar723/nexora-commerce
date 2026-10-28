@@ -320,16 +320,7 @@ export function Navbar({
           </div>
 
           {/* Desktop Navigation Links & Action Icons */}
-          <div className="flex items-center gap-1 sm:gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onNavigate('products')}
-              className="hidden lg:flex h-9 px-3 text-xs font-semibold text-foreground/80 hover:text-foreground hover:bg-muted/60 rounded-xl transition-colors"
-            >
-              All Products
-            </Button>
-
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
             {/* Wishlist button */}
             <Button
               variant="outline"
