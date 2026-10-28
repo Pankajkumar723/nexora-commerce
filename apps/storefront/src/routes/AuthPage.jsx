@@ -390,9 +390,11 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
         {/* Main Shadcn Card */}
         <Card className="border-border shadow-lg">
           <CardHeader className="text-center pb-4">
-            <div className="w-12 h-12 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center mx-auto mb-3 shadow-md">
-              <KeyRound className="w-6 h-6" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="Nexora Commerce"
+              className="w-16 h-16 object-contain mx-auto mb-3 drop-shadow-md"
+            />
             <CardTitle className="text-xl font-bold tracking-tight">
               {activeTab === 'login' ? 'Welcome Back to Nexora' : 'Create Your Nexora Account'}
             </CardTitle>

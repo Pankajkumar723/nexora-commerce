@@ -269,9 +269,11 @@ export function Navbar({
               onClick={() => onNavigate('home')}
               className="flex items-center gap-2.5 text-left focus:outline-none group"
             >
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-primary-foreground shadow-sm group-hover:scale-105 transition-transform">
-                <span className="font-bold text-lg tracking-tight">N</span>
-              </div>
+              <img
+                src="/logo.png"
+                alt="Nexora Commerce"
+                className="w-10 h-10 object-contain drop-shadow-sm group-hover:scale-105 transition-transform"
+              />
               <div>
                 <span className="text-xl font-bold tracking-tight text-foreground block leading-none">
                   NEXORA

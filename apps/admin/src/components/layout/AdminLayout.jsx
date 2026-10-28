@@ -28,9 +28,11 @@ export function AdminLayout({ activeTab, onSelectTab, children }) {
       {/* Sidebar Desktop */}
       <aside className="hidden lg:flex lg:flex-col w-64 bg-navy text-white border-r border-navy/80 shrink-0">
         <div className="p-6 border-b border-white/10 flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-royal-blue flex items-center justify-center font-bold text-base shadow">
-            N
-          </div>
+          <img
+            src="/logo.png"
+            alt="Nexora Admin"
+            className="w-9 h-9 object-contain drop-shadow"
+          />
           <div>
             <h1 className="font-extrabold text-sm tracking-tight leading-none text-white">
               NEXORA ADMIN
@@ -125,7 +127,10 @@ export function AdminLayout({ activeTab, onSelectTab, children }) {
             <div className="w-64 bg-navy text-white p-5 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
-                  <span className="font-bold text-sm">Nexora Admin</span>
+                  <div className="flex items-center gap-2.5">
+                    <img src="/logo.png" alt="Nexora Admin" className="w-8 h-8 object-contain" />
+                    <span className="font-bold text-sm">Nexora Admin</span>
+                  </div>
                   <button onClick={() => setSidebarOpen(false)}>
                     <X className="w-5 h-5 text-gray-300" />
                   </button>

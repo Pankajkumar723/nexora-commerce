@@ -56,9 +56,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm shadow-sm">
-                N
-              </div>
+              <img
+                src="/logo.png"
+                alt="Nexora Commerce"
+                className="w-8 h-8 object-contain drop-shadow-xs"
+              />
               <span className="font-bold text-lg tracking-tight text-foreground">NEXORA COMMERCE</span>
             </div>
             <p className="text-xs sm:text-sm text-muted-foreground max-w-sm leading-relaxed">
