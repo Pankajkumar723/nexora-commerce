@@ -1,0 +1,67 @@
+import {
+  Controller,
+  Post,
+  Get,
+  Body,
+  UseGuards,
+  HttpCode,
+  HttpStatus,
+  Headers,
+} from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { AuthService } from './auth.service';
+import { RegisterDto } from './dto/register.dto';
+import { LoginDto } from './dto/login.dto';
+import { AuthGuard } from '../common/guards/auth.guard';
+import { CurrentUser } from '../common/guards/current-user.decorator';
+import { apiSuccess } from '../common/dto/api-response.dto';
+
+@ApiTags('Authentication')
+@Controller('auth')
+export class AuthController {
+  constructor(private readonly authService: AuthService) {}
+
+  @Post('register')
+  @ApiOperation({ summary: 'Register a new customer account' })
+  @ApiResponse({ status: 201, description: 'User successfully registered' })
+  @ApiResponse({ status: 409, description: 'Email already exists' })
+  async register(@Body() dto: RegisterDto) {
+    const result = await this.authService.register(dto);
+    return apiSuccess(result, null, 'Registration successful');
+  }
+
+  @Post('login')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Sign in with email and password' })
+  @ApiResponse({ status: 200, description: 'User authenticated with session token' })
+  @ApiResponse({ status: 401, description: 'Invalid credentials' })
+  async login(@Body() dto: LoginDto) {
+    const result = await this.authService.login(dto);
+    return apiSuccess(result, null, 'Sign in successful');
+  }
+
+  @Get('me')
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get current authenticated user and profile' })
+  @ApiResponse({ status: 200, description: 'User profile details' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  async getMe(@CurrentUser('id') userId: string) {
+    const user = await this.authService.getMe(userId);
+    return apiSuccess(user, null, 'Profile retrieved');
+  }
+
+  @Post('logout')
+  @UseGuards(AuthGuard)
+  @HttpCode(HttpStatus.OK)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Sign out and invalidate current session' })
+  @ApiResponse({ status: 200, description: 'Session terminated' })
+  async logout(@Headers('authorization') authHeader: string) {
+    const token = authHeader?.replace('Bearer ', '').trim();
+    if (token) {
+      await this.authService.logout(token);
+    }
+    return apiSuccess({ loggedOut: true }, null, 'Sign out successful');
+  }
+}
