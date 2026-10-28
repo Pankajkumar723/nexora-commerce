@@ -16,6 +16,7 @@ interface LayoutProps {
   user?: any;
   onNavigate?: (route: string) => void;
   onOpenAi?: () => void;
+  onSelectProduct?: (slug: string) => void;
 }
 
 export function Layout({
@@ -30,6 +31,7 @@ export function Layout({
   user,
   onNavigate = () => {},
   onOpenAi = () => {},
+  onSelectProduct = () => {},
 }: LayoutProps) {
   // Theme state for dark / light mode matching shadcn theme
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
@@ -93,6 +95,7 @@ export function Layout({
         onNavigate={onNavigate}
         user={user}
         onOpenAi={onOpenAi}
+        onSelectProduct={onSelectProduct}
       />
 
       {/* Page Content Slot */}

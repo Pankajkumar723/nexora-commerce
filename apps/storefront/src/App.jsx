@@ -195,6 +195,7 @@ export function App() {
       onNavigate={handleNavigate}
       user={currentUser}
       onOpenAi={() => setIsAiOpen(true)}
+      onSelectProduct={handleSelectProduct}
     >
       {/* Route Switcher */}
       {currentRoute === 'home' && (

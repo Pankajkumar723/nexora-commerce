@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ShoppingBag,
   Search,
@@ -19,10 +19,14 @@ import {
   Zap,
   Gamepad2,
   Layers,
+  TrendingUp,
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Avatar, AvatarFallback } from '../ui/avatar';
+import { useProducts } from '../../hooks/useCatalog';
+import { formatPrice } from '../../lib/formatters';
+
 const getCategoryIcon = (slug = '', name = '') => {
   const s = (slug || '').toLowerCase();
   const n = (name || '').toLowerCase();
@@ -49,8 +53,183 @@ export function Navbar({
   onNavigate,
   user,
   onOpenAi,
+  onSelectProduct,
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
+  const searchContainerRef = useRef(null);
+  const mobileSearchContainerRef = useRef(null);
+
+  // Live product search query (matches Flipkart instant search)
+  const { data: searchResultsData, isLoading: isSearchLoading } = useProducts({
+    search: searchTerm?.trim() || '',
+    limit: 6,
+  });
+
+  const searchResults = searchResultsData?.data || [];
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event) {
+      const inDesktop = searchContainerRef.current && searchContainerRef.current.contains(event.target);
+      const inMobile = mobileSearchContainerRef.current && mobileSearchContainerRef.current.contains(event.target);
+      if (!inDesktop && !inMobile) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleProductClick = (slug) => {
+    setIsDropdownOpen(false);
+    if (onSelectProduct) {
+      onSelectProduct(slug);
+    } else {
+      onNavigate('products');
+    }
+  };
+
+  const handleViewAllResults = () => {
+    setIsDropdownOpen(false);
+    onNavigate('products');
+  };
+
+  const handleKeyDown = (e) => {
+    if (!isDropdownOpen) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev < searchResults.length - 1 ? prev + 1 : 0));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : searchResults.length - 1));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (selectedIndex >= 0 && searchResults[selectedIndex]) {
+        handleProductClick(searchResults[selectedIndex].slug);
+      } else {
+        handleViewAllResults();
+      }
+    } else if (e.key === 'Escape') {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  // Reusable Flipkart-style search suggestions dropdown
+  const renderSearchDropdown = () => {
+    if (!isDropdownOpen) return null;
+
+    const trimmedQuery = searchTerm?.trim();
+
+    return (
+      <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-2xl shadow-2xl overflow-hidden z-50 divide-y divide-border/60 animate-in fade-in-0 zoom-in-95 duration-150">
+        {trimmedQuery ? (
+          <>
+            {isSearchLoading ? (
+              <div className="p-5 text-xs text-muted-foreground flex items-center justify-center gap-2">
+                <span className="w-3.5 h-3.5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                <span>Searching catalog...</span>
+              </div>
+            ) : searchResults.length > 0 ? (
+              <div className="max-h-80 overflow-y-auto divide-y divide-border/40 py-1">
+                <div className="px-3.5 py-1.5 text-[10px] font-bold text-muted-foreground bg-muted/40 uppercase tracking-wider flex items-center justify-between">
+                  <span>Matching Products</span>
+                  <span>{searchResults.length} found</span>
+                </div>
+                {searchResults.map((item, index) => {
+                  const img = item.images?.[0]?.url || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80';
+                  const isSelected = selectedIndex === index;
+                  return (
+                    <div
+                      key={item.id || item.slug}
+                      onClick={() => handleProductClick(item.slug)}
+                      onMouseEnter={() => setSelectedIndex(index)}
+                      className={`flex items-center gap-3 px-3.5 py-2.5 cursor-pointer transition-colors ${
+                        isSelected ? 'bg-primary/10 ring-1 ring-primary/20' : 'hover:bg-muted/60'
+                      }`}
+                    >
+                      <img
+                        src={img}
+                        alt={item.name}
+                        className="w-10 h-10 object-cover rounded-lg bg-muted border border-border shrink-0"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-semibold text-foreground truncate">
+                          {item.name}
+                        </p>
+                        {item.category?.name && (
+                          <p className="text-[11px] font-medium text-primary flex items-center gap-1 mt-0.5">
+                            <span className="text-muted-foreground">in</span>
+                            <span className="font-semibold underline decoration-primary/30">{item.category.name}</span>
+                          </p>
+                        )}
+                      </div>
+                      <div className="text-right shrink-0">
+                        <span className="text-xs font-bold text-foreground">
+                          {formatPrice(item.price)}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="p-6 text-center">
+                <p className="text-xs font-semibold text-foreground">No products found for "{searchTerm}"</p>
+                <p className="text-[11px] text-muted-foreground mt-1">Press Enter to search entire catalog</p>
+              </div>
+            )}
+
+            {/* Bottom Action Footer */}
+            <div
+              onClick={handleViewAllResults}
+              className="p-2.5 px-3.5 bg-muted/40 hover:bg-muted text-xs font-semibold text-primary flex items-center justify-between cursor-pointer transition-colors border-t border-border"
+            >
+              <span className="flex items-center gap-1.5">
+                <Search className="w-3.5 h-3.5" />
+                <span>See all results for "{searchTerm}"</span>
+              </span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </div>
+          </>
+        ) : (
+          /* Popular / Trending Suggestions when search bar is focused without query */
+          <div className="p-4 space-y-3">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+              <TrendingUp className="w-3.5 h-3.5 text-primary" />
+              <span>Trending Searches</span>
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {[
+                'ANC Headphones',
+                'Smartwatch',
+                'Mechanical Keyboard',
+                'Travel Backpack',
+                'GaN Charger',
+                'Aroma Diffuser',
+                'Titanium Ring',
+              ].map((term) => (
+                <button
+                  key={term}
+                  type="button"
+                  onClick={() => {
+                    onSearchChange(term);
+                    setIsDropdownOpen(true);
+                  }}
+                  className="text-xs px-3 py-1.5 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground text-foreground transition-colors font-medium border border-border"
+                >
+                  {term}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-card/95 backdrop-blur-md border-b border-border transition-all">
@@ -76,26 +255,39 @@ export function Navbar({
             </button>
           </div>
 
-          {/* Desktop Search Bar */}
-          <div className="hidden md:flex flex-1 max-w-md relative">
+          {/* Desktop Search Bar with Instant Flipkart-Style Dropdown */}
+          <div ref={searchContainerRef} className="hidden md:flex flex-1 max-w-md relative">
             <div className="relative w-full">
               <input
                 type="text"
                 value={searchTerm}
-                onChange={(e) => onSearchChange(e.target.value)}
+                onChange={(e) => {
+                  onSearchChange(e.target.value);
+                  setIsDropdownOpen(true);
+                  setSelectedIndex(-1);
+                }}
+                onFocus={() => setIsDropdownOpen(true)}
+                onKeyDown={handleKeyDown}
                 placeholder="Search premium headphones, watches, desk gear..."
-                className="w-full pl-10 pr-4 py-2 text-sm bg-muted/50 border border-input rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:bg-background transition"
+                className="w-full pl-10 pr-14 py-2 text-sm bg-muted/50 border border-input rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:bg-background transition"
               />
               <Search className="w-4 h-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               {searchTerm && (
                 <button
-                  onClick={() => onSearchChange('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground hover:text-foreground"
+                  type="button"
+                  onClick={() => {
+                    onSearchChange('');
+                    setIsDropdownOpen(false);
+                  }}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-muted-foreground hover:text-foreground bg-muted/60 px-1.5 py-0.5 rounded"
                 >
                   Clear
                 </button>
               )}
             </div>
+
+            {/* Instant Search Suggestions Dropdown */}
+            {renderSearchDropdown()}
           </div>
 
           {/* Desktop Navigation Links & Action Icons */}
@@ -163,10 +355,10 @@ export function Navbar({
               </Button>
             ) : (
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
                 onClick={() => onNavigate('login')}
-                className="gap-1.5 h-9 px-3 text-xs font-semibold text-foreground hover:text-primary"
+                className="gap-1.5 h-9 px-3 text-xs font-semibold border-input"
                 title="Customer Sign In / Sign Up"
               >
                 <User className="w-4 h-4" />
@@ -186,18 +378,37 @@ export function Navbar({
           </div>
         </div>
 
-        {/* Mobile Search Input */}
-        <div className="md:hidden pb-3">
+        {/* Mobile Search Input with Instant Dropdown */}
+        <div ref={mobileSearchContainerRef} className="md:hidden pb-3 relative">
           <div className="relative w-full">
             <input
               type="text"
               value={searchTerm}
-              onChange={(e) => onSearchChange(e.target.value)}
+              onChange={(e) => {
+                onSearchChange(e.target.value);
+                setIsDropdownOpen(true);
+                setSelectedIndex(-1);
+              }}
+              onFocus={() => setIsDropdownOpen(true)}
+              onKeyDown={handleKeyDown}
               placeholder="Search catalog products..."
-              className="w-full pl-10 pr-4 py-2 text-sm bg-muted/50 border border-input rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full pl-10 pr-14 py-2 text-sm bg-muted/50 border border-input rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
-            <Search className="w-4 h-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => {
+                  onSearchChange('');
+                  setIsDropdownOpen(false);
+                }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-muted-foreground hover:text-foreground bg-muted/60 px-1.5 py-0.5 rounded"
+              >
+                Clear
+              </button>
+            )}
           </div>
+          {renderSearchDropdown()}
         </div>
 
         {/* Category Pills Bar (No scrollbar line, proper category icons) */}
@@ -293,34 +504,13 @@ export function Navbar({
               if (onOpenAi) onOpenAi();
               setMobileMenuOpen(false);
             }}
-            className="flex items-center gap-2 w-full text-left py-2.5 font-bold text-primary border-b border-border/50 bg-primary/10 px-2 rounded-xl"
+            className="flex items-center gap-2 w-full text-left py-2 font-medium text-teal"
           >
-            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+            <Sparkles className="w-4 h-4" />
             <span>Ask Nexora AI Assistant</span>
           </button>
-          <div className="pt-2">
-            <span className="text-xs font-semibold uppercase text-muted-foreground tracking-wider block mb-2">
-              Categories
-            </span>
-            <div className="grid grid-cols-2 gap-2">
-              {categories.map((cat) => (
-                <button
-                  key={cat.slug}
-                  onClick={() => {
-                    onSelectCategory(cat.slug);
-                    setMobileMenuOpen(false);
-                  }}
-                  className="text-left text-xs py-1.5 px-2 rounded-lg bg-muted text-foreground font-medium"
-                >
-                  {cat.name}
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
       )}
     </header>
   );
 }
-
-export default Navbar;
