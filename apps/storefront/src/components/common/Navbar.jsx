@@ -234,7 +234,8 @@ export function Navbar({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-card/95 backdrop-blur-md border-b border-border transition-all">
+    <>
+      <header className="sticky top-0 z-40 bg-card/95 backdrop-blur-md border-b border-border shadow-xs transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4 sm:gap-8">
           {/* Brand Logo */}
@@ -293,54 +294,55 @@ export function Navbar({
           </div>
 
           {/* Desktop Navigation Links & Action Icons */}
-          <div className="flex items-center gap-1 sm:gap-3">
+          <div className="flex items-center gap-1 sm:gap-2">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => onNavigate('products')}
-              className="hidden lg:flex text-sm font-medium text-foreground hover:text-primary"
+              className="hidden lg:flex h-9 px-3 text-xs font-semibold text-foreground/80 hover:text-foreground hover:bg-muted/60 rounded-xl transition-colors"
             >
               All Products
             </Button>
 
             {/* Wishlist button */}
             <Button
-              variant="ghost"
+              variant="outline"
               size="icon"
               onClick={() => onNavigate('wishlist')}
-              className="relative text-muted-foreground hover:text-foreground"
+              className="relative h-9 w-9 rounded-xl border border-border/80 bg-background hover:bg-muted/60 hover:border-red-300 dark:hover:border-red-800 text-foreground transition-all duration-200 shadow-2xs hover:shadow-xs active:scale-95 flex items-center justify-center shrink-0"
               title="Saved items (Wishlist)"
             >
-              <Heart className={`w-4 h-4 transition-colors ${wishlistCount > 0 ? 'fill-red-500 text-red-500' : ''}`} />
+              <Heart className={`w-4 h-4 transition-colors ${wishlistCount > 0 ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`} />
               {wishlistCount > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white shadow-xs">
+                <span className="absolute -top-1.5 -right-1.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold text-white shadow-xs">
                   {wishlistCount}
                 </span>
               )}
             </Button>
 
-            {/* AI Assistant Quick Trigger */}
+            {/* AI Assistant Quick Trigger - Modern gradient pill */}
             <Button
               onClick={onOpenAi}
-              className="gap-1.5 h-9 px-3 text-xs font-bold shadow-sm"
+              className="gap-1.5 h-9 px-3.5 text-xs font-semibold rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-600 text-white shadow-sm hover:shadow active:scale-95 transition-all duration-200 border border-white/10 shrink-0"
               title="Open AI Shopping Assistant"
             >
-              <Sparkles className="w-3.5 h-3.5 animate-pulse" />
+              <Sparkles className="w-3.5 h-3.5 animate-pulse text-amber-200" />
               <span className="hidden sm:inline">Ask AI</span>
             </Button>
 
-            {/* Cart Trigger Button */}
+            {/* Cart Trigger Button - Clean modern unified pill */}
             <Button
               variant="outline"
               onClick={onOpenCart}
-              className="relative gap-2 h-9 px-3 text-xs font-semibold border-input shadow-sm"
+              className="relative gap-2 h-9 px-3.5 text-xs font-semibold rounded-xl border border-border/80 bg-background hover:bg-muted/60 text-foreground shadow-2xs hover:shadow-xs active:scale-95 transition-all duration-200 shrink-0 group"
+              title="View Shopping Cart"
             >
-              <ShoppingBag className="w-4 h-4" />
+              <ShoppingBag className="w-4 h-4 text-foreground/80 group-hover:text-primary transition-colors" />
               <span className="hidden sm:inline">Cart</span>
               {cartCount > 0 && (
-                <Badge variant="default" className="h-5 px-1.5 text-[10px] font-bold">
+                <span className="flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-primary text-primary-foreground text-[10px] font-bold leading-none shadow-2xs">
                   {cartCount}
-                </Badge>
+                </span>
               )}
             </Button>
 
@@ -350,10 +352,10 @@ export function Navbar({
                 variant="outline"
                 size="sm"
                 onClick={() => onNavigate('profile')}
-                className="gap-2 h-9 px-2.5 text-xs font-semibold border-input"
+                className="gap-2 h-9 px-2.5 text-xs font-semibold rounded-xl border border-border/80 bg-background hover:bg-muted/60 text-foreground shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0"
                 title="View Customer Profile"
               >
-                <Avatar className="w-6 h-6">
+                <Avatar className="w-5 h-5">
                   <AvatarFallback className="bg-primary text-primary-foreground text-[10px] font-bold">
                     {user.name?.charAt(0)?.toUpperCase() || 'C'}
                   </AvatarFallback>
@@ -365,10 +367,10 @@ export function Navbar({
                 variant="outline"
                 size="sm"
                 onClick={() => onNavigate('login')}
-                className="gap-1.5 h-9 px-3 text-xs font-semibold border-input"
+                className="gap-1.5 h-9 px-3.5 text-xs font-semibold rounded-xl border border-border/80 bg-background hover:bg-muted/60 hover:text-primary text-foreground shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0 group"
                 title="Customer Sign In / Sign Up"
               >
-                <User className="w-4 h-4" />
+                <User className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
                 <span className="hidden sm:inline">Sign In</span>
               </Button>
             )}
@@ -416,48 +418,6 @@ export function Navbar({
             )}
           </div>
           {renderSearchDropdown()}
-        </div>
-
-        {/* Category Pills Bar (No scrollbar line, proper category icons) */}
-        <div className="border-t border-border/80">
-          <div className="flex items-center gap-2 overflow-x-auto py-2.5 no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden text-sm scroll-smooth">
-            <Button
-              variant={!activeCategory ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => onSelectCategory('')}
-              className="rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-medium shrink-0 shadow-2xs"
-            >
-              <LayoutGrid className="w-3.5 h-3.5 shrink-0" />
-              <span>All Categories</span>
-            </Button>
-            {categories.map((cat) => {
-              const IconComponent = getCategoryIcon(cat.slug, cat.name);
-              const isSelected = activeCategory === cat.slug;
-              return (
-                <Button
-                  key={cat.id || cat.slug}
-                  variant={isSelected ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => onSelectCategory(cat.slug)}
-                  className="rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-medium shrink-0 shadow-2xs"
-                >
-                  <IconComponent className={`w-3.5 h-3.5 shrink-0 ${isSelected ? 'text-primary-foreground' : 'text-primary'}`} />
-                  <span>{cat.name}</span>
-                  {cat.productCount ? (
-                    <span
-                      className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ml-0.5 ${
-                        isSelected
-                          ? 'bg-primary-foreground/25 text-primary-foreground'
-                          : 'bg-muted text-muted-foreground'
-                      }`}
-                    >
-                      {cat.productCount}
-                    </span>
-                  ) : null}
-                </Button>
-              );
-            })}
-          </div>
         </div>
       </div>
 
@@ -536,5 +496,50 @@ export function Navbar({
         </div>
       )}
     </header>
-  );
+
+    {/* Category Pills Bar (Non-sticky: scrolls naturally with page content, only header holds) */}
+    <div className="bg-card border-b border-border/70 relative z-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-2 overflow-x-auto py-2.5 no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden text-sm scroll-smooth">
+          <Button
+            variant={!activeCategory ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => onSelectCategory('')}
+            className="rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-medium shrink-0 shadow-2xs"
+          >
+            <LayoutGrid className="w-3.5 h-3.5 shrink-0" />
+            <span>All Categories</span>
+          </Button>
+          {categories.map((cat) => {
+            const IconComponent = getCategoryIcon(cat.slug, cat.name);
+            const isSelected = activeCategory === cat.slug;
+            return (
+              <Button
+                key={cat.id || cat.slug}
+                variant={isSelected ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => onSelectCategory(cat.slug)}
+                className="rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-medium shrink-0 shadow-2xs"
+              >
+                <IconComponent className={`w-3.5 h-3.5 shrink-0 ${isSelected ? 'text-primary-foreground' : 'text-primary'}`} />
+                <span>{cat.name}</span>
+                {cat.productCount ? (
+                  <span
+                    className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ml-0.5 ${
+                      isSelected
+                        ? 'bg-primary-foreground/25 text-primary-foreground'
+                        : 'bg-muted text-muted-foreground'
+                    }`}
+                  >
+                    {cat.productCount}
+                  </span>
+                ) : null}
+              </Button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  </>
+);
 }
