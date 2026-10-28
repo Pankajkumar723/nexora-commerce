@@ -20,6 +20,7 @@ export function Navbar({
   onOpenCart,
   onNavigate,
   user,
+  onOpenAi,
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -91,6 +92,16 @@ export function Navbar({
               title="Saved items"
             >
               <Heart className="w-5 h-5" />
+            </button>
+
+            {/* AI Assistant Quick Trigger */}
+            <button
+              onClick={onOpenAi}
+              className="flex items-center gap-1.5 bg-gradient-to-r from-royal-blue to-teal text-white hover:opacity-90 px-3 py-2 rounded-xl text-xs font-bold shadow-sm transition active:scale-95"
+              title="Open AI Shopping Assistant"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-white animate-pulse" />
+              <span className="hidden sm:inline">Ask AI</span>
             </button>
 
             {/* Cart Trigger Button */}
@@ -227,6 +238,17 @@ export function Navbar({
               <span>Customer Sign In / Sign Up</span>
             </button>
           )}
+
+          <button
+            onClick={() => {
+              if (onOpenAi) onOpenAi();
+              setMobileMenuOpen(false);
+            }}
+            className="flex items-center gap-2 w-full text-left py-2.5 font-bold text-royal-blue border-b border-gray-100 bg-royal-blue/5 px-2 rounded-xl"
+          >
+            <Sparkles className="w-4 h-4 text-teal animate-pulse" />
+            <span>Ask Nexora AI Assistant</span>
+          </button>
           <div className="pt-2">
             <span className="text-xs font-semibold uppercase text-muted tracking-wider block mb-2">
               Categories

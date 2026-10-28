@@ -163,6 +163,7 @@ export function App() {
         onOpenCart={() => setIsCartOpen(true)}
         onNavigate={handleNavigate}
         user={currentUser}
+        onOpenAi={() => setIsAiOpen(true)}
       />
 
       {/* Main Page Routing */}
