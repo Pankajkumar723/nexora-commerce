@@ -4,6 +4,8 @@ import { Footer } from './components/common/Footer';
 import { HomePage } from './routes/HomePage';
 import { ProductsPage } from './routes/ProductsPage';
 import { ProductDetailPage } from './routes/ProductDetailPage';
+import { AuthPage } from './routes/AuthPage';
+import { ProfilePage } from './routes/ProfilePage';
 import { CartDrawer } from './features/cart/CartDrawer';
 import { AiAssistantDrawer, AiAssistantTrigger } from './features/ai-assistant/AiAssistantDrawer';
 import { useProducts, useCategories } from './hooks/useCatalog';
@@ -34,6 +36,23 @@ export function App() {
   });
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAiOpen, setIsAiOpen] = useState(false);
+
+  // Customer Auth State
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('nexora_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  const handleLogout = () => {
+    localStorage.removeItem('nexora_auth_token');
+    localStorage.removeItem('nexora_user');
+    setCurrentUser(null);
+    setCurrentRoute('home');
+  };
 
   useEffect(() => {
     try {
@@ -143,6 +162,7 @@ export function App() {
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
         onNavigate={handleNavigate}
+        user={currentUser}
       />
 
       {/* Main Page Routing */}
@@ -195,6 +215,24 @@ export function App() {
             onBack={() => handleNavigate('products')}
             onAddToCart={handleAddToCart}
             onDirectCheckout={() => setIsCartOpen(true)}
+          />
+        )}
+
+        {(currentRoute === 'login' || currentRoute === 'signup') && (
+          <AuthPage
+            initialMode={currentRoute === 'signup' ? 'signup' : 'login'}
+            onNavigate={handleNavigate}
+            onLoginSuccess={(user) => {
+              setCurrentUser(user);
+            }}
+          />
+        )}
+
+        {currentRoute === 'profile' && (
+          <ProfilePage
+            user={currentUser}
+            onLogout={handleLogout}
+            onNavigate={handleNavigate}
           />
         )}
       </div>

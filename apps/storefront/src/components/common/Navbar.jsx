@@ -19,6 +19,7 @@ export function Navbar({
   cartCount = 0,
   onOpenCart,
   onNavigate,
+  user,
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -106,14 +107,28 @@ export function Navbar({
               )}
             </button>
 
-            {/* Account Link */}
-            <button
-              onClick={() => alert('Customer login dialog opens via Better Auth')}
-              className="p-2 text-muted hover:text-navy hover:bg-canvas rounded-xl transition"
-              title="Account"
-            >
-              <User className="w-5 h-5" />
-            </button>
+            {/* Customer Account Button / Pill */}
+            {user ? (
+              <button
+                onClick={() => onNavigate('profile')}
+                className="flex items-center gap-2 p-1.5 sm:px-3 sm:py-1.5 rounded-xl text-xs font-semibold text-navy bg-canvas hover:bg-royal-blue/10 border border-border transition"
+                title="View Customer Profile"
+              >
+                <div className="w-6 h-6 rounded-lg bg-navy text-white text-[11px] font-bold flex items-center justify-center">
+                  {user.name?.charAt(0)?.toUpperCase() || 'C'}
+                </div>
+                <span className="hidden sm:inline">{user.name?.split(' ')[0] || 'Account'}</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => onNavigate('login')}
+                className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-2 text-xs font-semibold text-navy hover:text-royal-blue hover:bg-canvas rounded-xl transition"
+                title="Customer Sign In / Sign Up"
+              >
+                <User className="w-4 h-4" />
+                <span className="hidden sm:inline">Sign In</span>
+              </button>
+            )}
 
             {/* Mobile menu toggle */}
             <button
@@ -189,6 +204,29 @@ export function Navbar({
           >
             All Products
           </button>
+          {user ? (
+            <button
+              onClick={() => {
+                onNavigate('profile');
+                setMobileMenuOpen(false);
+              }}
+              className="flex items-center gap-2 w-full text-left py-2 font-medium text-royal-blue border-b border-gray-100"
+            >
+              <User className="w-4 h-4" />
+              <span>My Profile ({user.name?.split(' ')[0]})</span>
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                onNavigate('login');
+                setMobileMenuOpen(false);
+              }}
+              className="flex items-center gap-2 w-full text-left py-2 font-medium text-royal-blue border-b border-gray-100"
+            >
+              <User className="w-4 h-4" />
+              <span>Customer Sign In / Sign Up</span>
+            </button>
+          )}
           <div className="pt-2">
             <span className="text-xs font-semibold uppercase text-muted tracking-wider block mb-2">
               Categories
