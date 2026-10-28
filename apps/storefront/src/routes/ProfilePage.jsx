@@ -70,18 +70,14 @@ export function ProfilePage({ user, onLogout, onNavigate }) {
     ];
   });
 
-  const [addresses, setAddresses] = useState([
-    {
-      id: 'addr-1',
-      name: user?.name || 'Aryan Sharma',
-      street: '42 Cyber City, Phase 2, DLF Tech Park',
-      city: 'Gurugram',
-      state: 'Haryana',
-      postalCode: '122002',
-      phone: '+91 98765 43210',
-      isDefault: true,
-    },
-  ]);
+  const [addresses, setAddresses] = useState(() => {
+    try {
+      const saved = localStorage.getItem('nexora_saved_addresses');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
 
   const [showAddAddress, setShowAddAddress] = useState(false);
   const [newStreet, setNewStreet] = useState('');
@@ -96,20 +92,39 @@ export function ProfilePage({ user, onLogout, onNavigate }) {
 
     const newAddr = {
       id: `addr-${Date.now()}`,
-      name: user?.name || 'Aryan Sharma',
+      fullName: user?.name || 'Customer',
+      name: user?.name || 'Customer',
       street: newStreet,
       city: newCity,
-      state: newState || 'Karnataka',
+      state: newState || '',
       postalCode: newPostalCode,
-      phone: newPhone || '+91 98765 43210',
-      isDefault: false,
+      phone: newPhone || '',
+      addressType: 'Home',
+      isDefault: addresses.length === 0,
     };
 
-    setAddresses((prev) => [...prev, newAddr]);
+    const next = [newAddr, ...addresses].slice(0, 2);
+    setAddresses(next);
+    try {
+      localStorage.setItem('nexora_saved_addresses', JSON.stringify(next));
+    } catch (err) {
+      console.warn(err);
+    }
     setShowAddAddress(false);
     setNewStreet('');
     setNewCity('');
     setNewPostalCode('');
+    setNewPhone('');
+  };
+
+  const handleDeleteAddress = (idToDelete) => {
+    const next = addresses.filter((a) => a.id !== idToDelete);
+    setAddresses(next);
+    try {
+      localStorage.setItem('nexora_saved_addresses', JSON.stringify(next));
+    } catch (err) {
+      console.warn(err);
+    }
   };
 
   return (
@@ -364,26 +379,47 @@ export function ProfilePage({ user, onLogout, onNavigate }) {
               </form>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {addresses.map((addr) => (
-                <div
-                  key={addr.id}
-                  className="bg-white p-5 rounded-3xl border border-border relative flex flex-col justify-between"
+            {addresses.length === 0 ? (
+              <div className="bg-white p-8 rounded-3xl border border-border text-center">
+                <MapPin className="w-10 h-10 text-muted mx-auto mb-2 opacity-40" />
+                <h4 className="text-sm font-bold text-navy">No Saved Addresses</h4>
+                <p className="text-xs text-muted mt-1 mb-4">You can save up to 2 delivery addresses for fast 1-click checkout.</p>
+                <button
+                  onClick={() => setShowAddAddress(true)}
+                  className="px-4 py-2 bg-navy text-white text-xs font-semibold rounded-xl hover:bg-royal-blue transition"
                 >
-                  {addr.isDefault && (
-                    <span className="absolute top-4 right-4 text-[10px] bg-teal/10 text-teal font-bold px-2 py-0.5 rounded-full border border-teal/20">
-                      Default Address
-                    </span>
-                  )}
-                  <div>
-                    <h4 className="font-semibold text-navy text-sm">{addr.name}</h4>
-                    <p className="text-xs text-gray-700 mt-1">{addr.street}</p>
-                    <p className="text-xs text-gray-700">{addr.city}, {addr.state} - {addr.postalCode}</p>
-                    <p className="text-xs text-muted mt-2">Phone: {addr.phone}</p>
+                  + Add Address
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {addresses.map((addr) => (
+                  <div
+                    key={addr.id}
+                    className="bg-white p-5 rounded-3xl border border-border relative flex flex-col justify-between"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[10px] bg-navy/10 text-navy font-bold px-2.5 py-0.5 rounded-full border border-navy/20">
+                        {addr.addressType || 'Home'}
+                      </span>
+                      <button
+                        onClick={() => handleDeleteAddress(addr.id)}
+                        className="text-xs text-muted hover:text-red-500 transition"
+                        title="Delete address"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-navy text-sm">{addr.fullName || addr.name}</h4>
+                      <p className="text-xs text-gray-700 mt-1">{addr.street}</p>
+                      <p className="text-xs text-gray-700">{addr.city}{addr.state ? `, ${addr.state}` : ''} - {addr.postalCode}</p>
+                      <p className="text-xs text-muted mt-2">Phone: {addr.phone}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>

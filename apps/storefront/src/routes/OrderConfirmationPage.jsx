@@ -175,9 +175,19 @@ export function OrderConfirmationPage({ order, onNavigate }) {
                 Shipping Destination
               </h3>
               <div className="text-xs text-gray-700 space-y-1">
-                <p className="font-bold text-gray-900">{order.shippingAddress?.fullName}</p>
+                <div className="flex items-center justify-between">
+                  <p className="font-bold text-gray-900">{order.shippingAddress?.fullName}</p>
+                  {order.shippingAddress?.addressType && (
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-navy/10 text-navy border border-navy/20">
+                      {order.shippingAddress.addressType}
+                    </span>
+                  )}
+                </div>
                 <p>{order.shippingAddress?.street}</p>
-                <p>{order.shippingAddress?.city}, {order.shippingAddress?.state} - {order.shippingAddress?.postalCode}</p>
+                <p>
+                  {order.shippingAddress?.city}
+                  {order.shippingAddress?.state ? `, ${order.shippingAddress.state}` : ''} - {order.shippingAddress?.postalCode}
+                </p>
                 <p className="text-muted pt-1">Phone: {order.shippingAddress?.phone}</p>
               </div>
 
