@@ -117,9 +117,51 @@ async function main() {
         image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80',
       },
     }),
+    prisma.category.create({
+      data: {
+        name: 'Smart Home & Tech',
+        slug: 'smart-home-tech',
+        description: 'Ambient dynamic lighting, smart diffusers, and automated living accessories.',
+        image: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=800&q=80',
+      },
+    }),
+    prisma.category.create({
+      data: {
+        name: 'Photography & Creators',
+        slug: 'photography-creator',
+        description: 'Rigid carbon fiber tripods, 4K HDR webcams, and motorized phone stabilizers.',
+        image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80',
+      },
+    }),
+    prisma.category.create({
+      data: {
+        name: 'Power & Charging',
+        slug: 'power-charging',
+        description: '140W multi-port GaN chargers, folding MagSafe travel stands, and laptop power banks.',
+        image: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80',
+      },
+    }),
+    prisma.category.create({
+      data: {
+        name: 'Gaming & Precision',
+        slug: 'gaming-precision',
+        description: 'Ultra-lightweight 4K wireless mice, Cordura hybrid deskpads, and spatial headsets.',
+        image: 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=800&q=80',
+      },
+    }),
   ]);
 
-  const [catAudio, catWearables, catDesk, catTravel, catApparel] = categories;
+  const [
+    catAudio,
+    catWearables,
+    catDesk,
+    catTravel,
+    catApparel,
+    catSmartHome,
+    catPhotography,
+    catPower,
+    catGaming,
+  ] = categories;
   console.log('✓ Seeded Categories.');
 
   // 4. Products, Images & Variants
@@ -219,6 +261,290 @@ async function main() {
         { sku: 'NEX-HD-M-BLK', attributes: { size: 'M', color: 'Deep Navy' }, stockQuantity: 25 },
         { sku: 'NEX-HD-L-BLK', attributes: { size: 'L', color: 'Deep Navy' }, stockQuantity: 30 },
         { sku: 'NEX-HD-XL-GRY', attributes: { size: 'XL', color: 'Heather Charcoal' }, stockQuantity: 18 },
+      ],
+    },
+    // --- 20 NEW PRODUCTS ---
+    {
+      category: catSmartHome,
+      name: 'Aura Horizon Smart Lightbar Pro',
+      slug: 'aura-horizon-smart-lightbar-pro',
+      description: 'Dynamic dual-zone ambient lighting with 16 million colors, screen mirror sync, and voice control via Apple HomeKit, Google Home, and Alexa. Anti-glare asymmetrical optical design.',
+      price: '5999.00',
+      compareAtPrice: '7499.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=1000&q=80', alt: 'Smart Lightbar on Desk', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-LIGHT-PRO', attributes: { finish: 'Space Gray Aluminum' }, stockQuantity: 65 },
+      ],
+    },
+    {
+      category: catSmartHome,
+      name: 'Lumina Minimalist Desk Lamp & Qi Charger',
+      slug: 'lumina-minimalist-desk-lamp-charger',
+      description: 'Crafted from aircraft-grade anodized aluminum with dual pivot joints. CRI 98 ultra-high color rendering index for eye strain prevention, with integrated 15W MagSafe fast-charging base.',
+      price: '3899.00',
+      compareAtPrice: '4999.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1000&q=80', alt: 'Minimalist Desk Lamp', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-LMP-SLV', attributes: { color: 'Matte Silver' }, stockQuantity: 28 },
+        { sku: 'NEX-LMP-BLK', attributes: { color: 'Stealth Black' }, stockQuantity: 20 },
+      ],
+    },
+    {
+      category: catSmartHome,
+      name: 'AeroPure Smart Ultrasonic Aroma Diffuser',
+      slug: 'aeropure-smart-ultrasonic-aroma-diffuser',
+      description: 'Whisper-quiet ultrasonic mist generator with automated scheduling, 450ml capacity water tank for 16-hour continuous diffusion, and gentle amber LED flame simulation.',
+      price: '2999.00',
+      compareAtPrice: '3999.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1000&q=80', alt: 'Aroma Diffuser with Mist', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-DIF-WHT', attributes: { color: 'Ceramic White' }, stockQuantity: 32 },
+        { sku: 'NEX-DIF-GRY', attributes: { color: 'Charcoal Stone' }, stockQuantity: 20 },
+      ],
+    },
+    {
+      category: catPhotography,
+      name: 'Apex Ultra-Rigid Carbon Fiber Travel Tripod',
+      slug: 'apex-ultra-rigid-carbon-fiber-travel-tripod',
+      description: '8-layer high-modulus carbon fiber construction with CNC machined Arca-Swiss fluid ball head. Supports up to 14kg camera rigs while weighing only 1.2kg and folding to 38cm.',
+      price: '14999.00',
+      compareAtPrice: '18999.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1000&q=80', alt: 'Carbon Fiber Tripod Standing', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-TRIPOD-CF', attributes: { material: 'Toray 8X Carbon Fiber' }, stockQuantity: 35 },
+      ],
+    },
+    {
+      category: catPhotography,
+      name: 'OpticPro 4K HDR Creator Webcam',
+      slug: 'opticpro-4k-hdr-creator-webcam',
+      description: 'Equipped with a 1/2.8-inch Sony Starvis 2 image sensor, 4K at 60fps streaming, hardware phase-detection autofocus, dual studio beamforming microphones, and magnetic privacy cover.',
+      price: '9499.00',
+      compareAtPrice: '11999.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=1000&q=80', alt: '4K Webcam on Monitor', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-CAM-4K', attributes: { color: 'Matte Obsidian' }, stockQuantity: 60 },
+      ],
+    },
+    {
+      category: catPhotography,
+      name: 'GimbalFlow 3-Axis Motorized Smartphone Gimbal',
+      slug: 'gimbalflow-3-axis-motorized-smartphone-gimbal',
+      description: 'Brushless motor 3-axis stabilization with AI visual object tracking, built-in retractable selfie extension rod, magnetic fill light, and 14 hours battery capacity.',
+      price: '7999.00',
+      compareAtPrice: '9999.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?auto=format&fit=crop&w=1000&q=80', alt: 'Handheld Gimbal Stabilizer', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-GIMBAL-GRY', attributes: { color: 'Lunar Gray' }, stockQuantity: 40 },
+      ],
+    },
+    {
+      category: catPower,
+      name: 'Voltaic 140W Multi-Port GaN Fast Charger',
+      slug: 'voltaic-140w-multi-port-gan-fast-charger',
+      description: 'Next-gen Gallium Nitride (GaN III) fast charger with 3x USB-C PD 3.1 ports (capable of full 140W MacBook Pro charging) and 1x USB-A port. Compact foldable travel prongs.',
+      price: '4499.00',
+      compareAtPrice: '5499.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1000&q=80', alt: 'GaN Power Brick', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-GAN-140-BLK', attributes: { color: 'Midnight Black' }, stockQuantity: 65 },
+        { sku: 'NEX-GAN-140-WHT', attributes: { color: 'Pure White' }, stockQuantity: 45 },
+      ],
+    },
+    {
+      category: catPower,
+      name: 'MagFold 3-in-1 Magnetic Travel Charging Stand',
+      slug: 'magfold-3-in-1-magnetic-travel-charging-stand',
+      description: 'Precision milled aluminum folding charging station. Powers your iPhone (15W MagSafe), Apple Watch (Fast Charge), and AirPods simultaneously. Folds completely flat for travel.',
+      price: '3799.00',
+      compareAtPrice: '4699.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1622445262464-84b1456045b6?auto=format&fit=crop&w=1000&q=80', alt: '3-in-1 Wireless Stand', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-MAG-STAND', attributes: { finish: 'Space Gray' }, stockQuantity: 85 },
+      ],
+    },
+    {
+      category: catPower,
+      name: 'Titanium Armor 25,000mAh Laptop Power Bank',
+      slug: 'titanium-armor-25000mah-laptop-power-bank',
+      description: 'Airline approved 99.9Wh flight-ready power bank with dual 100W Power Delivery output, smart TFT digital readout displaying real-time wattage and battery health, wrapped in anodized aluminum.',
+      price: '6999.00',
+      compareAtPrice: '8999.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1609592424364-88981f14ecdf?auto=format&fit=crop&w=1000&q=80', alt: 'High Capacity Power Bank', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-PB-25K', attributes: { capacity: '25,000mAh (100W PD)' }, stockQuantity: 50 },
+      ],
+    },
+    {
+      category: catPower,
+      name: 'Kevlar Ultra-Durable 240W Braided Cable (2m)',
+      slug: 'kevlar-ultra-durable-240w-braided-cable-2m',
+      description: 'Reinforced with genuine DuPont Kevlar fibers, tested to withstand 35,000+ bends. Supports USB-PD 3.1 up to 240W power delivery with gold-plated corrosion resistant USB-C terminals.',
+      price: '1499.00',
+      compareAtPrice: '1999.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1595079672139-5470805c567a?auto=format&fit=crop&w=1000&q=80', alt: 'Braided Type-C Cable', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-CBL-2M-BLK', attributes: { length: '2 Meters', color: 'Tactical Black' }, stockQuantity: 90 },
+      ],
+    },
+    {
+      category: catGaming,
+      name: 'ViperStrike 4K Wireless Ultra-Light Gaming Mouse',
+      slug: 'viperstrike-4k-wireless-ultra-light-gaming-mouse',
+      description: 'Weighs only 49 grams with a magnesium composite internal structure. PixArt PAW3395 26,000 DPI optical sensor, Nordic 52840 MCU with 4,000Hz hyper-polling rate and zero smoothing.',
+      price: '5499.00',
+      compareAtPrice: '6999.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=1000&q=80', alt: 'Wireless Gaming Mouse', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-MSE-BLK', attributes: { color: 'Matte Black' }, stockQuantity: 35 },
+      ],
+    },
+    {
+      category: catGaming,
+      name: 'Velocity Hybrid Cordura Gaming Mousepad XL',
+      slug: 'velocity-hybrid-cordura-gaming-mousepad-xl',
+      description: 'Massive 900x400x4mm deskpad with waterproof Cordura military-grade woven textile. Micro-stitched anti-fray border with non-slip natural tree rubber backing for supreme cursor precision.',
+      price: '1999.00',
+      compareAtPrice: '2699.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1616400619175-5beda3a17896?auto=format&fit=crop&w=1000&q=80', alt: 'XL Deskpad on Setup', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-PAD-XL-BLK', attributes: { size: '900x400mm', color: 'Stealth Black' }, stockQuantity: 90 },
+      ],
+    },
+    {
+      category: catGaming,
+      name: 'Apex Phantom Spatial Wireless Gaming Headset',
+      slug: 'apex-phantom-spatial-wireless-gaming-headset',
+      description: 'Lossless 2.4GHz ultra-low latency wireless + Bluetooth 5.3 multipoint. Custom 50mm neodymium acoustic drivers with DTS Headphone:X v2.0 7.1 spatial surround and memory foam cooling gel pads.',
+      price: '8999.00',
+      compareAtPrice: '11499.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=1000&q=80', alt: 'Wireless Gaming Headset', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-HS-WRL', attributes: { color: 'Graphite Black' }, stockQuantity: 48 },
+      ],
+    },
+    {
+      category: catAudio,
+      name: 'SoundWave Studio Audiophile Reference Monitors (Pair)',
+      slug: 'soundwave-studio-audiophile-reference-monitors',
+      description: 'Active bi-amplified studio monitor pair with 5.25-inch woven Kevlar low-frequency transducers, 1-inch low-mass silk dome tweeters, acoustic room compensation EQ, and balanced XLR/TRS inputs.',
+      price: '22999.00',
+      compareAtPrice: '27999.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=1000&q=80', alt: 'Studio Monitor Speakers', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-SPK-5IN', attributes: { configuration: 'Active Pair (5.25-inch)' }, stockQuantity: 30 },
+      ],
+    },
+    {
+      category: catAudio,
+      name: 'RetroSound Hi-Fi Bluetooth Tube Amplifier',
+      slug: 'retrosound-hi-fi-bluetooth-tube-amplifier',
+      description: 'Vintage brushed copper chassis with twin 6N1 vacuum pre-amp tubes delivering lush acoustic warmth. Supports Qualcomm aptX HD 24-bit wireless streaming and optical DAC input.',
+      price: '12499.00',
+      compareAtPrice: '15999.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1558089687-f282ffcbc126?auto=format&fit=crop&w=1000&q=80', alt: 'Vacuum Tube Amplifier', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-AMP-COP', attributes: { finish: 'Brushed Copper & Walnut' }, stockQuantity: 25 },
+      ],
+    },
+    {
+      category: catWearables,
+      name: 'Nexora BioRing Sleep & Recovery Smart Ring',
+      slug: 'nexora-bioring-sleep-recovery-smart-ring',
+      description: 'Forged from medical-grade hypoallergenic titanium. Seamlessly monitors sleep stages, Heart Rate Variability (HRV), and body temperature with 7-day battery life and zero mandatory subscriptions.',
+      price: '16499.00',
+      compareAtPrice: '19999.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1000&q=80', alt: 'Titanium Smart Ring on Finger', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-RNG-BLK-9', attributes: { size: 'Size 9', finish: 'Stealth Matte Black' }, stockQuantity: 25 },
+      ],
+    },
+    {
+      category: catWearables,
+      name: 'PulseFit Ultra Active Smartwatch 46mm',
+      slug: 'pulsefit-ultra-active-smartwatch-46mm',
+      description: 'Durable military MIL-STD-810H certified outdoor smartwatch with 2,000 nit sunlight readable AMOLED screen, offline topographical maps, dual-frequency GPS, and 21-day endurance battery.',
+      price: '13999.00',
+      compareAtPrice: '16999.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=1000&q=80', alt: 'Active GPS Smartwatch', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-PULSE-46', attributes: { case: '46mm Dark Titanium', band: 'Orange Trail Loop' }, stockQuantity: 45 },
+      ],
+    },
+    {
+      category: catDesk,
+      name: 'ErgoLift Single Monitor Gas Spring Arm',
+      slug: 'ergolift-single-monitor-gas-spring-arm',
+      description: 'Heavy-duty automotive grade gas spring monitor mount supporting up to 35-inch monitors (up to 12kg). 360-degree rotation, tilt/swivel, integrated internal cable raceways, clamp or grommet mount.',
+      price: '4999.00',
+      compareAtPrice: '6499.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=1000&q=80', alt: 'Monitor Arm Setup', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-ARM-SNGL', attributes: { finish: 'Matte Black Aluminum' }, stockQuantity: 70 },
+      ],
+    },
+    {
+      category: catDesk,
+      name: 'Artisan Full-Grain Leather Desk Mat (90x45cm)',
+      slug: 'artisan-full-grain-leather-desk-mat',
+      description: 'Handcrafted from 2mm vegetable-tanned full-grain leather that develops a rich natural patina over time. Smooth mouse tracking surface with anti-slip suede leather underside.',
+      price: '2799.00',
+      compareAtPrice: '3499.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?auto=format&fit=crop&w=1000&q=80', alt: 'Leather Desk Pad', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-LTHR-BRN', attributes: { color: 'Cognac Saddle Brown' }, stockQuantity: 30 },
+      ],
+    },
+    {
+      category: catTravel,
+      name: 'TechOrganizer Modular Cable & Accessory Case',
+      slug: 'techorganizer-modular-cable-accessory-case',
+      description: 'Weather-resistant Cordura tech pouch with origami-style expandable internal accordion dividers. Dual zip opening, dedicated slots for power banks, cables, SSDs, and stylus pens.',
+      price: '1899.00',
+      compareAtPrice: '2499.00',
+      images: [
+        { url: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1000&q=80', alt: 'Tech Pouch Open', sortOrder: 0 },
+      ],
+      variants: [
+        { sku: 'NEX-POUCH-BLK', attributes: { color: 'Charcoal Black' }, stockQuantity: 50 },
       ],
     },
   ];
