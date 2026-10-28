@@ -8,6 +8,7 @@ interface LayoutProps {
   children: React.ReactNode;
   searchTerm?: string;
   onSearchChange?: (term: string) => void;
+  onSearchSubmit?: (term: string) => void;
   categories?: any[];
   selectedCategory?: string;
   onSelectCategory?: (cat: string) => void;
@@ -25,6 +26,7 @@ export function Layout({
   children,
   searchTerm = '',
   onSearchChange = () => {},
+  onSearchSubmit = () => {},
   categories = [],
   selectedCategory = '',
   onSelectCategory = () => {},
@@ -91,6 +93,7 @@ export function Layout({
       <Navbar
         searchTerm={searchTerm}
         onSearchChange={onSearchChange}
+        onSearchSubmit={onSearchSubmit}
         categories={categories}
         activeCategory={selectedCategory}
         onSelectCategory={onSelectCategory}

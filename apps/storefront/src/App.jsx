@@ -12,7 +12,6 @@ import { CartDrawer } from './features/cart/CartDrawer';
 import { WishlistDrawer } from './features/wishlist/WishlistDrawer';
 import { AiAssistantDrawer, AiAssistantTrigger } from './features/ai-assistant/AiAssistantDrawer';
 import { useProducts, useCategories } from './hooks/useCatalog';
-import { useDebounce } from './hooks/useDebounce';
 import { authClient } from './lib/auth-client';
 
 export function App() {
@@ -20,9 +19,8 @@ export function App() {
   const [currentRoute, setCurrentRoute] = useState('home'); // 'home' | 'products' | 'product-detail' | 'checkout' | 'order-confirmation'
   const [activeSlug, setActiveSlug] = useState('');
 
-  // Search and Filter State
-  const [searchInput, setSearchInput] = useState('');
-  const debouncedSearch = useDebounce(searchInput, 400);
+  // Search and Filter State (Applied search filters catalog page only when committed)
+  const [appliedSearch, setAppliedSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
@@ -121,7 +119,7 @@ export function App() {
   const { data: productsResponse, isLoading: isProductsLoading } = useProducts({
     page: currentPage,
     limit: 12,
-    search: debouncedSearch,
+    search: appliedSearch?.trim() || undefined,
     category: selectedCategory,
     minPrice: minPrice || undefined,
     maxPrice: maxPrice || undefined,
@@ -215,12 +213,19 @@ export function App() {
   };
 
   const handleResetFilters = () => {
-    setSearchInput('');
+    setAppliedSearch('');
     setSelectedCategory('');
     setMinPrice('');
     setMaxPrice('');
     setCurrentSort('newest');
     setCurrentPage(1);
+  };
+
+  const handleSearchSubmit = (term) => {
+    setAppliedSearch(term || '');
+    setCurrentRoute('products');
+    setCurrentPage(1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSelectProduct = (slug) => {
@@ -238,13 +243,8 @@ export function App() {
 
   return (
     <Layout
-      searchTerm={searchInput}
-      onSearchChange={(term) => {
-        setSearchInput(term);
-        if (term && currentRoute !== 'products') {
-          setCurrentRoute('products');
-        }
-      }}
+      searchTerm={appliedSearch}
+      onSearchSubmit={handleSearchSubmit}
       categories={categories}
       selectedCategory={selectedCategory}
       onSelectCategory={(cat) => {
@@ -286,8 +286,8 @@ export function App() {
           meta={meta}
           categories={categories}
           isLoading={isProductsLoading}
-          searchTerm={searchInput}
-          onSearchChange={setSearchInput}
+          searchTerm={appliedSearch}
+          onSearchChange={setAppliedSearch}
           selectedCategory={selectedCategory}
           onSelectCategory={setSelectedCategory}
           minPrice={minPrice}
