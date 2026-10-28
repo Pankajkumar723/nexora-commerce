@@ -208,14 +208,15 @@ export function ProductDetailPage({
                     onToggleWishlist(product);
                   }
                 }}
-                className={`py-6 px-4 rounded-xl border shadow-xs transition-colors shrink-0 ${
+                className={`py-6 px-4 rounded-xl border shadow-xs transition-colors shrink-0 gap-2 font-semibold text-xs ${
                   isSaved
-                    ? 'border-red-500/50 bg-red-500/10 text-red-500 hover:bg-red-500/20'
-                    : 'text-muted-foreground hover:text-red-500'
+                    ? 'border-red-500 bg-red-500 text-white hover:bg-red-600'
+                    : 'text-foreground hover:text-red-500 hover:border-red-200'
                 }`}
                 title={isSaved ? 'Remove from Saved items' : 'Save to Wishlist'}
               >
-                <Heart className={`w-5 h-5 transition-transform active:scale-125 ${isSaved ? 'fill-red-500 text-red-500' : ''}`} />
+                <Heart className={`w-4 h-4 transition-transform active:scale-125 ${isSaved ? 'fill-white text-white' : ''}`} />
+                <span>{isSaved ? 'Saved' : 'Save'}</span>
               </Button>
             </div>
 

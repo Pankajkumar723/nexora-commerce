@@ -13,7 +13,8 @@ import {
   Clock,
   Sparkles,
   ShoppingBag,
-  Trash2
+  Trash2,
+  Heart
 } from 'lucide-react';
 import { formatPrice } from '../lib/formatters';
 import { Button } from '../components/ui/button';
@@ -165,7 +166,16 @@ export function ProfilePage({ user, onLogout, onNavigate }) {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => onNavigate('wishlist')}
+              className="gap-1.5 font-semibold text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
+            >
+              <Heart className="w-4 h-4 fill-red-500" />
+              <span>Saved Items</span>
+            </Button>
             <Button
               variant="outline"
               size="sm"

@@ -307,9 +307,9 @@ export function Navbar({
             <Button
               variant="ghost"
               size="icon"
-              onClick={onOpenWishlist}
+              onClick={() => onNavigate('wishlist')}
               className="relative text-muted-foreground hover:text-foreground"
-              title="Saved items"
+              title="Saved items (Wishlist)"
             >
               <Heart className={`w-4 h-4 transition-colors ${wishlistCount > 0 ? 'fill-red-500 text-red-500' : ''}`} />
               {wishlistCount > 0 && (
@@ -484,14 +484,14 @@ export function Navbar({
           </button>
           <button
             onClick={() => {
-              if (onOpenWishlist) onOpenWishlist();
+              onNavigate('wishlist');
               setMobileMenuOpen(false);
             }}
             className="flex items-center justify-between w-full text-left py-2 font-medium text-foreground border-b border-border/50"
           >
             <div className="flex items-center gap-2">
               <Heart className={`w-4 h-4 ${wishlistCount > 0 ? 'fill-red-500 text-red-500' : ''}`} />
-              <span>Saved Items</span>
+              <span>Saved Items (Wishlist)</span>
             </div>
             {wishlistCount > 0 && (
               <Badge variant="secondary" className="text-xs">

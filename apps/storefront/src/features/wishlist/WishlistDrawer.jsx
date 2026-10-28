@@ -14,6 +14,7 @@ export function WishlistDrawer({
   onMoveAllToCart,
   onClearAll,
   onSelectProduct,
+  onViewFullPage,
 }) {
   if (!isOpen) return null;
 
@@ -157,6 +158,22 @@ export function WishlistDrawer({
                 <ShoppingBag className="w-4 h-4" />
                 <span>Move All to Cart</span>
               </Button>
+
+              {onViewFullPage && (
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => {
+                    onClose();
+                    onViewFullPage();
+                  }}
+                  className="w-full text-xs font-semibold gap-1.5"
+                >
+                  <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" />
+                  <span>Open Full Saved Items Page</span>
+                  <ArrowRight className="w-3.5 h-3.5 ml-auto" />
+                </Button>
+              )}
 
               <div className="flex items-center justify-between pt-1">
                 <Button

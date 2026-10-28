@@ -32,7 +32,7 @@ export function ProductCard({ product, onSelect, onAddToCart, isSaved = false, o
           <DiscountBadge discount={discount} />
         </div>
 
-        {/* Wishlist Quick Action */}
+        {/* Wishlist Quick Action - Always visible & prominent */}
         <button
           type="button"
           onClick={(e) => {
@@ -41,14 +41,19 @@ export function ProductCard({ product, onSelect, onAddToCart, isSaved = false, o
               onToggleWishlist(product);
             }
           }}
-          className={`absolute top-3 right-3 w-8 h-8 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center shadow-sm transition-all duration-200 ${
+          className={`absolute top-3 right-3 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer ${
             isSaved
-              ? 'text-red-500 opacity-100 ring-1 ring-red-500/30'
-              : 'text-muted-foreground hover:text-red-500 hover:scale-110 opacity-0 group-hover:opacity-100'
+              ? 'bg-red-500 text-white shadow-md scale-105 ring-2 ring-red-500/30 hover:bg-red-600'
+              : 'bg-background/95 backdrop-blur-md border border-border/80 text-foreground/70 hover:text-red-500 hover:border-red-200 shadow-sm hover:scale-110'
           }`}
-          title={isSaved ? 'Remove from saved' : 'Save to wishlist'}
+          title={isSaved ? 'Remove from saved items' : 'Save to wishlist'}
+          aria-label={isSaved ? 'Remove from saved items' : 'Save to wishlist'}
         >
-          <Heart className={`w-4 h-4 transition-transform active:scale-125 ${isSaved ? 'fill-red-500 text-red-500' : ''}`} />
+          <Heart
+            className={`w-4 h-4 transition-transform active:scale-125 ${
+              isSaved ? 'fill-white text-white' : 'hover:fill-red-500/20'
+            }`}
+          />
         </button>
       </div>
 

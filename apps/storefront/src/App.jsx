@@ -7,6 +7,7 @@ import { AuthPage } from './routes/AuthPage';
 import { ProfilePage } from './routes/ProfilePage';
 import { CheckoutPage } from './routes/CheckoutPage';
 import { OrderConfirmationPage } from './routes/OrderConfirmationPage';
+import { SavedItemsPage } from './routes/SavedItemsPage';
 import { CartDrawer } from './features/cart/CartDrawer';
 import { WishlistDrawer } from './features/wishlist/WishlistDrawer';
 import { AiAssistantDrawer, AiAssistantTrigger } from './features/ai-assistant/AiAssistantDrawer';
@@ -362,6 +363,22 @@ export function App() {
         />
       )}
 
+      {currentRoute === 'wishlist' && (
+        <SavedItemsPage
+          items={wishlistItems}
+          onRemoveItem={handleRemoveFromWishlist}
+          onMoveToCart={(product) => handleAddToCart({ product, variant: product.variants?.[0], quantity: 1 })}
+          onMoveAllToCart={handleMoveAllWishlistToCart}
+          onClearAll={handleClearWishlist}
+          onDirectOrder={(product) => {
+            handleAddToCart({ product, variant: product.variants?.[0], quantity: 1 });
+            handleNavigate('checkout');
+          }}
+          onSelectProduct={handleSelectProduct}
+          onExploreAll={() => handleNavigate('products')}
+        />
+      )}
+
       {/* Slide-over Cart Drawer */}
       <CartDrawer
         isOpen={isCartOpen}
@@ -385,6 +402,10 @@ export function App() {
         onMoveToCart={handleMoveWishlistToCart}
         onMoveAllToCart={handleMoveAllWishlistToCart}
         onClearAll={handleClearWishlist}
+        onViewFullPage={() => {
+          setIsWishlistOpen(false);
+          handleNavigate('wishlist');
+        }}
         onSelectProduct={(slug) => {
           setIsWishlistOpen(false);
           handleSelectProduct(slug);
