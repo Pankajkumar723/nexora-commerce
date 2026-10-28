@@ -131,6 +131,15 @@
   .text-muted {
     color: var(--muted-foreground);
   }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+    height: 0;
+    width: 0;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
   .shimmer {
     background: linear-gradient(
       90deg,

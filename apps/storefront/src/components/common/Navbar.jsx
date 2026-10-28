@@ -8,10 +8,35 @@ import {
   X,
   Sparkles,
   ArrowRight,
+  LayoutGrid,
+  Headphones,
+  Watch,
+  Keyboard,
+  Briefcase,
+  Shirt,
+  Home,
+  Camera,
+  Zap,
+  Gamepad2,
+  Layers,
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Avatar, AvatarFallback } from '../ui/avatar';
+const getCategoryIcon = (slug = '', name = '') => {
+  const s = (slug || '').toLowerCase();
+  const n = (name || '').toLowerCase();
+  if (s.includes('audio') || n.includes('audio') || n.includes('acoustics') || n.includes('headphone')) return Headphones;
+  if (s.includes('wearable') || n.includes('wearable') || n.includes('watch')) return Watch;
+  if (s.includes('desk') || n.includes('desk') || n.includes('ergonomic') || n.includes('keyboard')) return Keyboard;
+  if (s.includes('travel') || s.includes('edc') || n.includes('carry') || n.includes('bag')) return Briefcase;
+  if (s.includes('apparel') || n.includes('clothing') || n.includes('apparel') || n.includes('wear')) return Shirt;
+  if (s.includes('smart-home') || n.includes('smart home') || n.includes('home')) return Home;
+  if (s.includes('photo') || n.includes('camera') || n.includes('creator')) return Camera;
+  if (s.includes('power') || n.includes('charging') || n.includes('charger') || n.includes('power')) return Zap;
+  if (s.includes('gaming') || n.includes('gaming') || n.includes('game')) return Gamepad2;
+  return Layers;
+};
 
 export function Navbar({
   searchTerm,
@@ -175,28 +200,46 @@ export function Navbar({
           </div>
         </div>
 
-        {/* Category Pills Bar */}
-        <div className="flex items-center gap-2 overflow-x-auto py-2.5 border-t border-border no-scrollbar text-sm">
-          <Button
-            variant={!activeCategory ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => onSelectCategory('')}
-            className="rounded-full text-xs h-7 px-3 whitespace-nowrap"
-          >
-            All Categories
-          </Button>
-          {categories.map((cat) => (
+        {/* Category Pills Bar (No scrollbar line, proper category icons) */}
+        <div className="border-t border-border/80">
+          <div className="flex items-center gap-2 overflow-x-auto py-2.5 no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden text-sm scroll-smooth">
             <Button
-              key={cat.id || cat.slug}
-              variant={activeCategory === cat.slug ? 'default' : 'outline'}
+              variant={!activeCategory ? 'default' : 'outline'}
               size="sm"
-              onClick={() => onSelectCategory(cat.slug)}
-              className="rounded-full text-xs h-7 px-3 whitespace-nowrap"
+              onClick={() => onSelectCategory('')}
+              className="rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-medium shrink-0 shadow-2xs"
             >
-              {cat.name}
-              {cat.productCount ? ` (${cat.productCount})` : ''}
+              <LayoutGrid className="w-3.5 h-3.5 shrink-0" />
+              <span>All Categories</span>
             </Button>
-          ))}
+            {categories.map((cat) => {
+              const IconComponent = getCategoryIcon(cat.slug, cat.name);
+              const isSelected = activeCategory === cat.slug;
+              return (
+                <Button
+                  key={cat.id || cat.slug}
+                  variant={isSelected ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => onSelectCategory(cat.slug)}
+                  className="rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-medium shrink-0 shadow-2xs"
+                >
+                  <IconComponent className={`w-3.5 h-3.5 shrink-0 ${isSelected ? 'text-primary-foreground' : 'text-primary'}`} />
+                  <span>{cat.name}</span>
+                  {cat.productCount ? (
+                    <span
+                      className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ml-0.5 ${
+                        isSelected
+                          ? 'bg-primary-foreground/25 text-primary-foreground'
+                          : 'bg-muted text-muted-foreground'
+                      }`}
+                    >
+                      {cat.productCount}
+                    </span>
+                  ) : null}
+                </Button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
