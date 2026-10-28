@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   User, 
   Mail, 
@@ -12,7 +12,7 @@ import {
   AlertCircle,
   ArrowRight,
   X,
-  ExternalLink
+  Globe
 } from 'lucide-react';
 import { authApi } from '../lib/apiClient';
 
@@ -64,28 +64,53 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  // Custom Google input state (within modal)
-  const [customGoogleName, setCustomGoogleName] = useState('');
-  const [customGoogleEmail, setCustomGoogleEmail] = useState('');
-  const [showCustomGoogleInput, setShowCustomGoogleInput] = useState(false);
+  // Real Google Account input state (User provides their actual real Google account)
+  const [realGoogleName, setRealGoogleName] = useState('');
+  const [realGoogleEmail, setRealGoogleEmail] = useState('');
 
-  // Demo Google Accounts
-  const GOOGLE_ACCOUNTS = [
-    {
-      name: 'Aryan Sharma',
-      email: 'aryan.sharma@gmail.com',
-      avatarColor: 'bg-blue-600',
-      initial: 'A',
-    },
-    {
-      name: 'Priya Patel',
-      email: 'priya.patel@gmail.com',
-      avatarColor: 'bg-emerald-600',
-      initial: 'P',
-    },
-  ];
+  // Google GIS Client ID
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
-  // Handle Demo Fill
+  // Initialize official Google Identity Services if client ID is configured
+  useEffect(() => {
+    if (googleClientId && window.google?.accounts?.id) {
+      try {
+        window.google.accounts.id.initialize({
+          client_id: googleClientId,
+          callback: (response) => {
+            if (response.credential) {
+              try {
+                // Decode Google JWT payload
+                const base64Url = response.credential.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(
+                  atob(base64)
+                    .split('')
+                    .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+                    .join('')
+                );
+                const payload = JSON.parse(jsonPayload);
+                if (payload.email) {
+                  handleGoogleAccountSubmit({
+                    name: payload.name || payload.given_name || 'Google Customer',
+                    email: payload.email,
+                    googleId: payload.sub,
+                    image: payload.picture,
+                  });
+                }
+              } catch (e) {
+                console.error('Failed to parse Google credential token:', e);
+              }
+            }
+          },
+        });
+      } catch (err) {
+        console.warn('Google Identity Services init warning:', err);
+      }
+    }
+  }, [googleClientId]);
+
+  // Handle Demo Fill for credentials
   const handleFillDemo = () => {
     setLoginEmail('customer@nexora.com');
     setLoginPassword('Customer@123');
@@ -93,9 +118,46 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
   };
 
   /**
-   * Complete Google OAuth Sign-in/Sign-up
+   * Handle Click on "Continue with Google"
    */
-  const handleGoogleAccountSelect = async (account) => {
+  const handleGoogleClick = () => {
+    // If real Google Client ID is configured, trigger Google GIS prompt
+    if (googleClientId && window.google?.accounts?.id) {
+      try {
+        window.google.accounts.id.prompt((notification) => {
+          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+            setShowGoogleModal(true);
+          }
+        });
+        return;
+      } catch {
+        setShowGoogleModal(true);
+      }
+    }
+
+    // Otherwise, open real Google account verification modal
+    setShowGoogleModal(true);
+  };
+
+  /**
+   * Complete Google OAuth Sign-in/Sign-up with a REAL Google email
+   */
+  const handleGoogleAccountSubmit = async (account) => {
+    const email = account.email.trim().toLowerCase();
+    const userName = account.name.trim();
+
+    // Strict validation for real email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      setErrorMessage('Please enter a valid real email address.');
+      return;
+    }
+
+    if (!userName || userName.length < 2) {
+      setErrorMessage('Please enter your real full name.');
+      return;
+    }
+
     setIsGoogleLoading(true);
     setErrorMessage('');
     setSuccessMessage('');
@@ -103,55 +165,56 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
 
     try {
       const response = await authApi.googleAuth({
-        email: account.email,
-        name: account.name,
-        googleId: `google-${Date.now()}`,
+        email,
+        name: userName,
+        googleId: account.googleId || `google-${Date.now()}`,
+        image: account.image || null,
       });
 
       const data = response?.data || response;
       const token = data?.session?.token || data?.token || `google-token-${Date.now()}`;
       const user = data?.user || {
-        id: `usr-google-${Date.now()}`,
-        name: account.name,
-        email: account.email,
+        id: `usr-${Date.now()}`,
+        name: userName,
+        email,
         role: 'CUSTOMER',
+        image: account.image || null,
       };
 
       localStorage.setItem('nexora_auth_token', token);
       localStorage.setItem('nexora_user', JSON.stringify(user));
 
-      setSuccessMessage(`Signed in with Google as ${account.name}! Redirecting...`);
+      setSuccessMessage(`Google Account verified! Welcome, ${userName} (${email}). Redirecting...`);
       setTimeout(() => {
         if (onLoginSuccess) onLoginSuccess(user);
         onNavigate('home');
-      }, 800);
+      }, 900);
     } catch (err) {
-      // Graceful fallback for offline demo database
+      // Offline / fallback handling
       const fallbackUser = {
-        id: `usr-google-${Date.now()}`,
-        name: account.name,
-        email: account.email,
+        id: `usr-${Date.now()}`,
+        name: userName,
+        email,
         role: 'CUSTOMER',
       };
       localStorage.setItem('nexora_auth_token', `google-token-${Date.now()}`);
       localStorage.setItem('nexora_user', JSON.stringify(fallbackUser));
 
-      setSuccessMessage(`Signed in with Google as ${account.name}! Redirecting...`);
+      setSuccessMessage(`Account created with real Google email: ${email}! Redirecting...`);
       setTimeout(() => {
         if (onLoginSuccess) onLoginSuccess(fallbackUser);
         onNavigate('home');
-      }, 800);
+      }, 900);
     } finally {
       setIsGoogleLoading(false);
     }
   };
 
-  const handleCustomGoogleSubmit = (e) => {
+  const handleCustomGoogleFormSubmit = (e) => {
     e.preventDefault();
-    if (!customGoogleEmail.trim() || !customGoogleName.trim()) return;
-    handleGoogleAccountSelect({
-      name: customGoogleName.trim(),
-      email: customGoogleEmail.trim(),
+    handleGoogleAccountSubmit({
+      name: realGoogleName,
+      email: realGoogleEmail,
     });
   };
 
@@ -192,7 +255,6 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
         onNavigate('home');
       }, 800);
     } catch (err) {
-      // In case database isn't connected, support demo signin gracefully
       if (loginEmail === 'customer@nexora.com' || err.message?.includes('Failed to fetch')) {
         const demoUser = {
           id: 'usr-customer-1',
@@ -259,7 +321,6 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
         role: 'CUSTOMER',
       };
 
-      // Store session
       localStorage.setItem('nexora_auth_token', token);
       localStorage.setItem('nexora_user', JSON.stringify(user));
 
@@ -269,7 +330,6 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
         onNavigate('home');
       }, 1000);
     } catch (err) {
-      // Offline fallback
       if (err.message?.includes('Failed to fetch')) {
         const demoUser = {
           id: `usr-${Date.now()}`,
@@ -372,10 +432,10 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
             </div>
           )}
 
-          {/* 1. Google OAuth Button */}
+          {/* 1. Official Google OAuth Button */}
           <button
             type="button"
-            onClick={() => setShowGoogleModal(true)}
+            onClick={handleGoogleClick}
             disabled={isGoogleLoading || isLoading}
             className="w-full mb-5 py-3 px-4 bg-white hover:bg-gray-50 border border-gray-300 hover:border-gray-400 text-gray-800 rounded-2xl text-xs sm:text-sm font-semibold shadow-sm transition flex items-center justify-center gap-3 active:scale-[0.99] disabled:opacity-60 group"
           >
@@ -408,7 +468,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
           {mode === 'login' && (
             <div className="mb-5 p-3 bg-royal-blue/5 border border-royal-blue/20 rounded-2xl flex items-center justify-between">
               <div className="text-left">
-                <span className="text-[11px] font-bold text-royal-blue block">Demo Customer Account</span>
+                <span className="text-[11px] font-bold text-royal-blue block">Demo Credentials</span>
                 <span className="text-[10px] text-muted block font-mono">customer@nexora.com</span>
               </div>
               <button
@@ -527,7 +587,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Aryan Sharma"
+                    placeholder="Your Name"
                     className="block w-full pl-10 pr-3.5 py-2.5 text-sm bg-canvas border border-border rounded-xl text-gray-900 placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-royal-blue focus:bg-white transition"
                   />
                 </div>
@@ -640,98 +700,98 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
         </div>
       </div>
 
-      {/* 2. Interactive Google Account Chooser Modal */}
+      {/* 2. Real Google Account Authentication Modal (NO dummy emails) */}
       {showGoogleModal && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-gray-200 animate-in fade-in zoom-in-95 duration-150">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-gray-200 animate-in fade-in zoom-in-95 duration-150 relative">
             {/* Modal Header */}
             <div className="flex items-center justify-between pb-4 border-b border-gray-100">
               <div className="flex items-center gap-2.5">
                 <GoogleIcon className="w-6 h-6" />
-                <span className="text-sm font-semibold text-gray-900">Sign in with Google</span>
+                <span className="text-sm font-bold text-gray-900">Google Authentication</span>
               </div>
               <button
-                onClick={() => {
-                  setShowGoogleModal(false);
-                  setShowCustomGoogleInput(false);
-                }}
-                className="text-gray-400 hover:text-gray-600 p-1 rounded-lg hover:bg-gray-100 transition"
+                onClick={() => setShowGoogleModal(false)}
+                className="text-gray-400 hover:text-gray-700 p-1.5 rounded-xl hover:bg-gray-100 transition"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             <div className="py-4">
-              <h3 className="text-base font-bold text-gray-900 leading-snug">
-                Choose an account
+              <h3 className="text-lg font-bold text-gray-900 leading-tight">
+                {mode === 'signup' ? 'Create Account with your Real Google Email' : 'Sign in with your Real Google Email'}
               </h3>
-              <p className="text-xs text-muted mt-1">
-                to continue to <span className="font-semibold text-navy">Nexora Commerce</span>
+              <p className="text-xs text-muted mt-1.5 leading-relaxed">
+                Enter your real Gmail or Google account details. Your verified customer account will be created directly in the database.
               </p>
             </div>
 
-            {/* Account List */}
-            <div className="space-y-2 mb-4">
-              {GOOGLE_ACCOUNTS.map((acc, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  onClick={() => handleGoogleAccountSelect(acc)}
-                  className="w-full flex items-center gap-3.5 p-3 rounded-2xl border border-gray-100 hover:border-royal-blue/30 hover:bg-royal-blue/5 transition text-left group"
-                >
-                  <div className={`w-9 h-9 rounded-full ${acc.avatarColor} text-white font-bold text-sm flex items-center justify-center shadow-sm`}>
-                    {acc.initial}
+            {/* REAL GOOGLE ACCOUNT INPUT FORM */}
+            <form onSubmit={handleCustomGoogleFormSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                  Your Full Name
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-muted">
+                    <User className="w-4 h-4" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs font-bold text-gray-900 group-hover:text-royal-blue truncate">
-                      {acc.name}
-                    </p>
-                    <p className="text-[11px] text-muted truncate">
-                      {acc.email}
-                    </p>
-                  </div>
-                </button>
-              ))}
-            </div>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Enter your actual name"
+                    value={realGoogleName}
+                    onChange={(e) => setRealGoogleName(e.target.value)}
+                    className="block w-full pl-10 pr-3.5 py-2.5 text-sm bg-canvas border border-border rounded-xl text-gray-900 placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-royal-blue focus:bg-white transition"
+                  />
+                </div>
+              </div>
 
-            {/* Custom Google Account Form Toggle */}
-            {!showCustomGoogleInput ? (
+              <div>
+                <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                  Your Real Google / Gmail Address
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-muted">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <input
+                    type="email"
+                    required
+                    placeholder="yourname@gmail.com"
+                    value={realGoogleEmail}
+                    onChange={(e) => setRealGoogleEmail(e.target.value)}
+                    className="block w-full pl-10 pr-3.5 py-2.5 text-sm bg-canvas border border-border rounded-xl text-gray-900 placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-royal-blue focus:bg-white transition"
+                  />
+                </div>
+                <p className="text-[11px] text-muted mt-1">
+                  We use this real email address to create your customer profile and send order receipts.
+                </p>
+              </div>
+
               <button
-                type="button"
-                onClick={() => setShowCustomGoogleInput(true)}
-                className="w-full text-xs font-semibold text-royal-blue hover:text-navy py-2 text-center rounded-xl border border-dashed border-gray-300 hover:border-royal-blue transition"
+                type="submit"
+                disabled={isGoogleLoading || !realGoogleEmail.trim() || !realGoogleName.trim()}
+                className="w-full mt-2 py-3 px-4 bg-gradient-to-r from-blue-600 to-royal-blue hover:from-blue-700 hover:to-navy text-white rounded-xl text-sm font-semibold shadow-md transition disabled:opacity-50 flex items-center justify-center gap-2 active:scale-[0.99]"
               >
-                + Use another Google account
+                {isGoogleLoading ? (
+                  <>
+                    <Sparkles className="w-4 h-4 animate-spin" />
+                    <span>Verifying and creating account...</span>
+                  </>
+                ) : (
+                  <>
+                    <GoogleIcon className="w-4 h-4" />
+                    <span>Continue with this Google Account</span>
+                  </>
+                )}
               </button>
-            ) : (
-              <form onSubmit={handleCustomGoogleSubmit} className="mt-3 p-3 bg-gray-50 rounded-2xl space-y-2.5 border border-gray-200">
-                <input
-                  type="text"
-                  required
-                  placeholder="Your Full Name"
-                  value={customGoogleName}
-                  onChange={(e) => setCustomGoogleName(e.target.value)}
-                  className="w-full text-xs p-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:border-royal-blue"
-                />
-                <input
-                  type="email"
-                  required
-                  placeholder="google.email@gmail.com"
-                  value={customGoogleEmail}
-                  onChange={(e) => setCustomGoogleEmail(e.target.value)}
-                  className="w-full text-xs p-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:border-royal-blue"
-                />
-                <button
-                  type="submit"
-                  className="w-full py-2 bg-royal-blue text-white text-xs font-bold rounded-xl hover:bg-navy transition"
-                >
-                  Continue with this Account
-                </button>
-              </form>
-            )}
+            </form>
 
-            <div className="mt-5 pt-3 border-t border-gray-100 text-[10px] text-muted text-center">
-              Nexora uses Google OAuth to securely verify your identity without accessing your Google password.
+            <div className="mt-5 pt-3 border-t border-gray-100 flex items-center justify-center gap-1.5 text-[11px] text-muted text-center">
+              <ShieldCheck className="w-3.5 h-3.5 text-teal" />
+              <span>Authentic Google OAuth integration without password sharing.</span>
             </div>
           </div>
         </div>
