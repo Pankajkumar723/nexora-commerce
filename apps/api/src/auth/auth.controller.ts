@@ -64,4 +64,13 @@ export class AuthController {
     }
     return apiSuccess({ loggedOut: true }, null, 'Sign out successful');
   }
+
+  @Post('google')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Sign in or sign up via Google OAuth' })
+  @ApiResponse({ status: 200, description: 'User authenticated with Google' })
+  async googleAuth(@Body() body: { email: string; name: string; googleId?: string; image?: string }) {
+    const result = await this.authService.googleAuth(body);
+    return apiSuccess(result, null, 'Google authentication successful');
+  }
 }

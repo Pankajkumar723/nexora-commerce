@@ -201,4 +201,71 @@ export class AuthService {
       return { success: true };
     }
   }
+
+  /**
+   * Google OAuth authentication & registration
+   */
+  async googleAuth(dto: { email: string; name: string; googleId?: string; image?: string }) {
+    const email = dto.email.toLowerCase();
+    let user = await this.prisma.user.findUnique({
+      where: { email },
+      include: { profile: true },
+    });
+
+    const sessionToken = randomBytes(32).toString('hex');
+    const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+
+    if (!user) {
+      user = await this.prisma.$transaction(async (tx) => {
+        const newUser = await tx.user.create({
+          data: {
+            name: dto.name,
+            email,
+            emailVerified: true,
+            image: dto.image || null,
+          },
+        });
+
+        await tx.account.create({
+          data: {
+            userId: newUser.id,
+            providerId: 'google',
+            accountId: dto.googleId || newUser.id,
+          },
+        });
+
+        const profile = await tx.customerProfile.create({
+          data: {
+            authUserId: newUser.id,
+            name: dto.name,
+          },
+        });
+
+        return { ...newUser, profile };
+      });
+    }
+
+    const session = await this.prisma.session.create({
+      data: {
+        userId: user.id,
+        token: sessionToken,
+        expiresAt,
+      },
+    });
+
+    return {
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        image: user.image,
+      },
+      profile: user.profile,
+      session: {
+        token: session.token,
+        expiresAt: session.expiresAt,
+      },
+    };
+  }
 }

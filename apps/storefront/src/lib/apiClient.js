@@ -93,4 +93,10 @@ export const authApi = {
   getProfile: () => {
     return apiRequest('/users/profile');
   },
+  googleAuth: (data) => {
+    return apiRequest('/auth/google', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
 };
