@@ -348,23 +348,22 @@ export function AiAssistantDrawer({
 }
 
 /**
- * Floating AI Trigger Button component
+ * Floating AI Trigger Button component (compact & sleek)
  */
 export function AiAssistantTrigger({ onClick }) {
   return (
     <button
       onClick={onClick}
       type="button"
-      className="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-navy via-royal-blue to-teal hover:opacity-95 text-white px-5 py-3.5 rounded-full shadow-2xl flex items-center gap-3 font-semibold text-sm transition-all transform hover:scale-105 active:scale-95 group border-2 border-white/20 ring-4 ring-royal-blue/20 cursor-pointer pointer-events-auto"
+      className="fixed bottom-5 right-5 z-40 bg-gradient-to-r from-navy to-royal-blue hover:from-royal-blue hover:to-teal text-white px-3.5 py-2 rounded-full shadow-md flex items-center gap-2 font-medium text-xs transition-all hover:scale-105 active:scale-95 border border-white/20 group cursor-pointer pointer-events-auto"
       aria-label="Open Nexora AI Shopping Assistant"
+      title="Ask Nexora AI"
     >
-      <div className="w-7 h-7 rounded-full bg-white/25 flex items-center justify-center group-hover:rotate-12 transition-transform shadow-inner">
-        <Sparkles className="w-4 h-4 text-white animate-pulse" />
-      </div>
-      <span className="tracking-wide text-white drop-shadow-sm font-bold">Ask Nexora AI</span>
-      <span className="relative flex h-2.5 w-2.5">
+      <Sparkles className="w-3.5 h-3.5 text-teal group-hover:rotate-12 transition-transform" />
+      <span className="font-semibold text-xs text-white">Ask AI</span>
+      <span className="relative flex h-2 w-2">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
       </span>
     </button>
   );
