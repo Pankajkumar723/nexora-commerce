@@ -118,11 +118,10 @@ export function SavedItemsPage({
           <div className="pt-2">
             <Button
               onClick={onExploreAll}
-              size="lg"
-              className="px-6 py-6 rounded-xl font-bold text-xs uppercase tracking-wider gap-2 shadow-md"
+              className="h-10 px-6 rounded-xl font-bold text-xs uppercase tracking-wider gap-2 shadow-sm"
             >
               <span>Explore Products Catalog</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </Button>
           </div>
         </div>

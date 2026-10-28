@@ -164,27 +164,27 @@ export function ProductDetailPage({
           />
 
           {/* Quantity and Actions */}
-          <div className="space-y-4 pt-2">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center border border-border rounded-xl bg-card p-1">
+          <div className="space-y-3 pt-2">
+            <div className="flex items-center gap-3">
+              <div className="h-10 flex items-center border border-border rounded-xl bg-card px-1 shrink-0">
                 <Button
                   variant="ghost"
                   size="icon"
                   disabled={quantity <= 1}
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                  className="h-7 w-7 text-muted-foreground hover:text-foreground rounded-lg"
                 >
-                  <Minus className="w-4 h-4" />
+                  <Minus className="w-3.5 h-3.5" />
                 </Button>
-                <span className="w-10 text-center font-bold text-sm text-foreground">{quantity}</span>
+                <span className="w-9 text-center font-bold text-xs text-foreground select-none">{quantity}</span>
                 <Button
                   variant="ghost"
                   size="icon"
                   disabled={quantity >= availableStock}
                   onClick={() => setQuantity(Math.min(availableStock, quantity + 1))}
-                  className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                  className="h-7 w-7 text-muted-foreground hover:text-foreground rounded-lg"
                 >
-                  <Plus className="w-4 h-4" />
+                  <Plus className="w-3.5 h-3.5" />
                 </Button>
               </div>
 
@@ -192,31 +192,29 @@ export function ProductDetailPage({
                 disabled={!inStock}
                 onClick={handleAddToCart}
                 variant="navy"
-                size="lg"
-                className="flex-1 py-6 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md gap-2"
+                className="flex-1 h-10 rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm gap-2"
               >
-                <ShoppingBag className="w-4 h-4" />
+                <ShoppingBag className="w-3.5 h-3.5" />
                 <span>Add to Shopping Cart</span>
               </Button>
 
               <Button
                 type="button"
                 variant="outline"
-                size="lg"
                 onClick={() => {
                   if (onToggleWishlist && product) {
                     onToggleWishlist(product);
                   }
                 }}
-                className={`py-6 px-4 rounded-xl border shadow-xs transition-colors shrink-0 gap-2 font-semibold text-xs ${
+                className={`h-10 w-24 shrink-0 rounded-xl border shadow-xs transition-colors flex items-center justify-center gap-1.5 font-semibold text-xs ${
                   isSaved
                     ? 'border-red-500 bg-red-500 text-white hover:bg-red-600'
-                    : 'text-foreground hover:text-red-500 hover:border-red-200'
+                    : 'text-foreground hover:text-red-500 hover:border-red-200 bg-card'
                 }`}
                 title={isSaved ? 'Remove from Saved items' : 'Save to Wishlist'}
               >
-                <Heart className={`w-4 h-4 transition-transform active:scale-125 ${isSaved ? 'fill-white text-white' : ''}`} />
-                <span>{isSaved ? 'Saved' : 'Save'}</span>
+                <Heart className={`w-3.5 h-3.5 shrink-0 transition-transform active:scale-125 ${isSaved ? 'fill-white text-white' : ''}`} />
+                <span className="w-10 text-center">{isSaved ? 'Saved' : 'Save'}</span>
               </Button>
             </div>
 
@@ -227,10 +225,9 @@ export function ProductDetailPage({
                 onDirectCheckout();
               }}
               variant="default"
-              size="lg"
-              className="w-full py-6 rounded-xl font-bold text-xs uppercase tracking-wider shadow gap-2"
+              className="w-full h-10 rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm gap-2"
             >
-              <Zap className="w-4 h-4" />
+              <Zap className="w-3.5 h-3.5" />
               <span>Instant Razorpay Checkout</span>
             </Button>
           </div>

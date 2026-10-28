@@ -901,8 +901,7 @@ export function CheckoutPage({
                 type="submit"
                 disabled={isProcessing || cartItems.length === 0}
                 variant="navy"
-                size="lg"
-                className="w-full mt-6 py-6 text-sm font-bold rounded-2xl shadow-lg gap-2"
+                className="w-full mt-6 h-11 text-xs font-bold uppercase tracking-wider rounded-xl shadow-md gap-2"
               >
                 {isProcessing ? (
                   <>

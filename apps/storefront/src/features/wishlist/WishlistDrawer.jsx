@@ -153,9 +153,9 @@ export function WishlistDrawer({
             <div className="p-5 border-t border-border bg-muted/30 space-y-3">
               <Button
                 onClick={onMoveAllToCart}
-                className="w-full py-5 text-xs font-bold uppercase tracking-wider gap-2 shadow-md"
+                className="w-full h-10 text-xs font-bold uppercase tracking-wider gap-2 shadow-sm rounded-xl"
               >
-                <ShoppingBag className="w-4 h-4" />
+                <ShoppingBag className="w-3.5 h-3.5" />
                 <span>Move All to Cart</span>
               </Button>
 
