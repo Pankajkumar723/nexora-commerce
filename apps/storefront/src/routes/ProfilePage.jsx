@@ -19,43 +19,56 @@ import { formatPrice } from '../lib/formatters';
 export function ProfilePage({ user, onLogout, onNavigate }) {
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'orders' | 'addresses'
 
-  // Demo fallback orders if no live orders fetched yet
-  const [orders] = useState([
-    {
-      id: 'ord-1092',
-      orderNumber: 'NEX-2026-1092',
-      createdAt: '2026-10-24T14:32:00.000Z',
-      status: 'CONFIRMED',
-      paymentStatus: 'PAID',
-      total: 18999,
-      itemCount: 1,
-      items: [
-        {
-          name: 'Nexora Studio Pro Wireless ANC Headphones',
-          variant: 'Matte Obsidian',
-          quantity: 1,
-          price: 18999,
-        },
-      ],
-    },
-    {
-      id: 'ord-1085',
-      orderNumber: 'NEX-2026-1085',
-      createdAt: '2026-10-18T10:15:00.000Z',
-      status: 'DELIVERED',
-      paymentStatus: 'PAID',
-      total: 8499,
-      itemCount: 1,
-      items: [
-        {
-          name: 'Nexora Horizon Spatial True Wireless Earbuds',
-          variant: 'Glacier White',
-          quantity: 1,
-          price: 8499,
-        },
-      ],
-    },
-  ]);
+  // User orders loaded from localStorage + demo fallback
+  const [orders] = useState(() => {
+    try {
+      const stored = localStorage.getItem('nexora_orders');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to parse nexora_orders:', e);
+    }
+    return [
+      {
+        id: 'ord-1092',
+        orderNumber: 'NEX-2026-1092',
+        createdAt: '2026-10-24T14:32:00.000Z',
+        status: 'CONFIRMED',
+        paymentStatus: 'PAID',
+        total: 18999,
+        itemCount: 1,
+        items: [
+          {
+            name: 'Nexora Studio Pro Wireless ANC Headphones',
+            variant: 'Matte Obsidian',
+            quantity: 1,
+            price: 18999,
+          },
+        ],
+      },
+      {
+        id: 'ord-1085',
+        orderNumber: 'NEX-2026-1085',
+        createdAt: '2026-10-18T10:15:00.000Z',
+        status: 'DELIVERED',
+        paymentStatus: 'PAID',
+        total: 8499,
+        itemCount: 1,
+        items: [
+          {
+            name: 'Nexora Horizon Spatial True Wireless Earbuds',
+            variant: 'Glacier White',
+            quantity: 1,
+            price: 8499,
+          },
+        ],
+      },
+    ];
+  });
 
   const [addresses, setAddresses] = useState([
     {
@@ -277,10 +290,13 @@ export function ProfilePage({ user, onLogout, onNavigate }) {
                 <div className="text-left md:text-right flex md:flex-col justify-between items-center md:items-end w-full md:w-auto pt-3 md:pt-0 border-t md:border-t-0 border-gray-100">
                   <div>
                     <span className="text-xs text-muted block">Order Total</span>
-                    <span className="text-lg font-bold text-navy">{formatPrice(order.total)}</span>
+                    <span className="text-lg font-bold text-navy">
+                      {formatPrice(order.total || order.pricing?.total || 0)}
+                    </span>
                   </div>
                   <span className="text-xs text-teal font-medium flex items-center gap-1 mt-1">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Razorpay Verified
+                    <CheckCircle2 className="w-3.5 h-3.5" />{' '}
+                    {order.paymentMethod === 'cod' ? 'Cash On Delivery' : 'Razorpay Verified'}
                   </span>
                 </div>
               </div>

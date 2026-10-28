@@ -100,3 +100,42 @@ export const authApi = {
     });
   },
 };
+
+export const couponApi = {
+  validateCoupon: (code, orderSubtotal) => {
+    return apiRequest('/coupons/validate', {
+      method: 'POST',
+      body: JSON.stringify({ code, orderSubtotal }),
+    });
+  },
+};
+
+export const orderApi = {
+  createOrder: (data) => {
+    return apiRequest('/orders', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+  getOrderById: (id) => {
+    return apiRequest(`/orders/${id}`);
+  },
+  getCustomerOrders: () => {
+    return apiRequest('/orders');
+  },
+};
+
+export const paymentApi = {
+  createRazorpayOrder: (orderId) => {
+    return apiRequest('/payments/razorpay/order', {
+      method: 'POST',
+      body: JSON.stringify({ orderId }),
+    });
+  },
+  verifyRazorpayPayment: (data) => {
+    return apiRequest('/payments/razorpay/verify', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+};

@@ -6,6 +6,8 @@ import { ProductsPage } from './routes/ProductsPage';
 import { ProductDetailPage } from './routes/ProductDetailPage';
 import { AuthPage } from './routes/AuthPage';
 import { ProfilePage } from './routes/ProfilePage';
+import { CheckoutPage } from './routes/CheckoutPage';
+import { OrderConfirmationPage } from './routes/OrderConfirmationPage';
 import { CartDrawer } from './features/cart/CartDrawer';
 import { AiAssistantDrawer, AiAssistantTrigger } from './features/ai-assistant/AiAssistantDrawer';
 import { useProducts, useCategories } from './hooks/useCatalog';
@@ -41,6 +43,16 @@ export function App() {
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const saved = localStorage.getItem('nexora_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  // Confirmed Order State (Persisted in localStorage)
+  const [confirmedOrder, setConfirmedOrder] = useState(() => {
+    try {
+      const saved = localStorage.getItem('nexora_last_order');
       return saved ? JSON.parse(saved) : null;
     } catch {
       return null;
@@ -236,6 +248,32 @@ export function App() {
             onNavigate={handleNavigate}
           />
         )}
+
+        {currentRoute === 'checkout' && (
+          <CheckoutPage
+            cartItems={cartItems}
+            user={currentUser}
+            onNavigate={handleNavigate}
+            onOrderSuccess={(order) => {
+              setConfirmedOrder(order);
+              try {
+                localStorage.setItem('nexora_last_order', JSON.stringify(order));
+              } catch (e) {
+                console.warn('Failed to save last order:', e);
+              }
+              setCartItems([]);
+              setCurrentRoute('order-confirmation');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        )}
+
+        {currentRoute === 'order-confirmation' && (
+          <OrderConfirmationPage
+            order={confirmedOrder}
+            onNavigate={handleNavigate}
+          />
+        )}
       </div>
 
       {/* Slide-over Cart Drawer */}
@@ -246,7 +284,9 @@ export function App() {
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
         onCheckout={() => {
-          alert('Razorpay Checkout integration initiates in Phase E! Cart total calculated server-side.');
+          setIsCartOpen(false);
+          setCurrentRoute('checkout');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
       />
 
