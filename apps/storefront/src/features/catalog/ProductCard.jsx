@@ -5,7 +5,7 @@ import { StockBadge, DiscountBadge } from '../../components/common/Badge';
 import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
 
-export function ProductCard({ product, onSelect, onAddToCart }) {
+export function ProductCard({ product, onSelect, onAddToCart, isSaved = false, onToggleWishlist }) {
   const primaryImage =
     product.images && product.images.length > 0
       ? product.images[0].url
@@ -34,14 +34,21 @@ export function ProductCard({ product, onSelect, onAddToCart }) {
 
         {/* Wishlist Quick Action */}
         <button
+          type="button"
           onClick={(e) => {
             e.stopPropagation();
-            alert(`Saved "${product.name}" to wishlist`);
+            if (onToggleWishlist) {
+              onToggleWishlist(product);
+            }
           }}
-          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-background/80 backdrop-blur-sm text-muted-foreground hover:text-destructive hover:bg-background flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-          title="Save to wishlist"
+          className={`absolute top-3 right-3 w-8 h-8 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center shadow-sm transition-all duration-200 ${
+            isSaved
+              ? 'text-red-500 opacity-100 ring-1 ring-red-500/30'
+              : 'text-muted-foreground hover:text-red-500 hover:scale-110 opacity-0 group-hover:opacity-100'
+          }`}
+          title={isSaved ? 'Remove from saved' : 'Save to wishlist'}
         >
-          <Heart className="w-4 h-4" />
+          <Heart className={`w-4 h-4 transition-transform active:scale-125 ${isSaved ? 'fill-red-500 text-red-500' : ''}`} />
         </button>
       </div>
 

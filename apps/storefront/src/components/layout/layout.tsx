@@ -13,6 +13,8 @@ interface LayoutProps {
   onSelectCategory?: (cat: string) => void;
   cartCount?: number;
   onOpenCart?: () => void;
+  wishlistCount?: number;
+  onOpenWishlist?: () => void;
   user?: any;
   onNavigate?: (route: string) => void;
   onOpenAi?: () => void;
@@ -28,6 +30,8 @@ export function Layout({
   onSelectCategory = () => {},
   cartCount = 0,
   onOpenCart = () => {},
+  wishlistCount = 0,
+  onOpenWishlist = () => {},
   user,
   onNavigate = () => {},
   onOpenAi = () => {},
@@ -92,6 +96,8 @@ export function Layout({
         onSelectCategory={onSelectCategory}
         cartCount={cartCount}
         onOpenCart={onOpenCart}
+        wishlistCount={wishlistCount}
+        onOpenWishlist={onOpenWishlist}
         onNavigate={onNavigate}
         user={user}
         onOpenAi={onOpenAi}

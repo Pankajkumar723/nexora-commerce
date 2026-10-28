@@ -25,7 +25,11 @@ export function ProductsPage({
   onResetFilters,
   onSelectProduct,
   onAddToCart,
+  wishlistItems = [],
+  onToggleWishlist,
 }) {
+  const wishlistSet = new Set((wishlistItems || []).map((p) => p.id));
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
       {/* Page Header */}
@@ -74,6 +78,8 @@ export function ProductsPage({
                 product={product}
                 onSelect={onSelectProduct}
                 onAddToCart={onAddToCart}
+                isSaved={wishlistSet.has(product.id)}
+                onToggleWishlist={onToggleWishlist}
               />
             ))}
           </div>

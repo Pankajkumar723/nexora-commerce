@@ -13,8 +13,11 @@ export function HomePage({
   onSelectCategory,
   onAddToCart,
   onExploreAll,
+  wishlistItems = [],
+  onToggleWishlist,
 }) {
   const featuredProducts = products.slice(0, 6);
+  const wishlistSet = new Set((wishlistItems || []).map((p) => p.id));
 
   return (
     <div className="space-y-16 py-6 sm:py-8">
@@ -132,6 +135,8 @@ export function HomePage({
                 product={product}
                 onSelect={onSelectProduct}
                 onAddToCart={onAddToCart}
+                isSaved={wishlistSet.has(product.id)}
+                onToggleWishlist={onToggleWishlist}
               />
             ))}
           </div>

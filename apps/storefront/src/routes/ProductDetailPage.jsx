@@ -27,11 +27,15 @@ export function ProductDetailPage({
   onBack,
   onAddToCart,
   onDirectCheckout,
+  wishlistItems = [],
+  onToggleWishlist,
 }) {
   const { data: product, isLoading, error } = useProductDetail(slug);
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [toastMessage, setToastMessage] = useState('');
+
+  const isSaved = product ? wishlistItems.some((item) => item.id === product.id) : false;
 
   // Default to first variant if product has variants
   useEffect(() => {
@@ -193,6 +197,25 @@ export function ProductDetailPage({
               >
                 <ShoppingBag className="w-4 h-4" />
                 <span>Add to Shopping Cart</span>
+              </Button>
+
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                onClick={() => {
+                  if (onToggleWishlist && product) {
+                    onToggleWishlist(product);
+                  }
+                }}
+                className={`py-6 px-4 rounded-xl border shadow-xs transition-colors shrink-0 ${
+                  isSaved
+                    ? 'border-red-500/50 bg-red-500/10 text-red-500 hover:bg-red-500/20'
+                    : 'text-muted-foreground hover:text-red-500'
+                }`}
+                title={isSaved ? 'Remove from Saved items' : 'Save to Wishlist'}
+              >
+                <Heart className={`w-5 h-5 transition-transform active:scale-125 ${isSaved ? 'fill-red-500 text-red-500' : ''}`} />
               </Button>
             </div>
 

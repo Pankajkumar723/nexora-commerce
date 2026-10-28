@@ -50,6 +50,8 @@ export function Navbar({
   onSelectCategory,
   cartCount = 0,
   onOpenCart,
+  wishlistCount = 0,
+  onOpenWishlist,
   onNavigate,
   user,
   onOpenAi,
@@ -305,11 +307,16 @@ export function Navbar({
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => alert('Wishlist feature connected to user account')}
-              className="text-muted-foreground hover:text-foreground"
+              onClick={onOpenWishlist}
+              className="relative text-muted-foreground hover:text-foreground"
               title="Saved items"
             >
-              <Heart className="w-4 h-4" />
+              <Heart className={`w-4 h-4 transition-colors ${wishlistCount > 0 ? 'fill-red-500 text-red-500' : ''}`} />
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white shadow-xs">
+                  {wishlistCount}
+                </span>
+              )}
             </Button>
 
             {/* AI Assistant Quick Trigger */}
@@ -474,6 +481,23 @@ export function Navbar({
             className="block w-full text-left py-2 font-medium text-foreground border-b border-border/50"
           >
             All Products
+          </button>
+          <button
+            onClick={() => {
+              if (onOpenWishlist) onOpenWishlist();
+              setMobileMenuOpen(false);
+            }}
+            className="flex items-center justify-between w-full text-left py-2 font-medium text-foreground border-b border-border/50"
+          >
+            <div className="flex items-center gap-2">
+              <Heart className={`w-4 h-4 ${wishlistCount > 0 ? 'fill-red-500 text-red-500' : ''}`} />
+              <span>Saved Items</span>
+            </div>
+            {wishlistCount > 0 && (
+              <Badge variant="secondary" className="text-xs">
+                {wishlistCount}
+              </Badge>
+            )}
           </button>
           {user ? (
             <button

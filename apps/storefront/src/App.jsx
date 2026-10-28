@@ -8,6 +8,7 @@ import { ProfilePage } from './routes/ProfilePage';
 import { CheckoutPage } from './routes/CheckoutPage';
 import { OrderConfirmationPage } from './routes/OrderConfirmationPage';
 import { CartDrawer } from './features/cart/CartDrawer';
+import { WishlistDrawer } from './features/wishlist/WishlistDrawer';
 import { AiAssistantDrawer, AiAssistantTrigger } from './features/ai-assistant/AiAssistantDrawer';
 import { useProducts, useCategories } from './hooks/useCatalog';
 import { useDebounce } from './hooks/useDebounce';
@@ -38,6 +39,17 @@ export function App() {
   });
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAiOpen, setIsAiOpen] = useState(false);
+
+  // Wishlist State (Persisted in localStorage)
+  const [wishlistItems, setWishlistItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem('nexora_wishlist');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
 
   // Customer Auth State (Managed via Better Auth client & localStorage)
   const [currentUser, setCurrentUser] = useState(() => {
@@ -94,6 +106,14 @@ export function App() {
       console.error('Failed to persist cart:', e);
     }
   }, [cartItems]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('nexora_wishlist', JSON.stringify(wishlistItems));
+    } catch (e) {
+      console.error('Failed to persist wishlist:', e);
+    }
+  }, [wishlistItems]);
 
   // Data fetching
   const { data: categories = [] } = useCategories();
@@ -152,6 +172,47 @@ export function App() {
     );
   };
 
+  // Wishlist Handlers
+  const handleToggleWishlist = (product) => {
+    if (!product) return;
+    setWishlistItems((prev) => {
+      const exists = prev.some((item) => item.id === product.id);
+      if (exists) {
+        return prev.filter((item) => item.id !== product.id);
+      } else {
+        return [...prev, product];
+      }
+    });
+  };
+
+  const handleRemoveFromWishlist = (productId) => {
+    setWishlistItems((prev) => prev.filter((item) => item.id !== productId));
+  };
+
+  const handleClearWishlist = () => {
+    setWishlistItems([]);
+  };
+
+  const handleMoveWishlistToCart = (product) => {
+    handleAddToCart({
+      product,
+      variant: product.variants?.[0],
+      quantity: 1,
+    });
+    handleRemoveFromWishlist(product.id);
+  };
+
+  const handleMoveAllWishlistToCart = () => {
+    wishlistItems.forEach((product) => {
+      handleAddToCart({
+        product,
+        variant: product.variants?.[0],
+        quantity: 1,
+      });
+    });
+    handleClearWishlist();
+  };
+
   const handleResetFilters = () => {
     setSearchInput('');
     setSelectedCategory('');
@@ -192,6 +253,8 @@ export function App() {
       }}
       cartCount={totalCartCount}
       onOpenCart={() => setIsCartOpen(true)}
+      wishlistCount={wishlistItems.length}
+      onOpenWishlist={() => setIsWishlistOpen(true)}
       onNavigate={handleNavigate}
       user={currentUser}
       onOpenAi={() => setIsAiOpen(true)}
@@ -211,6 +274,8 @@ export function App() {
           }}
           onAddToCart={(product) => handleAddToCart({ product, variant: product.variants?.[0], quantity: 1 })}
           onExploreAll={() => handleNavigate('products')}
+          wishlistItems={wishlistItems}
+          onToggleWishlist={handleToggleWishlist}
         />
       )}
 
@@ -237,6 +302,8 @@ export function App() {
           onResetFilters={handleResetFilters}
           onSelectProduct={handleSelectProduct}
           onAddToCart={(product) => handleAddToCart({ product, variant: product.variants?.[0], quantity: 1 })}
+          wishlistItems={wishlistItems}
+          onToggleWishlist={handleToggleWishlist}
         />
       )}
 
@@ -246,6 +313,8 @@ export function App() {
           onBack={() => handleNavigate('products')}
           onAddToCart={handleAddToCart}
           onDirectCheckout={() => setIsCartOpen(true)}
+          wishlistItems={wishlistItems}
+          onToggleWishlist={handleToggleWishlist}
         />
       )}
 
@@ -304,6 +373,21 @@ export function App() {
           setIsCartOpen(false);
           setCurrentRoute('checkout');
           window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      />
+
+      {/* Slide-over Wishlist Drawer */}
+      <WishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        items={wishlistItems}
+        onRemoveItem={handleRemoveFromWishlist}
+        onMoveToCart={handleMoveWishlistToCart}
+        onMoveAllToCart={handleMoveAllWishlistToCart}
+        onClearAll={handleClearWishlist}
+        onSelectProduct={(slug) => {
+          setIsWishlistOpen(false);
+          handleSelectProduct(slug);
         }}
       />
 
