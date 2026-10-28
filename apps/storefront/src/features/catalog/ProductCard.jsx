@@ -2,6 +2,8 @@ import React from 'react';
 import { Star, ShoppingBag, Eye, Heart } from 'lucide-react';
 import { formatPrice, calculateDiscount } from '../../lib/formatters';
 import { StockBadge, DiscountBadge } from '../../components/common/Badge';
+import { Button } from '../../components/ui/button';
+import { Badge } from '../../components/ui/badge';
 
 export function ProductCard({ product, onSelect, onAddToCart }) {
   const primaryImage =
@@ -14,10 +16,10 @@ export function ProductCard({ product, onSelect, onAddToCart }) {
   return (
     <div
       onClick={() => onSelect(product.slug)}
-      className="group bg-white rounded-card border border-border overflow-hidden hover:shadow-xl hover:border-gray-300 transition-all duration-300 flex flex-col justify-between cursor-pointer relative"
+      className="group bg-card text-card-foreground rounded-2xl border border-border overflow-hidden hover:shadow-xl hover:border-royal-blue/40 transition-all duration-300 flex flex-col justify-between cursor-pointer relative"
     >
       {/* Top Image Surface */}
-      <div className="relative aspect-[4/3] bg-gray-50 overflow-hidden">
+      <div className="relative aspect-[4/3] bg-muted overflow-hidden">
         <img
           src={primaryImage}
           alt={product.name}
@@ -36,7 +38,7 @@ export function ProductCard({ product, onSelect, onAddToCart }) {
             e.stopPropagation();
             alert(`Saved "${product.name}" to wishlist`);
           }}
-          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm text-muted hover:text-red-500 hover:bg-white flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-background/80 backdrop-blur-sm text-muted-foreground hover:text-destructive hover:bg-background flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200"
           title="Save to wishlist"
         >
           <Heart className="w-4 h-4" />
@@ -55,48 +57,46 @@ export function ProductCard({ product, onSelect, onAddToCart }) {
           </div>
 
           {/* Product Name */}
-          <h3 className="text-sm font-semibold text-navy group-hover:text-royal-blue line-clamp-2 mb-2 transition-colors">
+          <h3 className="text-sm font-semibold text-foreground group-hover:text-royal-blue line-clamp-2 mb-2 transition-colors">
             {product.name}
           </h3>
 
           {/* Ratings */}
-          <div className="flex items-center gap-1.5 text-xs text-muted mb-3">
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3">
             <div className="flex items-center text-amber-500">
               <Star className="w-3.5 h-3.5 fill-current" />
             </div>
-            <span className="font-semibold text-gray-900">{product.rating || 5.0}</span>
+            <span className="font-semibold text-foreground">{product.rating || 5.0}</span>
             <span>({product.reviewCount || 0})</span>
           </div>
         </div>
 
         {/* Bottom Price & Add CTA */}
-        <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
+        <div className="pt-3 border-t border-border flex items-center justify-between">
           <div>
-            <div className="text-base font-bold text-navy">
+            <div className="text-base font-bold text-foreground">
               {formatPrice(product.price)}
             </div>
             {product.compareAtPrice && Number(product.compareAtPrice) > Number(product.price) && (
-              <div className="text-xs text-muted line-through">
+              <div className="text-xs text-muted-foreground line-through">
                 {formatPrice(product.compareAtPrice)}
               </div>
             )}
           </div>
 
-          <button
+          <Button
+            size="icon"
+            variant={product.inStock ? 'navy' : 'secondary'}
+            disabled={!product.inStock}
             onClick={(e) => {
               e.stopPropagation();
               onAddToCart(product);
             }}
-            disabled={!product.inStock}
-            className={`p-2.5 rounded-xl flex items-center justify-center transition active:scale-95 shadow-sm ${
-              product.inStock
-                ? 'bg-navy hover:bg-royal-blue text-white'
-                : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-            }`}
+            className="h-9 w-9 rounded-xl"
             title={product.inStock ? 'Add to Cart' : 'Out of Stock'}
           >
             <ShoppingBag className="w-4 h-4" />
-          </button>
+          </Button>
         </div>
       </div>
     </div>

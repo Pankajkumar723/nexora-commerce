@@ -2,11 +2,14 @@ import {
   Controller,
   Post,
   Get,
+  All,
   Body,
   UseGuards,
   HttpCode,
   HttpStatus,
   Headers,
+  Req,
+  Res,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
@@ -15,10 +18,15 @@ import { LoginDto } from './dto/login.dto';
 import { AuthGuard } from '../common/guards/auth.guard';
 import { CurrentUser } from '../common/guards/current-user.decorator';
 import { apiSuccess } from '../common/dto/api-response.dto';
+import { toNodeHandler } from 'better-auth/node';
+import { auth } from './better-auth.instance';
+import { Request, Response } from 'express';
 
 @ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
+  private readonly betterAuthHandler = toNodeHandler(auth);
+
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
@@ -72,5 +80,11 @@ export class AuthController {
   async googleAuth(@Body() body: { email: string; name: string; googleId?: string; image?: string }) {
     const result = await this.authService.googleAuth(body);
     return apiSuccess(result, null, 'Google authentication successful');
+  }
+
+  @All('*')
+  @ApiOperation({ summary: 'Better Auth native endpoint handler' })
+  async handleBetterAuth(@Req() req: Request, @Res() res: Response) {
+    return this.betterAuthHandler(req, res);
   }
 }

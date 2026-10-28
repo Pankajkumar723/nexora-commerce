@@ -5,6 +5,8 @@ import { ProductSort } from '../features/catalog/ProductSort';
 import { ProductGridSkeleton } from '../components/common/LoadingSkeleton';
 import { EmptyState } from '../components/common/EmptyState';
 import { Filter, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Button } from '../components/ui/button';
+import { Badge } from '../components/ui/badge';
 
 export function ProductsPage({
   products = [],
@@ -53,10 +55,10 @@ export function ProductsPage({
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-navy tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
           Catalog & Equipment
         </h1>
-        <p className="text-xs sm:text-sm text-muted mt-1">
+        <p className="text-xs sm:text-sm text-muted-foreground mt-1">
           Precision consumer hardware, audio monitors, mechanical keys, and everyday EDC.
         </p>
       </div>
@@ -64,39 +66,44 @@ export function ProductsPage({
       {/* Active Filter Chips */}
       {activeChips.length > 0 && (
         <div className="flex flex-wrap items-center gap-2 pt-1">
-          <span className="text-xs text-muted font-medium">Active filters:</span>
+          <span className="text-xs text-muted-foreground font-medium">Active filters:</span>
           {activeChips.map((chip, idx) => (
-            <span
+            <Badge
               key={idx}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-royal-blue border border-blue-200"
+              variant="secondary"
+              className="gap-1.5 py-1 px-3 text-xs font-semibold"
             >
               <span>{chip.label}</span>
               <button
                 onClick={chip.onRemove}
-                className="hover:text-navy focus:outline-none"
+                className="hover:text-destructive focus:outline-none"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
-            </span>
+            </Badge>
           ))}
-          <button
+          <Button
+            variant="link"
+            size="sm"
             onClick={onResetFilters}
-            className="text-xs text-muted hover:text-navy underline ml-2"
+            className="text-xs text-muted-foreground hover:text-foreground h-auto p-0"
           >
             Clear all
-          </button>
+          </Button>
         </div>
       )}
 
       {/* Mobile Filters Toggle Button */}
       <div className="lg:hidden flex items-center justify-between">
-        <button
+        <Button
+          variant="outline"
+          size="sm"
           onClick={() => setMobileFiltersOpen(true)}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-xl text-xs font-semibold text-navy shadow-sm"
+          className="gap-2"
         >
           <Filter className="w-4 h-4 text-royal-blue" />
           <span>Filter Products</span>
-        </button>
+        </Button>
       </div>
 
       {/* Main Grid + Sidebar Layout */}
@@ -144,28 +151,32 @@ export function ProductsPage({
           {/* Pagination Controls */}
           {meta.totalPages > 1 && (
             <div className="flex items-center justify-between border-t border-border pt-6">
-              <button
+              <Button
+                variant="outline"
+                size="sm"
                 disabled={currentPage <= 1}
                 onClick={() => onPageChange(currentPage - 1)}
-                className="flex items-center gap-1 px-4 py-2 text-xs font-semibold rounded-lg border border-border bg-white text-navy disabled:opacity-40 disabled:cursor-not-allowed hover:bg-canvas transition"
+                className="gap-1 text-xs font-semibold"
               >
                 <ChevronLeft className="w-4 h-4" />
                 <span>Previous</span>
-              </button>
+              </Button>
 
-              <div className="text-xs text-muted font-medium">
-                Page <span className="font-bold text-navy">{currentPage}</span> of{' '}
-                <span className="font-bold text-navy">{meta.totalPages}</span>
+              <div className="text-xs text-muted-foreground font-medium">
+                Page <span className="font-bold text-foreground">{currentPage}</span> of{' '}
+                <span className="font-bold text-foreground">{meta.totalPages}</span>
               </div>
 
-              <button
+              <Button
+                variant="outline"
+                size="sm"
                 disabled={currentPage >= meta.totalPages}
                 onClick={() => onPageChange(currentPage + 1)}
-                className="flex items-center gap-1 px-4 py-2 text-xs font-semibold rounded-lg border border-border bg-white text-navy disabled:opacity-40 disabled:cursor-not-allowed hover:bg-canvas transition"
+                className="gap-1 text-xs font-semibold"
               >
                 <span>Next</span>
                 <ChevronRight className="w-4 h-4" />
-              </button>
+              </Button>
             </div>
           )}
         </main>
@@ -176,18 +187,23 @@ export function ProductsPage({
         <div className="fixed inset-0 z-50 lg:hidden overflow-hidden">
           <div
             onClick={() => setMobileFiltersOpen(false)}
-            className="absolute inset-0 bg-navy/40 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
           />
-          <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-            <div className="w-screen max-w-sm bg-white p-6 shadow-2xl flex flex-col justify-between overflow-y-auto">
-              <div className="flex items-center justify-between pb-4 border-b border-border mb-4">
-                <span className="font-bold text-navy text-sm">Filters</span>
-                <button
+          <div className="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div className="w-screen max-w-sm bg-card border-l border-border p-6 overflow-y-auto">
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-border">
+                <h3 className="text-base font-bold text-foreground flex items-center gap-2">
+                  <Filter className="w-4 h-4 text-royal-blue" />
+                  Filter Equipment
+                </h3>
+                <Button
+                  variant="ghost"
+                  size="icon"
                   onClick={() => setMobileFiltersOpen(false)}
-                  className="p-1 rounded-lg text-muted hover:text-navy"
+                  className="h-8 w-8"
                 >
-                  <X className="w-5 h-5" />
-                </button>
+                  <X className="w-4 h-4" />
+                </Button>
               </div>
 
               <ProductFilters
@@ -205,13 +221,6 @@ export function ProductsPage({
                   setMobileFiltersOpen(false);
                 }}
               />
-
-              <button
-                onClick={() => setMobileFiltersOpen(false)}
-                className="w-full mt-6 py-2.5 bg-royal-blue text-white rounded-xl text-xs font-bold"
-              >
-                Apply Filters
-              </button>
             </div>
           </div>
         </div>

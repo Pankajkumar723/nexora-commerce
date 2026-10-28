@@ -2,6 +2,8 @@ import React from 'react';
 import { Sparkles, ArrowRight, ShieldCheck, Zap, Award } from 'lucide-react';
 import { ProductCard } from '../features/catalog/ProductCard';
 import { ProductGridSkeleton } from '../components/common/LoadingSkeleton';
+import { Button } from '../components/ui/button';
+import { Badge } from '../components/ui/badge';
 
 export function HomePage({
   products = [],
@@ -35,19 +37,23 @@ export function HomePage({
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <button
+            <Button
               onClick={onExploreAll}
-              className="px-6 py-3 bg-white text-navy font-bold text-sm rounded-xl hover:bg-gray-100 shadow-md transition active:scale-95 flex items-center gap-2"
+              variant="default"
+              size="lg"
+              className="bg-white text-navy hover:bg-gray-100 shadow-md gap-2 font-bold text-sm h-12 px-6 rounded-xl"
             >
               <span>Explore Products</span>
               <ArrowRight className="w-4 h-4 text-royal-blue" />
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => onSelectCategory('audio-acoustics')}
-              className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold text-sm rounded-xl border border-white/25 backdrop-blur-md transition active:scale-95"
+              variant="outline"
+              size="lg"
+              className="bg-white/10 hover:bg-white/20 text-white border-white/25 backdrop-blur-md font-semibold text-sm h-12 px-6 rounded-xl"
             >
               Audio Collection
-            </button>
+            </Button>
           </div>
         </div>
       </section>
@@ -56,16 +62,18 @@ export function HomePage({
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-navy">Curated Collections</h2>
-            <p className="text-xs sm:text-sm text-muted mt-1">Explore specialized performance categories</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-foreground">Curated Collections</h2>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">Explore specialized performance categories</p>
           </div>
-          <button
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={onExploreAll}
-            className="text-xs sm:text-sm font-semibold text-royal-blue hover:text-navy transition flex items-center gap-1"
+            className="text-xs sm:text-sm font-semibold text-royal-blue hover:text-foreground gap-1"
           >
             <span>View All</span>
             <ArrowRight className="w-4 h-4" />
-          </button>
+          </Button>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -73,14 +81,14 @@ export function HomePage({
             <button
               key={cat.id || cat.slug}
               onClick={() => onSelectCategory(cat.slug)}
-              className="group relative rounded-2xl overflow-hidden aspect-[4/5] bg-gray-100 border border-border text-left shadow-sm hover:shadow-lg transition-all"
+              className="group relative rounded-2xl overflow-hidden aspect-[4/5] bg-muted border border-border text-left shadow-sm hover:shadow-lg transition-all"
             >
               <img
                 src={cat.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80'}
                 alt={cat.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-transparent flex flex-col justify-end p-4">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-4">
                 <span className="text-xs font-bold text-white group-hover:text-teal transition-colors">
                   {cat.name}
                 </span>
@@ -101,15 +109,17 @@ export function HomePage({
               <Zap className="w-4 h-4" />
               <span>Trending Gear</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-navy">Featured Engineering</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-foreground">Featured Engineering</h2>
           </div>
-          <button
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={onExploreAll}
-            className="text-xs sm:text-sm font-semibold text-royal-blue hover:text-navy transition flex items-center gap-1"
+            className="text-xs sm:text-sm font-semibold text-royal-blue hover:text-foreground gap-1"
           >
             <span>See Catalog</span>
             <ArrowRight className="w-4 h-4" />
-          </button>
+          </Button>
         </div>
 
         {isLoading ? (
@@ -143,12 +153,12 @@ export function HomePage({
             </p>
           </div>
 
-          <button
+          <Button
             onClick={onExploreAll}
-            className="px-6 py-3 bg-teal hover:bg-teal-600 text-white text-xs font-bold rounded-xl shadow transition active:scale-95 shrink-0"
+            className="bg-teal hover:bg-teal-600 text-white text-xs font-bold rounded-xl shadow transition shrink-0 h-11 px-6"
           >
             Claim Discount Now
-          </button>
+          </Button>
         </div>
       </section>
     </div>
