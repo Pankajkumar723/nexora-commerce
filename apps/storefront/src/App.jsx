@@ -14,9 +14,23 @@ import { AiAssistantDrawer, AiAssistantTrigger } from './features/ai-assistant/A
 import { useProducts, useCategories } from './hooks/useCatalog';
 import { authClient } from './lib/auth-client';
 
+const getInitialRoute = () => {
+  if (typeof window !== 'undefined') {
+    const hash = window.location.hash.replace('#', '').trim();
+    if (hash && ['home', 'products', 'product-detail', 'profile', 'wishlist', 'checkout', 'order-confirmation', 'login', 'signup'].includes(hash)) {
+      return hash;
+    }
+    const saved = localStorage.getItem('nexora_active_route');
+    if (saved && ['home', 'products', 'product-detail', 'profile', 'wishlist', 'checkout', 'order-confirmation', 'login', 'signup'].includes(saved)) {
+      return saved;
+    }
+  }
+  return 'profile';
+};
+
 export function App() {
-  // Navigation state
-  const [currentRoute, setCurrentRoute] = useState('home'); // 'home' | 'products' | 'product-detail' | 'checkout' | 'order-confirmation'
+  // Navigation state (Defaulting to 'profile' per user requirement, with URL hash persistence)
+  const [currentRoute, setCurrentRoute] = useState(getInitialRoute);
   const [activeSlug, setActiveSlug] = useState('');
 
   // Search and Filter State (Applied search filters catalog page only when committed)
@@ -97,6 +111,36 @@ export function App() {
     }
     initSession();
   }, []);
+
+  // Synchronize route with URL hash and localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const activeHash = window.location.hash.replace('#', '').trim();
+      if (!activeHash) {
+        window.location.hash = currentRoute;
+      }
+    }
+
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '').trim();
+      if (hash && ['home', 'products', 'product-detail', 'profile', 'wishlist', 'checkout', 'order-confirmation', 'login', 'signup'].includes(hash)) {
+        setCurrentRoute(hash);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const currentHash = window.location.hash.replace('#', '').trim();
+      if (currentHash !== currentRoute) {
+        window.location.hash = currentRoute;
+      }
+      localStorage.setItem('nexora_active_route', currentRoute);
+    }
+  }, [currentRoute]);
 
   const handleLogout = async () => {
     try {
@@ -248,6 +292,10 @@ export function App() {
 
   const handleNavigate = (route) => {
     setCurrentRoute(route);
+    if (typeof window !== 'undefined') {
+      window.location.hash = route;
+      localStorage.setItem('nexora_active_route', route);
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -255,6 +303,7 @@ export function App() {
 
   return (
     <Layout
+      currentRoute={currentRoute}
       searchTerm={appliedSearch}
       onSearchSubmit={handleSearchSubmit}
       categories={categories}

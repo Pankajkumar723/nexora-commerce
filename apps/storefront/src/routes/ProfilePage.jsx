@@ -27,6 +27,7 @@ import {
   Copy,
   FileText,
   X,
+  ChevronRight,
 } from 'lucide-react';
 import { formatPrice } from '../lib/formatters';
 import { Button } from '../components/ui/button';

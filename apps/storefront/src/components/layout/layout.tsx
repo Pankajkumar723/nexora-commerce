@@ -4,6 +4,7 @@ import { Footer } from '../common/Footer';
 
 interface LayoutProps {
   children: React.ReactNode;
+  currentRoute?: string;
   searchTerm?: string;
   onSearchChange?: (term: string) => void;
   onSearchSubmit?: (term: string) => void;
@@ -22,6 +23,7 @@ interface LayoutProps {
 
 export function Layout({
   children,
+  currentRoute = 'profile',
   searchTerm = '',
   onSearchChange = () => {},
   onSearchSubmit = () => {},
@@ -69,6 +71,7 @@ export function Layout({
     <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-200">
       {/* Main Top Navbar */}
       <Navbar
+        currentRoute={currentRoute}
         searchTerm={searchTerm}
         onSearchChange={onSearchChange}
         onSearchSubmit={onSearchSubmit}

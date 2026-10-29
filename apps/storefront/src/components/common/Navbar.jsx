@@ -45,6 +45,7 @@ const getCategoryIcon = (slug = '', name = '') => {
 };
 
 export function Navbar({
+  currentRoute = 'profile',
   searchTerm = '',
   onSearchChange,
   onSearchSubmit,
@@ -371,18 +372,31 @@ export function Navbar({
 
             {/* Customer Account Button / Pill */}
             <Button
-              variant="outline"
+              variant={currentRoute === 'profile' ? 'default' : 'outline'}
               size="sm"
               onClick={() => onNavigate('profile')}
-              className="gap-2 h-9 px-3 text-xs font-semibold rounded-xl border border-border/80 bg-background hover:bg-muted/60 text-foreground shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0"
+              className={`gap-2 h-9 px-3.5 text-xs font-semibold rounded-xl border shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0 ${
+                currentRoute === 'profile'
+                  ? 'bg-primary text-primary-foreground border-primary shadow-sm ring-2 ring-primary/20'
+                  : 'border-border/80 bg-background hover:bg-muted/60 text-foreground'
+              }`}
               title="View Customer Profile & Orders"
             >
               <Avatar className="w-5 h-5">
-                <AvatarFallback className="bg-primary text-primary-foreground text-[10px] font-bold">
+                <AvatarFallback
+                  className={
+                    currentRoute === 'profile'
+                      ? 'bg-primary-foreground text-primary text-[10px] font-bold'
+                      : 'bg-primary text-primary-foreground text-[10px] font-bold'
+                  }
+                >
                   {user?.name?.charAt(0)?.toUpperCase() || 'A'}
                 </AvatarFallback>
               </Avatar>
-              <span className="font-semibold">{user?.name?.split(' ')[0] || 'Profile'}</span>
+              <span className="font-semibold">My Profile</span>
+              <span className="hidden xl:inline text-[11px] opacity-80 font-normal">
+                ({user?.name?.split(' ')[0] || 'Aryan'})
+              </span>
             </Button>
 
             {/* Dark / Light Theme Toggle */}
@@ -493,10 +507,19 @@ export function Navbar({
               onNavigate('profile');
               setMobileMenuOpen(false);
             }}
-            className="flex items-center gap-2 w-full text-left py-2 font-medium text-foreground border-b border-border/50"
+            className={`flex items-center justify-between w-full text-left py-2 font-medium border-b border-border/50 ${
+              currentRoute === 'profile' ? 'text-primary font-bold' : 'text-foreground'
+            }`}
           >
-            <User className="w-4 h-4 text-primary" />
-            <span>My Profile & Orders ({user?.name?.split(' ')[0] || 'Aryan'})</span>
+            <div className="flex items-center gap-2">
+              <User className="w-4 h-4 text-primary" />
+              <span>My Profile & Orders ({user?.name?.split(' ')[0] || 'Aryan'})</span>
+            </div>
+            {currentRoute === 'profile' && (
+              <Badge variant="default" className="text-[10px]">
+                Active
+              </Badge>
+            )}
           </button>
 
           <button
@@ -531,14 +554,43 @@ export function Navbar({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-2 overflow-x-auto py-2.5 no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden text-sm scroll-smooth">
           <Button
-            variant={!activeCategory ? 'default' : 'outline'}
+            variant={currentRoute === 'home' ? 'default' : 'outline'}
             size="sm"
-            onClick={() => onSelectCategory('')}
+            onClick={() => onNavigate('home')}
+            className="rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-medium shrink-0 shadow-2xs"
+          >
+            <Home className="w-3.5 h-3.5 shrink-0" />
+            <span>Home</span>
+          </Button>
+
+          <Button
+            variant={currentRoute === 'products' && !activeCategory ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => {
+              onSelectCategory('');
+              onNavigate('products');
+            }}
             className="rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-medium shrink-0 shadow-2xs"
           >
             <LayoutGrid className="w-3.5 h-3.5 shrink-0" />
-            <span>All Categories</span>
+            <span>All Products</span>
           </Button>
+
+          <Button
+            variant={currentRoute === 'profile' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => onNavigate('profile')}
+            className={`rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-semibold shrink-0 shadow-2xs ${
+              currentRoute === 'profile'
+                ? 'bg-primary text-primary-foreground shadow-xs'
+                : 'hover:border-primary/50 text-foreground'
+            }`}
+          >
+            <User className="w-3.5 h-3.5 shrink-0" />
+            <span>My Profile & Orders</span>
+          </Button>
+
+          <div className="h-4 w-px bg-border/80 shrink-0 mx-1" />
           {categories.map((cat) => {
             const IconComponent = getCategoryIcon(cat.slug, cat.name);
             const isSelected = activeCategory === cat.slug;
