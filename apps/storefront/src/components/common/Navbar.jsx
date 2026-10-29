@@ -20,6 +20,8 @@ import {
   Gamepad2,
   Layers,
   TrendingUp,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
@@ -57,6 +59,8 @@ export function Navbar({
   user,
   onOpenAi,
   onSelectProduct,
+  isDarkMode = false,
+  onToggleTheme,
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -394,6 +398,24 @@ export function Navbar({
               </Button>
             )}
 
+            {/* Dark / Light Theme Toggle */}
+            {onToggleTheme && (
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={onToggleTheme}
+                className="h-9 w-9 rounded-xl border border-border/80 bg-background hover:bg-muted/60 text-foreground shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0"
+                title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                aria-label="Toggle theme"
+              >
+                {isDarkMode ? (
+                  <Sun className="w-4 h-4 text-amber-400" />
+                ) : (
+                  <Moon className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+                )}
+              </Button>
+            )}
+
             {/* Mobile menu toggle */}
             <Button
               variant="ghost"
@@ -508,11 +530,24 @@ export function Navbar({
               if (onOpenAi) onOpenAi();
               setMobileMenuOpen(false);
             }}
-            className="flex items-center gap-2 w-full text-left py-2 font-medium text-teal"
+            className="flex items-center gap-2 w-full text-left py-2 font-medium text-teal border-b border-border/50"
           >
             <Sparkles className="w-4 h-4" />
             <span>Ask Nexora AI Assistant</span>
           </button>
+
+          {onToggleTheme && (
+            <button
+              onClick={() => {
+                onToggleTheme();
+                setMobileMenuOpen(false);
+              }}
+              className="flex items-center gap-2 w-full text-left py-2 font-medium text-foreground"
+            >
+              {isDarkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-muted-foreground" />}
+              <span>{isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}</span>
+            </button>
+          )}
         </div>
       )}
     </header>

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from '../common/Navbar';
 import { Footer } from '../common/Footer';
-import { Sparkles, Sun, Moon } from 'lucide-react';
-import { Button } from '../ui/button';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -69,26 +67,6 @@ export function Layout({
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-200">
-      {/* Top micro announcement bar */}
-      <div className="bg-primary text-primary-foreground text-xs py-1.5 px-4 text-center font-medium flex items-center justify-between">
-        <div className="flex-1 flex items-center justify-center gap-2">
-          <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-          <span>Experience AI-powered shopping assistance & free express shipping over ₹1,999</span>
-        </div>
-
-        {/* Dark/Light mode theme toggle */}
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={toggleTheme}
-          className="h-6 px-2 text-primary-foreground hover:bg-primary-foreground/10 text-[11px] gap-1"
-          title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-        >
-          {isDarkMode ? <Sun className="w-3 h-3 text-yellow-300" /> : <Moon className="w-3 h-3" />}
-          <span className="hidden sm:inline">{isDarkMode ? 'Light' : 'Dark'}</span>
-        </Button>
-      </div>
-
       {/* Main Top Navbar */}
       <Navbar
         searchTerm={searchTerm}
@@ -105,6 +83,8 @@ export function Layout({
         user={user}
         onOpenAi={onOpenAi}
         onSelectProduct={onSelectProduct}
+        isDarkMode={isDarkMode}
+        onToggleTheme={toggleTheme}
       />
 
       {/* Page Content Slot */}
