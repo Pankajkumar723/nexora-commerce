@@ -334,6 +334,9 @@ export function App() {
           user={currentUser}
           onLogout={handleLogout}
           onNavigate={handleNavigate}
+          onAddToCart={(product, variant) =>
+            handleAddToCart({ product, variant: variant || product.variants?.[0], quantity: 1 })
+          }
         />
       )}
 
