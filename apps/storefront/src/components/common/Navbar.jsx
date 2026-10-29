@@ -370,33 +370,20 @@ export function Navbar({
             </Button>
 
             {/* Customer Account Button / Pill */}
-            {user ? (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => onNavigate('profile')}
-                className="gap-2 h-9 px-2.5 text-xs font-semibold rounded-xl border border-border/80 bg-background hover:bg-muted/60 text-foreground shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0"
-                title="View Customer Profile"
-              >
-                <Avatar className="w-5 h-5">
-                  <AvatarFallback className="bg-primary text-primary-foreground text-[10px] font-bold">
-                    {user.name?.charAt(0)?.toUpperCase() || 'C'}
-                  </AvatarFallback>
-                </Avatar>
-                <span className="hidden sm:inline">{user.name?.split(' ')[0] || 'Account'}</span>
-              </Button>
-            ) : (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => onNavigate('login')}
-                className="gap-1.5 h-9 px-3.5 text-xs font-semibold rounded-xl border border-border/80 bg-background hover:bg-muted/60 hover:text-primary text-foreground shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0 group"
-                title="Customer Sign In / Sign Up"
-              >
-                <User className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
-                <span className="hidden sm:inline">Sign In</span>
-              </Button>
-            )}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => onNavigate('profile')}
+              className="gap-2 h-9 px-3 text-xs font-semibold rounded-xl border border-border/80 bg-background hover:bg-muted/60 text-foreground shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0"
+              title="View Customer Profile & Orders"
+            >
+              <Avatar className="w-5 h-5">
+                <AvatarFallback className="bg-primary text-primary-foreground text-[10px] font-bold">
+                  {user?.name?.charAt(0)?.toUpperCase() || 'A'}
+                </AvatarFallback>
+              </Avatar>
+              <span className="font-semibold">{user?.name?.split(' ')[0] || 'Profile'}</span>
+            </Button>
 
             {/* Dark / Light Theme Toggle */}
             {onToggleTheme && (
@@ -501,29 +488,16 @@ export function Navbar({
               </Badge>
             )}
           </button>
-          {user ? (
-            <button
-              onClick={() => {
-                onNavigate('profile');
-                setMobileMenuOpen(false);
-              }}
-              className="flex items-center gap-2 w-full text-left py-2 font-medium text-primary border-b border-border/50"
-            >
-              <User className="w-4 h-4" />
-              <span>My Profile ({user.name?.split(' ')[0]})</span>
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                onNavigate('login');
-                setMobileMenuOpen(false);
-              }}
-              className="flex items-center gap-2 w-full text-left py-2 font-medium text-primary border-b border-border/50"
-            >
-              <User className="w-4 h-4" />
-              <span>Customer Sign In / Sign Up</span>
-            </button>
-          )}
+          <button
+            onClick={() => {
+              onNavigate('profile');
+              setMobileMenuOpen(false);
+            }}
+            className="flex items-center gap-2 w-full text-left py-2 font-medium text-foreground border-b border-border/50"
+          >
+            <User className="w-4 h-4 text-primary" />
+            <span>My Profile & Orders ({user?.name?.split(' ')[0] || 'Aryan'})</span>
+          </button>
 
           <button
             onClick={() => {

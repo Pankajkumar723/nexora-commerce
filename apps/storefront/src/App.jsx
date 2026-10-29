@@ -54,10 +54,22 @@ export function App() {
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const saved = localStorage.getItem('nexora_user');
-      return saved ? JSON.parse(saved) : null;
+      if (saved) return JSON.parse(saved);
     } catch {
-      return null;
+      // fallback
     }
+    const defaultUser = {
+      id: 'usr-customer-1',
+      name: 'Aryan Sharma',
+      email: 'customer@nexora.com',
+      role: 'CUSTOMER',
+    };
+    try {
+      localStorage.setItem('nexora_user', JSON.stringify(defaultUser));
+    } catch (e) {
+      console.warn(e);
+    }
+    return defaultUser;
   });
 
   // Confirmed Order State (Persisted in localStorage)
