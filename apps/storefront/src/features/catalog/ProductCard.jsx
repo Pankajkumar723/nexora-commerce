@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, ShoppingBag, Eye, Heart } from 'lucide-react';
+import { Star, ShoppingBag, Eye, Heart, Zap } from 'lucide-react';
 import { formatPrice, calculateDiscount } from '../../lib/formatters';
 import { StockBadge, DiscountBadge } from '../../components/common/Badge';
 import { Button } from '../../components/ui/button';
@@ -73,13 +73,23 @@ export function ProductCard({ product, onSelect, onAddToCart, isSaved = false, o
             {product.name}
           </h3>
 
-          {/* Ratings */}
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3">
-            <div className="flex items-center text-amber-500">
-              <Star className="w-3.5 h-3.5 fill-current" />
+          {/* Ratings & Nexora Assured Badge (Flipkart Style) */}
+          <div className="flex items-center justify-between gap-1.5 text-xs text-muted-foreground mb-3">
+            <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-0.5 bg-emerald-600/10 text-emerald-700 dark:text-emerald-400 px-1.5 py-0.5 rounded text-[11px] font-bold">
+                <span>{product.rating || 5.0}</span>
+                <Star className="w-3 h-3 fill-current" />
+              </div>
+              <span className="text-[11px] text-muted-foreground">({product.reviewCount || 0})</span>
             </div>
-            <span className="font-semibold text-foreground">{product.rating || 5.0}</span>
-            <span>({product.reviewCount || 0})</span>
+
+            {/* Nexora Assured Badge */}
+            {(product.rating || 5.0) >= 4.7 && (
+              <span className="inline-flex items-center gap-0.5 bg-royal-blue text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded tracking-wide shadow-2xs">
+                <Zap className="w-2.5 h-2.5 fill-amber-300 text-amber-300" />
+                <span>Assured</span>
+              </span>
+            )}
           </div>
         </div>
 
