@@ -1,9 +1,10 @@
-import React from 'react';
-import { Star, ShoppingBag, Eye, Heart, Zap } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { Star, ShoppingBag, Eye, Heart, Zap, Truck } from 'lucide-react';
 import { formatPrice, calculateDiscount } from '../../lib/formatters';
 import { StockBadge, DiscountBadge } from '../../components/common/Badge';
 import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
+import { getDeliveryQuotes, getStoredPincode } from '../../lib/deliveryUtils';
 
 export function ProductCard({ product, onSelect, onAddToCart, isSaved = false, onToggleWishlist }) {
   const primaryImage =
@@ -12,6 +13,10 @@ export function ProductCard({ product, onSelect, onAddToCart, isSaved = false, o
       : 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80';
 
   const discount = calculateDiscount(product.price, product.compareAtPrice);
+
+  const deliveryQuote = useMemo(() => {
+    return getDeliveryQuotes(getStoredPincode());
+  }, []);
 
   return (
     <div
@@ -90,6 +95,14 @@ export function ProductCard({ product, onSelect, onAddToCart, isSaved = false, o
                 <span>Assured</span>
               </span>
             )}
+          </div>
+
+          {/* Delivery Date Snippet (Amazon / Flipkart Style) */}
+          <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground mt-1 mb-1">
+            <Truck className="w-3.5 h-3.5 text-royal-blue shrink-0" />
+            <span>
+              Get it by <strong className="font-semibold text-foreground">{deliveryQuote?.standard.formattedDate || '2-3 Days'}</strong>
+            </span>
           </div>
         </div>
 

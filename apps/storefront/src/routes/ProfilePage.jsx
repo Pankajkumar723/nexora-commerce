@@ -46,9 +46,11 @@ import {
   DialogTitle,
   DialogDescription,
 } from '../components/ui/dialog';
+import { OrderTrackingModal } from '../components/common/OrderTrackingModal';
 
 export function ProfilePage({ user, onLogout, onNavigate, onAddToCart }) {
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'orders' | 'addresses' | 'rewards'
+  const [selectedTrackingOrder, setSelectedTrackingOrder] = useState(null);
 
   // Editable Profile Info (stored in localStorage)
   const [profileData, setProfileData] = useState(() => {
@@ -551,10 +553,11 @@ export function ProfilePage({ user, onLogout, onNavigate, onAddToCart }) {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => setActiveTab('orders')}
-                className="h-8 text-xs font-semibold gap-1"
+                onClick={() => setSelectedTrackingOrder(orders[0])}
+                className="h-8 text-xs font-bold text-royal-blue border-royal-blue/30 hover:bg-royal-blue/10 gap-1.5"
               >
-                <span>Track Details</span>
+                <Truck className="w-3.5 h-3.5" />
+                <span>Live Tracker</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </Button>
             </div>
@@ -926,6 +929,16 @@ export function ProfilePage({ user, onLogout, onNavigate, onAddToCart }) {
                         </div>
 
                         <div className="flex items-center gap-2">
+                          <Button
+                            variant="default"
+                            size="sm"
+                            onClick={() => setSelectedTrackingOrder(order)}
+                            className="h-9 text-xs font-bold gap-1.5 bg-royal-blue hover:bg-royal-blue/90 text-white shadow-2xs"
+                          >
+                            <Truck className="w-3.5 h-3.5" />
+                            <span>Track Order</span>
+                          </Button>
+
                           <Button
                             variant="outline"
                             size="sm"
@@ -1490,6 +1503,13 @@ export function ProfilePage({ user, onLogout, onNavigate, onAddToCart }) {
           </DialogContent>
         </Dialog>
       )}
+
+      {/* Live Order Journey Tracking Modal */}
+      <OrderTrackingModal
+        order={selectedTrackingOrder}
+        isOpen={Boolean(selectedTrackingOrder)}
+        onClose={() => setSelectedTrackingOrder(null)}
+      />
     </div>
   );
 }

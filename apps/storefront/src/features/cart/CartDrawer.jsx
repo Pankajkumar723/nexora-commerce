@@ -1,9 +1,10 @@
-import React from 'react';
-import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, Truck, Sparkles, MapPin } from 'lucide-react';
 import { formatPrice } from '../../lib/formatters';
 import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
 import { Separator } from '../../components/ui/separator';
+import { getDeliveryQuotes, getStoredPincode } from '../../lib/deliveryUtils';
 
 export function CartDrawer({
   isOpen,
@@ -22,6 +23,12 @@ export function CartDrawer({
 
   const shipping = subtotal > 1999 || subtotal === 0 ? 0 : 150;
   const total = subtotal + shipping;
+
+  const currentPin = getStoredPincode();
+  const deliveryQuote = useMemo(() => getDeliveryQuotes(currentPin), [currentPin]);
+  const freeShippingThreshold = 1999;
+  const amountToFreeShipping = Math.max(0, freeShippingThreshold - subtotal);
+  const freeShippingProgress = Math.min(100, Math.round((subtotal / freeShippingThreshold) * 100));
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
@@ -51,6 +58,41 @@ export function CartDrawer({
               <X className="w-4 h-4" />
             </Button>
           </div>
+
+          {/* Delivery Date & Free Shipping Progress Ribbon */}
+          {items.length > 0 && (
+            <div className="px-5 py-3 bg-muted/40 border-b border-border space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <span className="flex items-center gap-1.5 text-foreground font-semibold">
+                  <Truck className="w-3.5 h-3.5 text-royal-blue shrink-0" />
+                  <span>Delivery to <strong className="font-mono text-royal-blue">{currentPin}</strong></span>
+                </span>
+                <span className="text-[11px] font-bold text-teal">
+                  by {deliveryQuote?.standard.formattedDate || '2-3 Days'}
+                </span>
+              </div>
+
+              {/* Free Shipping Progress */}
+              <div className="space-y-1">
+                <div className="h-1.5 bg-border rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-teal transition-all duration-300 rounded-full"
+                    style={{ width: `${freeShippingProgress}%` }}
+                  />
+                </div>
+                <div className="text-[10px] text-muted-foreground flex items-center justify-between">
+                  {amountToFreeShipping > 0 ? (
+                    <span>Add <strong>{formatPrice(amountToFreeShipping)}</strong> for <strong>FREE Delivery</strong></span>
+                  ) : (
+                    <span className="text-teal font-bold flex items-center gap-1">
+                      <Sparkles className="w-3 h-3" /> FREE Express Delivery Unlocked!
+                    </span>
+                  )}
+                  <span>{freeShippingProgress}%</span>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Items List */}
           <div className="flex-1 overflow-y-auto p-5 space-y-4">

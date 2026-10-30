@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   ArrowLeft, 
   ShieldCheck, 
@@ -17,7 +17,10 @@ import {
   MapPin,
   Plus,
   Trash2,
-  Check
+  Check,
+  Zap,
+  Clock,
+  Key,
 } from 'lucide-react';
 import { formatPrice } from '../lib/formatters';
 import { couponApi, orderApi, paymentApi } from '../lib/apiClient';
@@ -28,6 +31,14 @@ import { Badge } from '../components/ui/badge';
 import { Separator } from '../components/ui/separator';
 import { Checkbox } from '../components/ui/checkbox';
 import { Label } from '../components/ui/label';
+import {
+  getPincodeInfo,
+  getDeliveryQuotes,
+  getStoredPincode,
+  setStoredPincode,
+  isValidPincode,
+  generateTrackingInfo,
+} from '../lib/deliveryUtils';
 
 export function CheckoutPage({
   cartItems = [],
@@ -55,16 +66,19 @@ export function CheckoutPage({
     }
   });
 
-  // Empty by default - customer self-fills without dummy data
   const [addressType, setAddressType] = useState('Home'); // 'Home' | 'Office' | 'Other'
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
-  const [postalCode, setPostalCode] = useState('');
+  const [postalCode, setPostalCode] = useState(() => getStoredPincode());
   const [deliveryNotes, setDeliveryNotes] = useState('');
   const [shouldSaveAddress, setShouldSaveAddress] = useState(true);
+
+  // Delivery Speed & Preference State
+  const [deliverySpeed, setDeliverySpeed] = useState('standard'); // 'standard' | 'express'
+  const [deliveryPreference, setDeliveryPreference] = useState('hand'); // 'hand' | 'security' | 'call'
 
   // Payment Selection
   const [paymentMethod, setPaymentMethod] = useState('razorpay'); // 'razorpay' | 'cod'
@@ -86,6 +100,25 @@ export function CheckoutPage({
     return acc + price * item.quantity;
   }, 0);
 
+  // Dynamic Delivery Quotes for entered postalCode
+  const deliveryQuotes = useMemo(() => {
+    return getDeliveryQuotes(postalCode || getStoredPincode());
+  }, [postalCode]);
+
+  // Handle Postal Code change with auto-fill
+  const handlePostalCodeChange = (val) => {
+    const cleaned = val.replace(/\D/g, '').slice(0, 6);
+    setPostalCode(cleaned);
+    if (isValidPincode(cleaned)) {
+      setStoredPincode(cleaned);
+      const info = getPincodeInfo(cleaned);
+      if (info.valid) {
+        if (!city || city === 'Bengaluru') setCity(info.city);
+        if (!state || state === 'Karnataka') setState(info.state);
+      }
+    }
+  };
+
   // Calculate Discount
   let discountAmount = 0;
   if (appliedCoupon) {
@@ -97,9 +130,11 @@ export function CheckoutPage({
     }
   }
 
-  // Shipping Calculation
-  const isFreeShipping = subtotal > 1999 || subtotal === 0;
-  const shippingFee = isFreeShipping ? 0 : 150;
+  // Shipping Calculation with Standard vs Priority Express
+  const isFreeStandard = subtotal > 1999 || subtotal === 0;
+  const baseShippingFee = isFreeStandard ? 0 : 150;
+  const expressExtraFee = deliverySpeed === 'express' ? 99 : 0;
+  const shippingFee = baseShippingFee + expressExtraFee;
   const finalTotal = Math.max(0, subtotal - discountAmount + shippingFee);
 
   // Handle Coupon Application
@@ -260,6 +295,12 @@ export function CheckoutPage({
         image: item.product.images?.[0]?.url,
       })),
       shippingAddress: shippingDetails,
+      estimatedDeliveryDate: deliverySpeed === 'express' ? deliveryQuotes?.express.formattedDate : deliveryQuotes?.standard.formattedDate,
+      deliverySpeed,
+      deliveryPreference,
+      deliveryNotes: shippingDetails.deliveryNotes || deliveryNotes,
+      courierPartner: deliverySpeed === 'express' ? 'BlueDart Express Air' : 'Delhivery Logistics',
+      trackingInfo: generateTrackingInfo(generatedOrderNumber),
       financials: {
         subtotal,
         discountAmount,
@@ -611,10 +652,12 @@ export function CheckoutPage({
                       <Input
                         id="checkout-postalCode"
                         type="text"
+                        maxLength={6}
                         required={selectedAddressId === 'new'}
                         value={postalCode}
-                        onChange={(e) => setPostalCode(e.target.value)}
-                        placeholder="PIN Code"
+                        onChange={(e) => handlePostalCodeChange(e.target.value)}
+                        placeholder="6-digit PIN Code"
+                        className="font-mono"
                       />
                     </div>
 
@@ -647,11 +690,122 @@ export function CheckoutPage({
               )}
             </Card>
 
-            {/* Step 2: Payment Method */}
+            {/* Step 2: Choose Delivery Speed & Doorstep Preferences */}
+            <Card className="rounded-3xl border-border bg-card shadow-sm p-6 sm:p-7 space-y-5">
+              <div className="flex items-center justify-between pb-2 border-b border-border">
+                <CardTitle className="text-base font-bold flex items-center gap-2">
+                  <Truck className="w-5 h-5 text-royal-blue" />
+                  Step 2: Choose Delivery Speed
+                </CardTitle>
+                <span className="text-xs font-semibold text-muted-foreground">
+                  PIN: <strong className="font-mono text-royal-blue">{postalCode || '560103'}</strong> ({deliveryQuotes?.city || 'Bengaluru'})
+                </span>
+              </div>
+
+              {/* Delivery Speed Options */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* Standard Delivery */}
+                <label
+                  className={`flex items-start gap-3.5 p-4 rounded-2xl border cursor-pointer transition ${
+                    deliverySpeed === 'standard'
+                      ? 'border-emerald-500 bg-emerald-500/5 ring-2 ring-emerald-500/20'
+                      : 'border-border hover:border-border/80 bg-background'
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="delivery_speed"
+                    value="standard"
+                    checked={deliverySpeed === 'standard'}
+                    onChange={() => setDeliverySpeed('standard')}
+                    className="mt-1 text-emerald-600 focus:ring-emerald-500"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-1 flex-wrap">
+                      <span className="text-xs font-bold text-foreground">
+                        Standard Delivery
+                      </span>
+                      <Badge variant="teal" className="text-[10px] font-bold px-1.5 py-0">
+                        {isFreeStandard ? 'FREE' : '₹150'}
+                      </Badge>
+                    </div>
+                    <p className="text-xs font-extrabold text-foreground mt-1">
+                      Expected by {deliveryQuotes?.standard.formattedDate || '3 Business Days'}
+                    </p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">
+                      Reliable surface dispatch via {deliveryQuotes?.courierPartner || 'BlueDart Express'}
+                    </p>
+                  </div>
+                </label>
+
+                {/* Priority Express Air */}
+                <label
+                  className={`flex items-start gap-3.5 p-4 rounded-2xl border cursor-pointer transition ${
+                    deliverySpeed === 'express'
+                      ? 'border-royal-blue bg-royal-blue/5 ring-2 ring-royal-blue/20'
+                      : 'border-border hover:border-border/80 bg-background'
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="delivery_speed"
+                    value="express"
+                    checked={deliverySpeed === 'express'}
+                    onChange={() => setDeliverySpeed('express')}
+                    className="mt-1 text-royal-blue focus:ring-royal-blue"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-1 flex-wrap">
+                      <span className="text-xs font-bold text-foreground flex items-center gap-1">
+                        <Zap className="w-3 h-3 text-royal-blue" /> Priority Express
+                      </span>
+                      <Badge variant="default" className="text-[10px] font-bold px-1.5 py-0">
+                        +₹99
+                      </Badge>
+                    </div>
+                    <p className="text-xs font-extrabold text-royal-blue mt-1">
+                      Expected by {deliveryQuotes?.express.formattedDate || 'Tomorrow'}
+                    </p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">
+                      Fastest air priority with live SMS tracking & doorstep OTP
+                    </p>
+                  </div>
+                </label>
+              </div>
+
+              {/* Delivery Preference Option */}
+              <div className="space-y-2 pt-2 border-t border-border/60">
+                <Label className="text-xs font-semibold text-foreground">
+                  Doorstep Delivery Preference
+                </Label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  {[
+                    { id: 'hand', label: 'Hand to me with OTP' },
+                    { id: 'security', label: 'Leave at Security Gate' },
+                    { id: 'call', label: 'Call before arriving' },
+                  ].map((pref) => (
+                    <button
+                      key={pref.id}
+                      type="button"
+                      onClick={() => setDeliveryPreference(pref.id)}
+                      className={`p-2.5 rounded-xl border text-left text-xs font-semibold transition ${
+                        deliveryPreference === pref.id
+                          ? 'border-royal-blue bg-royal-blue/10 text-royal-blue font-bold'
+                          : 'border-border bg-background text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      {pref.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </Card>
+
+            {/* Step 3: Payment Method */}
             <Card className="rounded-3xl border-border bg-card shadow-sm p-6 sm:p-7">
               <CardTitle className="text-base font-bold mb-4 flex items-center gap-2">
                 <CreditCard className="w-5 h-5 text-royal-blue" />
-                Select Payment Method
+                Step 3: Select Payment Method
               </CardTitle>
 
               <div className="space-y-3">
@@ -856,6 +1010,33 @@ export function CheckoutPage({
                     {couponSuccess}
                   </p>
                 )}
+              </div>
+
+              {/* Estimated Delivery Highlight Banner */}
+              <div className="p-3.5 rounded-2xl bg-gradient-to-r from-royal-blue/10 via-card to-teal/10 border border-royal-blue/20 space-y-1.5">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-bold text-foreground flex items-center gap-1.5">
+                    <Truck className="w-4 h-4 text-royal-blue" />
+                    <span>Estimated Delivery</span>
+                  </span>
+                  <Badge variant={deliverySpeed === 'express' ? 'default' : 'teal'} className="text-[10px] font-bold">
+                    {deliverySpeed === 'express' ? 'Priority Express' : 'Standard'}
+                  </Badge>
+                </div>
+                <p className="text-sm font-extrabold text-foreground">
+                  {deliverySpeed === 'express'
+                    ? deliveryQuotes?.express.formattedDate
+                    : deliveryQuotes?.standard.formattedDate || 'In 2-3 Business Days'}
+                </p>
+                <div className="flex items-center justify-between text-[11px] text-muted-foreground pt-1 border-t border-border/60">
+                  <span className="flex items-center gap-1">
+                    <MapPin className="w-3 h-3 text-royal-blue" />
+                    <span>To {city || deliveryQuotes?.city || 'Bengaluru'} ({postalCode})</span>
+                  </span>
+                  <span className="flex items-center gap-1 text-teal font-semibold">
+                    <Key className="w-3 h-3" /> OTP Protected
+                  </span>
+                </div>
               </div>
 
               {/* Price Breakdown */}

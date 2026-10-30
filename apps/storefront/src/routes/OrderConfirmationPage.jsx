@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   CheckCircle2, 
   Package, 
@@ -10,13 +10,15 @@ import {
   Printer, 
   ShoppingBag,
   Sparkles,
-  ShieldCheck
+  ShieldCheck,
+  Key,
 } from 'lucide-react';
 import { formatPrice } from '../lib/formatters';
 import { Button } from '../components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Separator } from '../components/ui/separator';
+import { OrderTrackingModal } from '../components/common/OrderTrackingModal';
 
 export function OrderConfirmationPage({ order, onNavigate }) {
   if (!order) {
@@ -35,7 +37,9 @@ export function OrderConfirmationPage({ order, onNavigate }) {
     );
   }
 
-  // Estimated delivery date: 3 business days from order placement
+  const [isTrackingModalOpen, setIsTrackingModalOpen] = useState(false);
+
+  // Estimated delivery date
   const orderDate = new Date(order.createdAt || Date.now());
   const deliveryDate = new Date(orderDate);
   deliveryDate.setDate(deliveryDate.getDate() + 3);
@@ -68,24 +72,79 @@ export function OrderConfirmationPage({ order, onNavigate }) {
             Your order <strong className="text-foreground font-mono">{order.orderNumber}</strong> has been received and is now being prepared for express dispatch.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 mt-6 print:hidden">
+          {/* Delivery Date, Courier AWB & Doorstep OTP Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 my-6 text-left">
+            {/* Delivery Date */}
+            <div className="p-4 rounded-2xl bg-card border border-border shadow-xs">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-royal-blue flex items-center gap-1.5 mb-1">
+                <Truck className="w-3.5 h-3.5" />
+                <span>Estimated Delivery</span>
+              </span>
+              <p className="text-sm font-extrabold text-foreground">
+                {order.estimatedDeliveryDate || formattedDelivery}
+              </p>
+              <span className="text-[10px] text-muted-foreground mt-0.5 block">
+                Via {order.courierPartner || 'BlueDart Express Air'}
+              </span>
+            </div>
+
+            {/* Courier AWB */}
+            <div className="p-4 rounded-2xl bg-card border border-border shadow-xs">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5 mb-1">
+                <Package className="w-3.5 h-3.5 text-teal" />
+                <span>Tracking AWB</span>
+              </span>
+              <p className="text-sm font-mono font-extrabold text-foreground">
+                {order.trackingInfo?.awbNumber || `NEX-BD-${order.orderNumber?.slice(-4) || '9821'}`}
+              </p>
+              <span className="text-[10px] text-teal font-semibold mt-0.5 block">
+                Express air priority tracking
+              </span>
+            </div>
+
+            {/* Delivery OTP */}
+            <div className="p-4 rounded-2xl bg-royal-blue/10 border border-royal-blue/30 shadow-xs">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-royal-blue flex items-center gap-1.5 mb-1">
+                <Key className="w-3.5 h-3.5" />
+                <span>Doorstep Delivery OTP</span>
+              </span>
+              <p className="text-xl font-mono font-black text-foreground tracking-widest">
+                {order.trackingInfo?.deliveryOtp || '7492'}
+              </p>
+              <span className="text-[10px] text-muted-foreground mt-0.5 block">
+                Share only with delivery agent
+              </span>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-4 print:hidden">
+            <Button
+              variant="default"
+              size="sm"
+              onClick={() => setIsTrackingModalOpen(true)}
+              className="gap-2 text-xs font-bold bg-royal-blue hover:bg-royal-blue/90 text-white shadow-md h-10 px-5"
+            >
+              <Truck className="w-4 h-4 animate-bounce" />
+              <span>Track Live Delivery Journey</span>
+            </Button>
+
             <Button
               variant="outline"
               size="sm"
               onClick={() => window.print()}
-              className="gap-2 text-xs"
+              className="gap-2 text-xs h-10"
             >
               <Printer className="w-4 h-4" />
-              <span>Print Order Receipt</span>
+              <span>Print Receipt</span>
             </Button>
 
             <Button
               variant="secondary"
               size="sm"
               onClick={() => onNavigate('profile')}
-              className="gap-2 text-xs"
+              className="gap-2 text-xs h-10"
             >
-              <span>View in Profile Orders</span>
+              <span>View in Profile</span>
             </Button>
           </div>
         </Card>
@@ -264,6 +323,13 @@ export function OrderConfirmationPage({ order, onNavigate }) {
           </div>
         </div>
       </div>
+
+      {/* Live Order Journey Modal */}
+      <OrderTrackingModal
+        order={order}
+        isOpen={isTrackingModalOpen}
+        onClose={() => setIsTrackingModalOpen(false)}
+      />
     </div>
   );
 }
