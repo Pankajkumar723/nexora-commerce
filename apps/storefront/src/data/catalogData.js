@@ -184,15 +184,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-fc-1-1",
-        "url": "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=1200&q=80",
         "alt": "Merino Wool Knit Sweater in Charcoal",
         "sortOrder": 0
       },
       {
         "id": "img-fc-1-2",
-        "url": "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=1200&q=80",
         "alt": "Sweater Collar Texture",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fc-1-3",
+        "url": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Merino Wool Knit Side Profile",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fc-1-4",
+        "url": "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Fine Gauge Ribbed Hem & Cuffs",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fc-1-5",
+        "url": "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Model Wearing Merino Sweater in Studio",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -254,15 +272,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-fc-2-1",
-        "url": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=1200&q=80",
         "alt": "Oxford Shirt Classic White",
         "sortOrder": 0
       },
       {
         "id": "img-fc-2-2",
-        "url": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=1200&q=80",
         "alt": "Shirt Cuffs and Collar Details",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fc-2-3",
+        "url": "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Oxford Shirt Tailored Silhouette",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fc-2-4",
+        "url": "https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Mother-of-Pearl Button Details",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fc-2-5",
+        "url": "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Folded Shirt Packaging with Brand Tag",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -324,15 +360,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-fc-3-1",
-        "url": "https://images.unsplash.com/photo-1544923246-77307dd654cb?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1544923246-77307dd654cb?auto=format&fit=crop&w=1200&q=80",
         "alt": "Commuter Trench Coat Front",
         "sortOrder": 0
       },
       {
         "id": "img-fc-3-2",
-        "url": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=1200&q=80",
         "alt": "Trench Coat Lifestyle",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fc-3-3",
+        "url": "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Mulberry Silk Draped Back View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fc-3-4",
+        "url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Grade-6A Silk Micro-Weave Luster",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fc-3-5",
+        "url": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Runway Gala Lifestyle Model Presentation",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -385,15 +439,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-fc-4-1",
-        "url": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=1200&q=80",
         "alt": "Pure Mulberry Silk Evening Dress",
         "sortOrder": 0
       },
       {
         "id": "img-fc-4-2",
-        "url": "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1200&q=80",
         "alt": "Silk Fabric Back Profile",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fc-4-3",
+        "url": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Selvedge ID Red-Line Hem Detail",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fc-4-4",
+        "url": "https://images.unsplash.com/photo-1542272604-780c96856592?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Reinforced Copper Rivets & Back Pocket",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fc-4-5",
+        "url": "https://images.unsplash.com/photo-1582552938357-32b906dfca00?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Authentic 14oz Heavyweight Denim Texture",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -455,15 +527,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-fc-5-1",
-        "url": "https://images.unsplash.com/photo-1542272604-780c96856592?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1542272604-780c96856592?auto=format&fit=crop&w=1200&q=80",
         "alt": "Raw Selvedge Denim Jeans",
         "sortOrder": 0
       },
       {
         "id": "img-fc-5-2",
-        "url": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1200&q=80",
         "alt": "Red Line Selvedge Cuff",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fc-5-3",
+        "url": "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Trench Coat Storm Flap & Belted Waist",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fc-5-4",
+        "url": "https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Hydrophobic Nanotech Fabric Water Repellent",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fc-5-5",
+        "url": "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Outdoor Rainy Weather Model Presentation",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -525,15 +615,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-el-1-1",
-        "url": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80",
         "alt": "Studio Pro Headphones",
         "sortOrder": 0
       },
       {
         "id": "img-el-1-2",
-        "url": "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1200&q=80",
         "alt": "Headphones Side View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-el-1-3",
+        "url": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Studio Pro ANC Headband & Driver Articulation",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-el-1-4",
+        "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Plush Memory Foam Ear Cushions & Controls",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-el-1-5",
+        "url": "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Hard Shell Carrying Case & Braided Audio Cable",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -584,15 +692,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-el-2-1",
-        "url": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=1200&q=80",
         "alt": "Sony Bravia 65 Inch QD-OLED TV",
         "sortOrder": 0
       },
       {
         "id": "img-el-2-2",
-        "url": "https://images.unsplash.com/photo-1461151304267-38535e780c79?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1461151304267-38535e780c79?auto=format&fit=crop&w=1200&q=80",
         "alt": "Living Room TV Setup",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-el-2-3",
+        "url": "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Ultra-Thin Titanium Bezel & Side Profile",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-el-2-4",
+        "url": "https://images.unsplash.com/photo-1461151304267-38535e780c79?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Cinema HDR Color Depth in Darkened Room",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-el-2-5",
+        "url": "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Wall Mounted Living Room Home Theater Setup",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -636,15 +762,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-el-3-1",
-        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=1200&q=80",
         "alt": "Dolby Atmos Soundbar System",
         "sortOrder": 0
       },
       {
         "id": "img-el-3-2",
-        "url": "https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&w=1200&q=80",
         "alt": "Wireless Subwoofer Profile",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-el-3-3",
+        "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Acoustic Wool Grille & Touch Control Ring",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-el-3-4",
+        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Internal Dual Subwoofer & Radiator Architecture",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-el-3-5",
+        "url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Bookshelf Placement & Ambient Mood Lighting",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -687,15 +831,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-el-4-1",
-        "url": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1200&q=80",
         "alt": "4K Ultra Short Throw Projector",
         "sortOrder": 0
       },
       {
         "id": "img-el-4-2",
-        "url": "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&w=1200&q=80",
         "alt": "Projector Projection on Wall",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-el-4-3",
+        "url": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Laser Optical Lens & Glass Prism Array",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-el-4-4",
+        "url": "https://images.unsplash.com/photo-1586210579191-33b45e38fa2c?auto=format&fit=crop&w=1200&q=85",
+        "alt": "120-Inch Ambient Light Rejecting Screen Projection",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-el-4-5",
+        "url": "https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Minimalist Media Console Audio Video Setup",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -738,15 +900,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-el-5-1",
-        "url": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=1200&q=80",
         "alt": "True Wireless Earbuds Case",
         "sortOrder": 0
       },
       {
         "id": "img-el-5-2",
-        "url": "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?auto=format&fit=crop&w=1200&q=80",
         "alt": "Single Earbud Angle",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-el-5-3",
+        "url": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Wireless Charging Case Open with Earbuds",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-el-5-4",
+        "url": "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Ergonomic In-Ear Fit with Multi-Size Tips",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-el-5-5",
+        "url": "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?auto=format&fit=crop&w=1200&q=85",
+        "alt": "IPX7 Water Resistance Workout Setting",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -797,15 +977,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-mob-1-1",
-        "url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80",
         "alt": "Apex Titanium Ultra 5G Smartphone",
         "sortOrder": 0
       },
       {
         "id": "img-mob-1-2",
-        "url": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=1200&q=80",
         "alt": "Phone Camera Module",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-mob-1-3",
+        "url": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Grade-5 Titanium Frame & Curved Display",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-mob-1-4",
+        "url": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Triple Periscope Camera Module Zoom",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-mob-1-5",
+        "url": "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Retail Packaging with 120W GaN Fast Charger",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -858,15 +1056,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-mob-2-1",
-        "url": "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=1200&q=80",
         "alt": "Carbon Fiber Phone Case",
         "sortOrder": 0
       },
       {
         "id": "img-mob-2-2",
-        "url": "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=1200&q=80",
         "alt": "Case Texture Close-up",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-mob-2-3",
+        "url": "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Aramid Fiber Weave Close-Up Texture",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-mob-2-4",
+        "url": "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Integrated MagSafe Ring & Raised Camera Lip",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-mob-2-5",
+        "url": "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Slim Profile Hand Grip Ergonomics",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -919,15 +1135,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-mob-3-1",
-        "url": "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1200&q=80",
         "alt": "65W GaN Dual USB-C Charger",
         "sortOrder": 0
       },
       {
         "id": "img-mob-3-2",
-        "url": "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=1200&q=80",
         "alt": "Compact Charger in Hand",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-mob-3-3",
+        "url": "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Dual USB-C & USB-A Fast Charging Ports",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-mob-3-4",
+        "url": "https://images.unsplash.com/photo-1622445262464-84b1456045b6?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Compact Palm Size Comparison with Coin",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-mob-3-5",
+        "url": "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Simultaneous Laptop & Phone Power Delivery",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -978,15 +1212,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-mob-4-1",
-        "url": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=1200&q=80",
         "alt": "Folding Aluminum Phone Stand",
         "sortOrder": 0
       },
       {
         "id": "img-mob-4-2",
-        "url": "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
         "alt": "Phone Mounted on Desk Stand",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-mob-4-3",
+        "url": "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=1200&q=85",
+        "alt": "CNC Aerospace Aluminum Dual Hinges",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-mob-4-4",
+        "url": "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Folded Flat Pocket Portability",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-mob-4-5",
+        "url": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Desk Setup with Video Call Orientation",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1037,15 +1289,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-mob-5-1",
-        "url": "https://images.unsplash.com/photo-1609592426868-b7c191a90c01?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1609592426868-b7c191a90c01?auto=format&fit=crop&w=1200&q=80",
         "alt": "10000mAh Magnetic Power Bank",
         "sortOrder": 0
       },
       {
         "id": "img-mob-5-2",
-        "url": "https://images.unsplash.com/photo-1546054454-aa26e2b734c7?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1546054454-aa26e2b734c7?auto=format&fit=crop&w=1200&q=80",
         "alt": "Slim Power Bank Attached to Phone",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-mob-5-3",
+        "url": "https://images.unsplash.com/photo-1609592424109-dd9892f1b177?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Snap-On Magnetic Alignment on Phone Back",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-mob-5-4",
+        "url": "https://images.unsplash.com/photo-1622445262464-84b1456045b6?auto=format&fit=crop&w=1200&q=85",
+        "alt": "LED Digital Battery Percentage Display",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-mob-5-5",
+        "url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Pocket Slim Profile Carry",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1096,15 +1366,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-comp-1-1",
-        "url": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=80",
         "alt": "75% Mechanical Keyboard Angle",
         "sortOrder": 0
       },
       {
         "id": "img-comp-1-2",
-        "url": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=1200&q=80",
         "alt": "Keycap Details Top View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-comp-1-3",
+        "url": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Gasket Mount Aluminum Chassis Profile",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-comp-1-4",
+        "url": "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Hot-Swappable Switches & PBT Keycaps",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-comp-1-5",
+        "url": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Per-Key RGB Illumination in Dark Workstation",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1155,15 +1443,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-comp-2-1",
-        "url": "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=1200&q=80",
         "alt": "Ergonomic Vertical Mouse",
         "sortOrder": 0
       },
       {
         "id": "img-comp-2-2",
-        "url": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=1200&q=80",
         "alt": "Mouse Hand Placement",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-comp-2-3",
+        "url": "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=1200&q=85",
+        "alt": "57-Degree Natural Handshake Ergonomic Angle",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-comp-2-4",
+        "url": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Textured Thumb Rest & Dual Side Buttons",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-comp-2-5",
+        "url": "https://images.unsplash.com/photo-1605792657660-596af9009e82?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Dual Wireless 2.4GHz & Multi-Bluetooth Pairing",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1214,15 +1520,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-comp-3-1",
-        "url": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=1200&q=80",
         "alt": "Dell 32 Inch 4K Monitor",
         "sortOrder": 0
       },
       {
         "id": "img-comp-3-2",
-        "url": "https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&w=1200&q=80",
         "alt": "Monitor Clean Desk View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-comp-3-3",
+        "url": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=1200&q=85",
+        "alt": "IPS Black 2000:1 Contrast Color Calibration",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-comp-3-4",
+        "url": "https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&w=1200&q=85",
+        "alt": "90W USB-C Single Cable Hub Connectivity",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-comp-3-5",
+        "url": "https://images.unsplash.com/photo-1585792180666-f75a7407f4ac?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Pivot Height Adjustable Swivel Stand",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1266,15 +1590,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-comp-4-1",
-        "url": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=1200&q=80",
         "alt": "Heavy Duty Monitor Arm",
         "sortOrder": 0
       },
       {
         "id": "img-comp-4-2",
-        "url": "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&w=1200&q=80",
         "alt": "Floating Ultrawide Desk Setup",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-comp-4-3",
+        "url": "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Heavy-Duty Gas Spring Articulation",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-comp-4-4",
+        "url": "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Integrated Cable Management Channels",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-comp-4-5",
+        "url": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Clean Floating Dual Display Desk Setup",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1327,15 +1669,33 @@ export const PRODUCTS = [
     "images": [
       {
         "id": "img-comp-5-1",
-        "url": "https://images.unsplash.com/photo-1544652478-6653e09f18a2?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1544652478-6653e09f18a2?auto=format&fit=crop&w=1200&q=80",
         "alt": "Thunderbolt 4 Pro Dock",
         "sortOrder": 0
       },
       {
         "id": "img-comp-5-2",
-        "url": "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=1000&q=80",
+        "url": "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=1200&q=80",
         "alt": "Rear Ports Array",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-comp-5-3",
+        "url": "https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=1200&q=85",
+        "alt": "40Gbps Thunderbolt 4 Upstream & Downstream Ports",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-comp-5-4",
+        "url": "https://images.unsplash.com/photo-1544652478-6653e09f18a2?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Aluminum Anodized Heatsink Enclosure",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-comp-5-5",
+        "url": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Single Thunderbolt Cable Workstation Power",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1377,16 +1737,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-hk-1-1",
+        "id": "img-prod-hk-1-1",
         "url": "https://images.unsplash.com/photo-1584990347449-399a9a304886?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Enameled Cast Iron Dutch Oven",
+        "alt": "Artisan Cast Iron Pre-Seasoned Dutch Oven (6 Qt) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-hk-1-2",
+        "id": "img-prod-hk-1-2",
         "url": "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Dutch Oven on Stove Top",
+        "alt": "Artisan Cast Iron Pre-Seasoned Dutch Oven (6 Qt) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-hk-1-3",
+        "url": "https://images.unsplash.com/photo-1507048777864-77747e704874?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Cast Iron Pre-Seasoned Dutch Oven (6 Qt) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-hk-1-4",
+        "url": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Cast Iron Pre-Seasoned Dutch Oven (6 Qt) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-hk-1-5",
+        "url": "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Cast Iron Pre-Seasoned Dutch Oven (6 Qt) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1438,16 +1816,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-hk-2-1",
+        "id": "img-prod-hk-2-1",
         "url": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Precision Conical Burr Grinder",
+        "alt": "Nexora Barista Precision Conical Burr Coffee Grinder - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-hk-2-2",
+        "id": "img-prod-hk-2-2",
         "url": "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Fresh Ground Coffee Detail",
+        "alt": "Nexora Barista Precision Conical Burr Coffee Grinder - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-hk-2-3",
+        "url": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Barista Precision Conical Burr Coffee Grinder - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-hk-2-4",
+        "url": "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Barista Precision Conical Burr Coffee Grinder - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-hk-2-5",
+        "url": "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Barista Precision Conical Burr Coffee Grinder - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1497,16 +1893,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-hk-3-1",
+        "id": "img-prod-hk-3-1",
         "url": "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Damascus Chef Knife",
+        "alt": "Damascus Steel 8-Inch Chef Knife with Pakkawood Handle - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-hk-3-2",
+        "id": "img-prod-hk-3-2",
         "url": "https://images.unsplash.com/photo-1589793907316-f94c01d9f81d?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Blade Damascus Pattern",
+        "alt": "Damascus Steel 8-Inch Chef Knife with Pakkawood Handle - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-hk-3-3",
+        "url": "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Damascus Steel 8-Inch Chef Knife with Pakkawood Handle - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-hk-3-4",
+        "url": "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Damascus Steel 8-Inch Chef Knife with Pakkawood Handle - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-hk-3-5",
+        "url": "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Damascus Steel 8-Inch Chef Knife with Pakkawood Handle - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1549,16 +1963,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-hk-4-1",
+        "id": "img-prod-hk-4-1",
         "url": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Precision Sous Vide Immersion Cooker",
+        "alt": "Vanguard Smart Precision Sous Vide Cooker (1200W) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-hk-4-2",
+        "id": "img-prod-hk-4-2",
         "url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Perfect Medium Rare Steak Cooked via Sous Vide",
+        "alt": "Vanguard Smart Precision Sous Vide Cooker (1200W) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-hk-4-3",
+        "url": "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Smart Precision Sous Vide Cooker (1200W) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-hk-4-4",
+        "url": "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Smart Precision Sous Vide Cooker (1200W) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-hk-4-5",
+        "url": "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Smart Precision Sous Vide Cooker (1200W) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1601,16 +2033,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-hk-5-1",
+        "id": "img-prod-hk-5-1",
         "url": "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Pour Over Coffee Carafe",
+        "alt": "Nexora Borosilicate Thermal Carafe Pour-Over Set - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-hk-5-2",
+        "id": "img-prod-hk-5-2",
         "url": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Pouring Coffee from Carafe",
+        "alt": "Nexora Borosilicate Thermal Carafe Pour-Over Set - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-hk-5-3",
+        "url": "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Borosilicate Thermal Carafe Pour-Over Set - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-hk-5-4",
+        "url": "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Borosilicate Thermal Carafe Pour-Over Set - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-hk-5-5",
+        "url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Borosilicate Thermal Carafe Pour-Over Set - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1653,16 +2103,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-fd-1-1",
+        "id": "img-prod-fd-1-1",
         "url": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Nordic Oak Lounge Armchair",
+        "alt": "Aura Nordic Solid Oak Ergonomic Lounge Armchair - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-fd-1-2",
+        "id": "img-prod-fd-1-2",
         "url": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Bouclé Fabric Texture Detail",
+        "alt": "Aura Nordic Solid Oak Ergonomic Lounge Armchair - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fd-1-3",
+        "url": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Aura Nordic Solid Oak Ergonomic Lounge Armchair - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fd-1-4",
+        "url": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Aura Nordic Solid Oak Ergonomic Lounge Armchair - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fd-1-5",
+        "url": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Aura Nordic Solid Oak Ergonomic Lounge Armchair - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1714,16 +2182,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-fd-2-1",
+        "id": "img-prod-fd-2-1",
         "url": "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Solid Walnut Floating Shelf",
+        "alt": "Nexora Minimalist Walnut Floating Wall Shelf (90cm) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-fd-2-2",
+        "id": "img-prod-fd-2-2",
         "url": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Decor on Wall Shelf",
+        "alt": "Nexora Minimalist Walnut Floating Wall Shelf (90cm) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fd-2-3",
+        "url": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Minimalist Walnut Floating Wall Shelf (90cm) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fd-2-4",
+        "url": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Minimalist Walnut Floating Wall Shelf (90cm) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fd-2-5",
+        "url": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Minimalist Walnut Floating Wall Shelf (90cm) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1766,16 +2252,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-fd-3-1",
+        "id": "img-prod-fd-3-1",
         "url": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Electric Sit-Stand Desk",
+        "alt": "Kinesis Electric Dual-Motor Sit-Stand Desk (140x70cm) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-fd-3-2",
+        "id": "img-prod-fd-3-2",
         "url": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Desk Height Controller",
+        "alt": "Kinesis Electric Dual-Motor Sit-Stand Desk (140x70cm) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fd-3-3",
+        "url": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Kinesis Electric Dual-Motor Sit-Stand Desk (140x70cm) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fd-3-4",
+        "url": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Kinesis Electric Dual-Motor Sit-Stand Desk (140x70cm) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fd-3-5",
+        "url": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Kinesis Electric Dual-Motor Sit-Stand Desk (140x70cm) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1827,16 +2331,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-fd-4-1",
+        "id": "img-prod-fd-4-1",
         "url": "https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Handwoven Moroccan Wool Rug",
+        "alt": "Lumina Handwoven Moroccan Wool Area Rug (5x7 Ft) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-fd-4-2",
+        "id": "img-prod-fd-4-2",
         "url": "https://images.unsplash.com/photo-1579656381226-5fc0f0100c3b?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Rug Texture and Fringe Detail",
+        "alt": "Lumina Handwoven Moroccan Wool Area Rug (5x7 Ft) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fd-4-3",
+        "url": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Lumina Handwoven Moroccan Wool Area Rug (5x7 Ft) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fd-4-4",
+        "url": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Lumina Handwoven Moroccan Wool Area Rug (5x7 Ft) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fd-4-5",
+        "url": "https://images.unsplash.com/photo-1580481077190-7361296d445e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Lumina Handwoven Moroccan Wool Area Rug (5x7 Ft) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1879,16 +2401,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-fd-5-1",
+        "id": "img-prod-fd-5-1",
         "url": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Brushed Brass Arch Floor Lamp",
+        "alt": "Vanguard Bauhaus Arch Brushed Brass Floor Lamp - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-fd-5-2",
+        "id": "img-prod-fd-5-2",
         "url": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Marble Base and Arch Detail",
+        "alt": "Vanguard Bauhaus Arch Brushed Brass Floor Lamp - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fd-5-3",
+        "url": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Bauhaus Arch Brushed Brass Floor Lamp - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fd-5-4",
+        "url": "https://images.unsplash.com/photo-1580481077190-7361296d445e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Bauhaus Arch Brushed Brass Floor Lamp - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fd-5-5",
+        "url": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Bauhaus Arch Brushed Brass Floor Lamp - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1940,16 +2480,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-ha-1-1",
+        "id": "img-prod-ha-1-1",
         "url": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Cordless Vacuum Cleaner",
+        "alt": "Dyson V12 Detect Slim Cordless Vacuum Cleaner - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-ha-1-2",
+        "id": "img-prod-ha-1-2",
         "url": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Vacuum Cleaner Head on Wood Floor",
+        "alt": "Dyson V12 Detect Slim Cordless Vacuum Cleaner - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-ha-1-3",
+        "url": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Dyson V12 Detect Slim Cordless Vacuum Cleaner - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-ha-1-4",
+        "url": "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Dyson V12 Detect Slim Cordless Vacuum Cleaner - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-ha-1-5",
+        "url": "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Dyson V12 Detect Slim Cordless Vacuum Cleaner - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -1991,16 +2549,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-ha-2-1",
+        "id": "img-prod-ha-2-1",
         "url": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Smart Air Purifier",
+        "alt": "Nexora PureAir HEPA H13 Smart Air Purifier - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-ha-2-2",
+        "id": "img-prod-ha-2-2",
         "url": "https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Air Purifier in Modern Bedroom",
+        "alt": "Nexora PureAir HEPA H13 Smart Air Purifier - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-ha-2-3",
+        "url": "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora PureAir HEPA H13 Smart Air Purifier - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-ha-2-4",
+        "url": "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora PureAir HEPA H13 Smart Air Purifier - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-ha-2-5",
+        "url": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora PureAir HEPA H13 Smart Air Purifier - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2043,16 +2619,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-ha-3-1",
+        "id": "img-prod-ha-3-1",
         "url": "https://images.unsplash.com/photo-1626164284583-0570a25695fa?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Digital Touch Screen Air Fryer",
+        "alt": "Philips Digital Touch Screen Rapid Air Fryer (4.2L) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-ha-3-2",
+        "id": "img-prod-ha-3-2",
         "url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Crispy Fries in Air Fryer Basket",
+        "alt": "Philips Digital Touch Screen Rapid Air Fryer (4.2L) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-ha-3-3",
+        "url": "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Philips Digital Touch Screen Rapid Air Fryer (4.2L) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-ha-3-4",
+        "url": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Philips Digital Touch Screen Rapid Air Fryer (4.2L) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-ha-3-5",
+        "url": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Philips Digital Touch Screen Rapid Air Fryer (4.2L) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2095,16 +2689,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-ha-4-1",
+        "id": "img-prod-ha-4-1",
         "url": "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Convection Microwave Oven",
+        "alt": "LG 28L Convection Smart Microwave Oven - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-ha-4-2",
+        "id": "img-prod-ha-4-2",
         "url": "https://images.unsplash.com/photo-1584269600519-112d071b35e6?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Microwave Interior Stainless Cavity",
+        "alt": "LG 28L Convection Smart Microwave Oven - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-ha-4-3",
+        "url": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=1200&q=85",
+        "alt": "LG 28L Convection Smart Microwave Oven - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-ha-4-4",
+        "url": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1200&q=85",
+        "alt": "LG 28L Convection Smart Microwave Oven - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-ha-4-5",
+        "url": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "LG 28L Convection Smart Microwave Oven - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2147,16 +2759,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-ha-5-1",
+        "id": "img-prod-ha-5-1",
         "url": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Bladeless Tower Fan",
+        "alt": "Nexora UltraQuiet 3D Oscillating Bladeless Tower Fan - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-ha-5-2",
+        "id": "img-prod-ha-5-2",
         "url": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Living Room Tower Fan",
+        "alt": "Nexora UltraQuiet 3D Oscillating Bladeless Tower Fan - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-ha-5-3",
+        "url": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora UltraQuiet 3D Oscillating Bladeless Tower Fan - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-ha-5-4",
+        "url": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora UltraQuiet 3D Oscillating Bladeless Tower Fan - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-ha-5-5",
+        "url": "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora UltraQuiet 3D Oscillating Bladeless Tower Fan - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2206,16 +2836,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bpc-1-1",
+        "id": "img-prod-bpc-1-1",
         "url": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Sonic Facial Cleansing Device",
+        "alt": "Lumina Sonic HydraGlow Facial Cleansing Brush - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bpc-1-2",
+        "id": "img-prod-bpc-1-2",
         "url": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Facial Cleanser in Bathroom",
+        "alt": "Lumina Sonic HydraGlow Facial Cleansing Brush - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bpc-1-3",
+        "url": "https://images.unsplash.com/photo-1608248597359-002237d6e6a1?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Lumina Sonic HydraGlow Facial Cleansing Brush - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bpc-1-4",
+        "url": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Lumina Sonic HydraGlow Facial Cleansing Brush - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bpc-1-5",
+        "url": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Lumina Sonic HydraGlow Facial Cleansing Brush - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2267,16 +2915,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bpc-2-1",
+        "id": "img-prod-bpc-2-1",
         "url": "https://images.unsplash.com/photo-1608248597359-2e06c37c2766?auto=format&fit=crop&w=1000&q=80",
-        "alt": "24K Gold Peptide Serum Bottle",
+        "alt": "Nexora 24K Gold Peptide Anti-Aging Rejuvenation Serum - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bpc-2-2",
+        "id": "img-prod-bpc-2-2",
         "url": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Serum Dropper Application",
+        "alt": "Nexora 24K Gold Peptide Anti-Aging Rejuvenation Serum - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bpc-2-3",
+        "url": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora 24K Gold Peptide Anti-Aging Rejuvenation Serum - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bpc-2-4",
+        "url": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora 24K Gold Peptide Anti-Aging Rejuvenation Serum - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bpc-2-5",
+        "url": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora 24K Gold Peptide Anti-Aging Rejuvenation Serum - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2319,16 +2985,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bpc-3-1",
+        "id": "img-prod-bpc-3-1",
         "url": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Botanical Night Elixir Glass Dropper",
+        "alt": "Equinox Botanical Rosehip & Bakuchiol Night Elixir - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bpc-3-2",
+        "id": "img-prod-bpc-3-2",
         "url": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Natural Ingredients Flatlay",
+        "alt": "Equinox Botanical Rosehip & Bakuchiol Night Elixir - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bpc-3-3",
+        "url": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Botanical Rosehip & Bakuchiol Night Elixir - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bpc-3-4",
+        "url": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Botanical Rosehip & Bakuchiol Night Elixir - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bpc-3-5",
+        "url": "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Botanical Rosehip & Bakuchiol Night Elixir - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2371,16 +3055,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bpc-4-1",
+        "id": "img-prod-bpc-4-1",
         "url": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1000&q=80",
-        "alt": "High Speed Ionic Hair Dryer",
+        "alt": "Vanguard Ionic Tourmaline High-Speed Hair Dryer - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bpc-4-2",
+        "id": "img-prod-bpc-4-2",
         "url": "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Styling Hair with Diffuser",
+        "alt": "Vanguard Ionic Tourmaline High-Speed Hair Dryer - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bpc-4-3",
+        "url": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Ionic Tourmaline High-Speed Hair Dryer - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bpc-4-4",
+        "url": "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Ionic Tourmaline High-Speed Hair Dryer - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bpc-4-5",
+        "url": "https://images.unsplash.com/photo-1608248597359-002237d6e6a1?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Ionic Tourmaline High-Speed Hair Dryer - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2430,16 +3132,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bpc-5-1",
+        "id": "img-prod-bpc-5-1",
         "url": "https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Heated Beard Straightener Brush",
+        "alt": "Nexora Ceramic Ionic Heated Beard & Hair Straightener - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bpc-5-2",
+        "id": "img-prod-bpc-5-2",
         "url": "https://images.unsplash.com/photo-1621607512214-68297480165e?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Men Grooming Texture",
+        "alt": "Nexora Ceramic Ionic Heated Beard & Hair Straightener - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bpc-5-3",
+        "url": "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Ceramic Ionic Heated Beard & Hair Straightener - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bpc-5-4",
+        "url": "https://images.unsplash.com/photo-1608248597359-002237d6e6a1?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Ceramic Ionic Heated Beard & Hair Straightener - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bpc-5-5",
+        "url": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Ceramic Ionic Heated Beard & Hair Straightener - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2481,16 +3201,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-hw-1-1",
+        "id": "img-prod-hw-1-1",
         "url": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Percussion Massage Gun Set",
+        "alt": "Nexora Deep Tissue Percussion Muscle Massage Gun - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-hw-1-2",
+        "id": "img-prod-hw-1-2",
         "url": "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Athlete Muscle Recovery Session",
+        "alt": "Nexora Deep Tissue Percussion Muscle Massage Gun - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-hw-1-3",
+        "url": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Deep Tissue Percussion Muscle Massage Gun - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-hw-1-4",
+        "url": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Deep Tissue Percussion Muscle Massage Gun - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-hw-1-5",
+        "url": "https://images.unsplash.com/photo-1602928321679-560bb453f190?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Deep Tissue Percussion Muscle Massage Gun - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2533,16 +3271,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-hw-2-1",
+        "id": "img-prod-hw-2-1",
         "url": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Smart Body Composition Scale",
+        "alt": "Apex Smart Body Composition Scale with 16 Biometrics - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-hw-2-2",
+        "id": "img-prod-hw-2-2",
         "url": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Scale with Mobile Companion App",
+        "alt": "Apex Smart Body Composition Scale with 16 Biometrics - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-hw-2-3",
+        "url": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Smart Body Composition Scale with 16 Biometrics - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-hw-2-4",
+        "url": "https://images.unsplash.com/photo-1602928321679-560bb453f190?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Smart Body Composition Scale with 16 Biometrics - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-hw-2-5",
+        "url": "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Smart Body Composition Scale with 16 Biometrics - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2592,16 +3348,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-hw-3-1",
+        "id": "img-prod-hw-3-1",
         "url": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Ashwagandha Capsules Bottle",
+        "alt": "Equinox Pure KSM-66 Ashwagandha Stress & Sleep Capsules - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-hw-3-2",
+        "id": "img-prod-hw-3-2",
         "url": "https://images.unsplash.com/photo-1550572017-ed200f5e6343?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Herbal Supplement Ingredients",
+        "alt": "Equinox Pure KSM-66 Ashwagandha Stress & Sleep Capsules - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-hw-3-3",
+        "url": "https://images.unsplash.com/photo-1602928321679-560bb453f190?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Pure KSM-66 Ashwagandha Stress & Sleep Capsules - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-hw-3-4",
+        "url": "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Pure KSM-66 Ashwagandha Stress & Sleep Capsules - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-hw-3-5",
+        "url": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Pure KSM-66 Ashwagandha Stress & Sleep Capsules - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2644,16 +3418,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-hw-4-1",
+        "id": "img-prod-hw-4-1",
         "url": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Ceramic Essential Oil Diffuser",
+        "alt": "Vanguard Cold-Mist Ultrasonic Aromatherapy Diffuser - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-hw-4-2",
+        "id": "img-prod-hw-4-2",
         "url": "https://images.unsplash.com/photo-1547483238-f400e65ccd56?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Diffuser Vapor and Soft Lighting",
+        "alt": "Vanguard Cold-Mist Ultrasonic Aromatherapy Diffuser - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-hw-4-3",
+        "url": "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Cold-Mist Ultrasonic Aromatherapy Diffuser - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-hw-4-4",
+        "url": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Cold-Mist Ultrasonic Aromatherapy Diffuser - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-hw-4-5",
+        "url": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Cold-Mist Ultrasonic Aromatherapy Diffuser - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2696,16 +3488,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-hw-5-1",
+        "id": "img-prod-hw-5-1",
         "url": "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Ergonomic Memory Foam Contour Pillow",
+        "alt": "Nexora Ergonomic Memory Foam Contour Orthopedic Pillow - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-hw-5-2",
+        "id": "img-prod-hw-5-2",
         "url": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Bed Pillow Side Contour",
+        "alt": "Nexora Ergonomic Memory Foam Contour Orthopedic Pillow - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-hw-5-3",
+        "url": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Ergonomic Memory Foam Contour Orthopedic Pillow - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-hw-5-4",
+        "url": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Ergonomic Memory Foam Contour Orthopedic Pillow - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-hw-5-5",
+        "url": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Ergonomic Memory Foam Contour Orthopedic Pillow - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2748,16 +3558,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-gro-1-1",
+        "id": "img-prod-gro-1-1",
         "url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Cold Pressed Extra Virgin Olive Oil Bottle",
+        "alt": "Organic Cold-Pressed Extra Virgin Olive Oil (1 Liter) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-gro-1-2",
+        "id": "img-prod-gro-1-2",
         "url": "https://images.unsplash.com/photo-1541256942802-7b299655f5e3?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Olive Oil Drizzle on Fresh Bread",
+        "alt": "Organic Cold-Pressed Extra Virgin Olive Oil (1 Liter) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-gro-1-3",
+        "url": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Organic Cold-Pressed Extra Virgin Olive Oil (1 Liter) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-gro-1-4",
+        "url": "https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Organic Cold-Pressed Extra Virgin Olive Oil (1 Liter) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-gro-1-5",
+        "url": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Organic Cold-Pressed Extra Virgin Olive Oil (1 Liter) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2800,16 +3628,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-gro-2-1",
+        "id": "img-prod-gro-2-1",
         "url": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Raw Wild Forest Honey Jar",
+        "alt": "Nexora Raw Unprocessed Forest Honey (500g) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-gro-2-2",
+        "id": "img-prod-gro-2-2",
         "url": "https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Honey Dripper Detail",
+        "alt": "Nexora Raw Unprocessed Forest Honey (500g) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-gro-2-3",
+        "url": "https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Raw Unprocessed Forest Honey (500g) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-gro-2-4",
+        "url": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Raw Unprocessed Forest Honey (500g) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-gro-2-5",
+        "url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Raw Unprocessed Forest Honey (500g) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2852,16 +3698,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-gro-3-1",
+        "id": "img-prod-gro-3-1",
         "url": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Royal Kashmiri Saffron Threads",
+        "alt": "Heritage Royal Kashmiri Mogra Saffron (1 Gram) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-gro-3-2",
+        "id": "img-prod-gro-3-2",
         "url": "https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Golden Saffron Infusion in Milk",
+        "alt": "Heritage Royal Kashmiri Mogra Saffron (1 Gram) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-gro-3-3",
+        "url": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Heritage Royal Kashmiri Mogra Saffron (1 Gram) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-gro-3-4",
+        "url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Heritage Royal Kashmiri Mogra Saffron (1 Gram) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-gro-3-5",
+        "url": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Heritage Royal Kashmiri Mogra Saffron (1 Gram) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2904,16 +3768,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-gro-4-1",
+        "id": "img-prod-gro-4-1",
         "url": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Organic Rolled Oats Bowl",
+        "alt": "Artisan Organic Whole Grain Rolled Oats (1kg) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-gro-4-2",
+        "id": "img-prod-gro-4-2",
         "url": "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Oats with Fresh Berries and Nuts",
+        "alt": "Artisan Organic Whole Grain Rolled Oats (1kg) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-gro-4-3",
+        "url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Organic Whole Grain Rolled Oats (1kg) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-gro-4-4",
+        "url": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Organic Whole Grain Rolled Oats (1kg) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-gro-4-5",
+        "url": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Organic Whole Grain Rolled Oats (1kg) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -2956,16 +3838,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-gro-5-1",
+        "id": "img-prod-gro-5-1",
         "url": "https://images.unsplash.com/photo-1518110925495-5fe2fda0442c?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Himalayan Pink Rock Salt Crystals",
+        "alt": "Pure Himalayan Pink Mineral Rock Salt (1kg Pouch) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-gro-5-2",
+        "id": "img-prod-gro-5-2",
         "url": "https://images.unsplash.com/photo-1506084868230-bb9d95c24759?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Pink Salt in Wooden Pinch Bowl",
+        "alt": "Pure Himalayan Pink Mineral Rock Salt (1kg Pouch) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-gro-5-3",
+        "url": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Pure Himalayan Pink Mineral Rock Salt (1kg Pouch) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-gro-5-4",
+        "url": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Pure Himalayan Pink Mineral Rock Salt (1kg Pouch) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-gro-5-5",
+        "url": "https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Pure Himalayan Pink Mineral Rock Salt (1kg Pouch) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3017,16 +3917,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-fb-1-1",
+        "id": "img-prod-fb-1-1",
         "url": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Ethiopian Yirgacheffe Coffee Bag",
+        "alt": "Artisan Single-Origin Ethiopian Yirgacheffe Whole Bean Coffee (500g) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-fb-1-2",
+        "id": "img-prod-fb-1-2",
         "url": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Roasted Whole Coffee Beans",
+        "alt": "Artisan Single-Origin Ethiopian Yirgacheffe Whole Bean Coffee (500g) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fb-1-3",
+        "url": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Single-Origin Ethiopian Yirgacheffe Whole Bean Coffee (500g) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fb-1-4",
+        "url": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Single-Origin Ethiopian Yirgacheffe Whole Bean Coffee (500g) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fb-1-5",
+        "url": "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Single-Origin Ethiopian Yirgacheffe Whole Bean Coffee (500g) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3078,16 +3996,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-fb-2-1",
+        "id": "img-prod-fb-2-1",
         "url": "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Loose Leaf Darjeeling Tea Tin",
+        "alt": "Nexora Premium First Flush Darjeeling Black Tea (250g Tin) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-fb-2-2",
+        "id": "img-prod-fb-2-2",
         "url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Tea Brewing in Glass Teapot",
+        "alt": "Nexora Premium First Flush Darjeeling Black Tea (250g Tin) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fb-2-3",
+        "url": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Premium First Flush Darjeeling Black Tea (250g Tin) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fb-2-4",
+        "url": "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Premium First Flush Darjeeling Black Tea (250g Tin) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fb-2-5",
+        "url": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Premium First Flush Darjeeling Black Tea (250g Tin) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3130,16 +4066,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-fb-3-1",
+        "id": "img-prod-fb-3-1",
         "url": "https://images.unsplash.com/photo-1548907040-4baa42d10919?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Single Origin Dark Chocolate Bar",
+        "alt": "Equinox 85% Single-Origin Madagascar Dark Chocolate Bar (80g) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-fb-3-2",
+        "id": "img-prod-fb-3-2",
         "url": "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Broken Dark Chocolate Pieces",
+        "alt": "Equinox 85% Single-Origin Madagascar Dark Chocolate Bar (80g) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fb-3-3",
+        "url": "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox 85% Single-Origin Madagascar Dark Chocolate Bar (80g) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fb-3-4",
+        "url": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox 85% Single-Origin Madagascar Dark Chocolate Bar (80g) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fb-3-5",
+        "url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox 85% Single-Origin Madagascar Dark Chocolate Bar (80g) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3182,16 +4136,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-fb-4-1",
+        "id": "img-prod-fb-4-1",
         "url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Ceremonial Grade Matcha Bowl and Whisk",
+        "alt": "Vanguard Organic Ceremonial Grade Japanese Uji Matcha (50g) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-fb-4-2",
+        "id": "img-prod-fb-4-2",
         "url": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Whisking Vibrant Green Matcha",
+        "alt": "Vanguard Organic Ceremonial Grade Japanese Uji Matcha (50g) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fb-4-3",
+        "url": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Organic Ceremonial Grade Japanese Uji Matcha (50g) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fb-4-4",
+        "url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Organic Ceremonial Grade Japanese Uji Matcha (50g) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fb-4-5",
+        "url": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Organic Ceremonial Grade Japanese Uji Matcha (50g) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3234,16 +4206,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-fb-5-1",
+        "id": "img-prod-fb-5-1",
         "url": "https://images.unsplash.com/photo-1517093157656-b9ec81615d18?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Artisan Almond Granola Bowl",
+        "alt": "Nexora Roasted Mediterranean Almond & Cranberry Granola (500g) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-fb-5-2",
+        "id": "img-prod-fb-5-2",
         "url": "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Granola with Greek Yogurt and Berries",
+        "alt": "Nexora Roasted Mediterranean Almond & Cranberry Granola (500g) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-fb-5-3",
+        "url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Roasted Mediterranean Almond & Cranberry Granola (500g) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-fb-5-4",
+        "url": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Roasted Mediterranean Almond & Cranberry Granola (500g) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-fb-5-5",
+        "url": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Roasted Mediterranean Almond & Cranberry Granola (500g) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3286,16 +4276,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bs-1-1",
+        "id": "img-prod-bs-1-1",
         "url": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Hand Bound Leather Journal",
+        "alt": "Artisan Hand-Bound Full-Grain Leather Journal (240 Pages) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bs-1-2",
+        "id": "img-prod-bs-1-2",
         "url": "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Open Journal with Fountain Pen",
+        "alt": "Artisan Hand-Bound Full-Grain Leather Journal (240 Pages) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bs-1-3",
+        "url": "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Hand-Bound Full-Grain Leather Journal (240 Pages) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bs-1-4",
+        "url": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Hand-Bound Full-Grain Leather Journal (240 Pages) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bs-1-5",
+        "url": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Hand-Bound Full-Grain Leather Journal (240 Pages) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3347,16 +4355,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bs-2-1",
+        "id": "img-prod-bs-2-1",
         "url": "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Matte Black Aluminum Fountain Pen",
+        "alt": "Nexora Precision Matte Black Aluminum Fountain Pen (Fine Nib) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bs-2-2",
+        "id": "img-prod-bs-2-2",
         "url": "https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Fountain Pen Nib Close Up",
+        "alt": "Nexora Precision Matte Black Aluminum Fountain Pen (Fine Nib) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bs-2-3",
+        "url": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Precision Matte Black Aluminum Fountain Pen (Fine Nib) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bs-2-4",
+        "url": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Precision Matte Black Aluminum Fountain Pen (Fine Nib) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bs-2-5",
+        "url": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Precision Matte Black Aluminum Fountain Pen (Fine Nib) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3408,16 +4434,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bs-3-1",
+        "id": "img-prod-bs-3-1",
         "url": "https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Solid Brass Desk Ruler",
+        "alt": "Kinesis Minimalist Solid Brass Desk Ruler & Paperweight - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bs-3-2",
+        "id": "img-prod-bs-3-2",
         "url": "https://images.unsplash.com/photo-1507842229451-79730c7eb255?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Brass Ruler on Drafting Table",
+        "alt": "Kinesis Minimalist Solid Brass Desk Ruler & Paperweight - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bs-3-3",
+        "url": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Kinesis Minimalist Solid Brass Desk Ruler & Paperweight - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bs-3-4",
+        "url": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Kinesis Minimalist Solid Brass Desk Ruler & Paperweight - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bs-3-5",
+        "url": "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Kinesis Minimalist Solid Brass Desk Ruler & Paperweight - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3460,16 +4504,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bs-4-1",
+        "id": "img-prod-bs-4-1",
         "url": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Design Systems Hardcover Book",
+        "alt": "Vanguard Hardcover Design Systems & Architecture Manual - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bs-4-2",
+        "id": "img-prod-bs-4-2",
         "url": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Open Book Spreads with Typography",
+        "alt": "Vanguard Hardcover Design Systems & Architecture Manual - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bs-4-3",
+        "url": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Hardcover Design Systems & Architecture Manual - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bs-4-4",
+        "url": "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Hardcover Design Systems & Architecture Manual - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bs-4-5",
+        "url": "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Hardcover Design Systems & Architecture Manual - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3512,16 +4574,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bs-5-1",
+        "id": "img-prod-bs-5-1",
         "url": "https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Calligraphy Brush Markers Set",
+        "alt": "Nexora 12-Piece Artist Grade Dual-Tip Brush Calligraphy Markers - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bs-5-2",
+        "id": "img-prod-bs-5-2",
         "url": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Calligraphy Lettering Sample",
+        "alt": "Nexora 12-Piece Artist Grade Dual-Tip Brush Calligraphy Markers - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bs-5-3",
+        "url": "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora 12-Piece Artist Grade Dual-Tip Brush Calligraphy Markers - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bs-5-4",
+        "url": "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora 12-Piece Artist Grade Dual-Tip Brush Calligraphy Markers - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bs-5-5",
+        "url": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora 12-Piece Artist Grade Dual-Tip Brush Calligraphy Markers - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3563,16 +4643,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-tg-1-1",
+        "id": "img-prod-tg-1-1",
         "url": "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Wooden Mechanical Marble Run Puzzle",
+        "alt": "Nexora Quantum Wooden Mechanical Marble Run Puzzle (294 Pcs) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-tg-1-2",
+        "id": "img-prod-tg-1-2",
         "url": "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Marble Run Gear Details",
+        "alt": "Nexora Quantum Wooden Mechanical Marble Run Puzzle (294 Pcs) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-tg-1-3",
+        "url": "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Quantum Wooden Mechanical Marble Run Puzzle (294 Pcs) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-tg-1-4",
+        "url": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Quantum Wooden Mechanical Marble Run Puzzle (294 Pcs) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-tg-1-5",
+        "url": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Quantum Wooden Mechanical Marble Run Puzzle (294 Pcs) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3615,16 +4713,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-tg-2-1",
+        "id": "img-prod-tg-2-1",
         "url": "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=1000&q=80",
-        "alt": "High Speed Drift RC Car",
+        "alt": "Apex Stealth RC High-Speed Drift Racing Car (1:16 Scale) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-tg-2-2",
+        "id": "img-prod-tg-2-2",
         "url": "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1000&q=80",
-        "alt": "RC Car in Action Drifting",
+        "alt": "Apex Stealth RC High-Speed Drift Racing Car (1:16 Scale) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-tg-2-3",
+        "url": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Stealth RC High-Speed Drift Racing Car (1:16 Scale) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-tg-2-4",
+        "url": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Stealth RC High-Speed Drift Racing Car (1:16 Scale) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-tg-2-5",
+        "url": "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Stealth RC High-Speed Drift Racing Car (1:16 Scale) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3676,16 +4792,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-tg-3-1",
+        "id": "img-prod-tg-3-1",
         "url": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Neodymium Magnetic Sphere Cube",
+        "alt": "Equinox Magnetic NeoCube 216-Piece Sensory Sculpture - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-tg-3-2",
+        "id": "img-prod-tg-3-2",
         "url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Magnetic Sculpture Hand Manipulation",
+        "alt": "Equinox Magnetic NeoCube 216-Piece Sensory Sculpture - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-tg-3-3",
+        "url": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Magnetic NeoCube 216-Piece Sensory Sculpture - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-tg-3-4",
+        "url": "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Magnetic NeoCube 216-Piece Sensory Sculpture - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-tg-3-5",
+        "url": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Magnetic NeoCube 216-Piece Sensory Sculpture - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3737,16 +4871,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-tg-4-1",
+        "id": "img-prod-tg-4-1",
         "url": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Weighted Staunton Chess Set",
+        "alt": "Vanguard Tournament Weighted Staunton Chess Set (Triple Weighted) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-tg-4-2",
+        "id": "img-prod-tg-4-2",
         "url": "https://images.unsplash.com/photo-1586165368502-1bad197a6461?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Chess Knight Piece Close Up",
+        "alt": "Vanguard Tournament Weighted Staunton Chess Set (Triple Weighted) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-tg-4-3",
+        "url": "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Tournament Weighted Staunton Chess Set (Triple Weighted) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-tg-4-4",
+        "url": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Tournament Weighted Staunton Chess Set (Triple Weighted) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-tg-4-5",
+        "url": "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Tournament Weighted Staunton Chess Set (Triple Weighted) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3789,16 +4941,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-tg-5-1",
+        "id": "img-prod-tg-5-1",
         "url": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80",
-        "alt": "STEM Robotic Dog",
+        "alt": "Nexora Smart Interactive STEM Programmable Robotic Dog - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-tg-5-2",
+        "id": "img-prod-tg-5-2",
         "url": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Child Programming Robot via Tablet",
+        "alt": "Nexora Smart Interactive STEM Programmable Robotic Dog - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-tg-5-3",
+        "url": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Smart Interactive STEM Programmable Robotic Dog - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-tg-5-4",
+        "url": "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Smart Interactive STEM Programmable Robotic Dog - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-tg-5-5",
+        "url": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Smart Interactive STEM Programmable Robotic Dog - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3841,16 +5011,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bkc-1-1",
+        "id": "img-prod-bkc-1-1",
         "url": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Organic Bamboo Baby Swaddle Blankets Set",
+        "alt": "Nexora 100% Organic Bamboo Hypoallergenic Baby Swaddle Blanket Set - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bkc-1-2",
+        "id": "img-prod-bkc-1-2",
         "url": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Sleeping Baby Swaddled Comfortably",
+        "alt": "Nexora 100% Organic Bamboo Hypoallergenic Baby Swaddle Blanket Set - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bkc-1-3",
+        "url": "https://images.unsplash.com/photo-1544126592-807ade215a0b?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora 100% Organic Bamboo Hypoallergenic Baby Swaddle Blanket Set - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bkc-1-4",
+        "url": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora 100% Organic Bamboo Hypoallergenic Baby Swaddle Blanket Set - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bkc-1-5",
+        "url": "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora 100% Organic Bamboo Hypoallergenic Baby Swaddle Blanket Set - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3892,16 +5080,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bkc-2-1",
+        "id": "img-prod-bkc-2-1",
         "url": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Smart Video Baby Monitor",
+        "alt": "Aura Smart Video Baby Monitor with Cry Detection & Night Vision - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bkc-2-2",
+        "id": "img-prod-bkc-2-2",
         "url": "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Baby Sleeping Safely in Crib",
+        "alt": "Aura Smart Video Baby Monitor with Cry Detection & Night Vision - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bkc-2-3",
+        "url": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Aura Smart Video Baby Monitor with Cry Detection & Night Vision - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bkc-2-4",
+        "url": "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Aura Smart Video Baby Monitor with Cry Detection & Night Vision - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bkc-2-5",
+        "url": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Aura Smart Video Baby Monitor with Cry Detection & Night Vision - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -3944,16 +5150,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bkc-3-1",
+        "id": "img-prod-bkc-3-1",
         "url": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Ergonomic 3D Mesh Baby Carrier",
+        "alt": "Equinox Ergonomic All-Position 3D Mesh Baby Carrier - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bkc-3-2",
+        "id": "img-prod-bkc-3-2",
         "url": "https://images.unsplash.com/photo-1544126592-807ade215a0b?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Parent Carrying Baby Ergonomically",
+        "alt": "Equinox Ergonomic All-Position 3D Mesh Baby Carrier - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bkc-3-3",
+        "url": "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Ergonomic All-Position 3D Mesh Baby Carrier - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bkc-3-4",
+        "url": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Ergonomic All-Position 3D Mesh Baby Carrier - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bkc-3-5",
+        "url": "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Ergonomic All-Position 3D Mesh Baby Carrier - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4003,16 +5227,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bkc-4-1",
+        "id": "img-prod-bkc-4-1",
         "url": "https://images.unsplash.com/photo-1584839617966-29177a4a908d?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Silicone Toddler Feeding Set",
+        "alt": "Vanguard Food-Grade Silicone Non-Slip Toddler Feeding Set - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bkc-4-2",
+        "id": "img-prod-bkc-4-2",
         "url": "https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Toddler Self Feeding with Soft Spoon",
+        "alt": "Vanguard Food-Grade Silicone Non-Slip Toddler Feeding Set - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bkc-4-3",
+        "url": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Food-Grade Silicone Non-Slip Toddler Feeding Set - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bkc-4-4",
+        "url": "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Food-Grade Silicone Non-Slip Toddler Feeding Set - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bkc-4-5",
+        "url": "https://images.unsplash.com/photo-1544126592-807ade215a0b?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Food-Grade Silicone Non-Slip Toddler Feeding Set - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4062,16 +5304,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bkc-5-1",
+        "id": "img-prod-bkc-5-1",
         "url": "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Natural Baby Wash Bottle",
+        "alt": "Nexora Ultra-Gentle Tear-Free Natural Baby Wash & Shampoo (500ml) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bkc-5-2",
+        "id": "img-prod-bkc-5-2",
         "url": "https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Gentle Soap Foam Detail",
+        "alt": "Nexora Ultra-Gentle Tear-Free Natural Baby Wash & Shampoo (500ml) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bkc-5-3",
+        "url": "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Ultra-Gentle Tear-Free Natural Baby Wash & Shampoo (500ml) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bkc-5-4",
+        "url": "https://images.unsplash.com/photo-1544126592-807ade215a0b?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Ultra-Gentle Tear-Free Natural Baby Wash & Shampoo (500ml) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bkc-5-5",
+        "url": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Ultra-Gentle Tear-Free Natural Baby Wash & Shampoo (500ml) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4114,16 +5374,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-sf-1-1",
+        "id": "img-prod-sf-1-1",
         "url": "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Natural Cork Yoga Mat",
+        "alt": "Nexora High-Density Natural Cork Non-Slip Yoga Mat (6mm) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-sf-1-2",
+        "id": "img-prod-sf-1-2",
         "url": "https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Yoga Pose on Cork Mat",
+        "alt": "Nexora High-Density Natural Cork Non-Slip Yoga Mat (6mm) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-sf-1-3",
+        "url": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora High-Density Natural Cork Non-Slip Yoga Mat (6mm) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-sf-1-4",
+        "url": "https://images.unsplash.com/photo-1598289431512-b97b0917affc?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora High-Density Natural Cork Non-Slip Yoga Mat (6mm) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-sf-1-5",
+        "url": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora High-Density Natural Cork Non-Slip Yoga Mat (6mm) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4166,16 +5444,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-sf-2-1",
+        "id": "img-prod-sf-2-1",
         "url": "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Adjustable Dumbbells Set",
+        "alt": "Apex Pro Adjustable Quick-Lock Dumbbells Set (2.5kg - 24kg) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-sf-2-2",
+        "id": "img-prod-sf-2-2",
         "url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Home Gym Dumbbell Workout",
+        "alt": "Apex Pro Adjustable Quick-Lock Dumbbells Set (2.5kg - 24kg) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-sf-2-3",
+        "url": "https://images.unsplash.com/photo-1598289431512-b97b0917affc?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Pro Adjustable Quick-Lock Dumbbells Set (2.5kg - 24kg) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-sf-2-4",
+        "url": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Pro Adjustable Quick-Lock Dumbbells Set (2.5kg - 24kg) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-sf-2-5",
+        "url": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Pro Adjustable Quick-Lock Dumbbells Set (2.5kg - 24kg) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4217,16 +5513,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-sf-3-1",
+        "id": "img-prod-sf-3-1",
         "url": "https://images.unsplash.com/photo-1434608519344-49d77a699e1d?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Speed Skipping Jump Rope",
+        "alt": "Kinesis High-Speed Aluminum Bearing Skipping Jump Rope - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-sf-3-2",
+        "id": "img-prod-sf-3-2",
         "url": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Jump Rope Athlete Workout",
+        "alt": "Kinesis High-Speed Aluminum Bearing Skipping Jump Rope - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-sf-3-3",
+        "url": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Kinesis High-Speed Aluminum Bearing Skipping Jump Rope - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-sf-3-4",
+        "url": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Kinesis High-Speed Aluminum Bearing Skipping Jump Rope - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-sf-3-5",
+        "url": "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Kinesis High-Speed Aluminum Bearing Skipping Jump Rope - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4276,16 +5590,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-sf-4-1",
+        "id": "img-prod-sf-4-1",
         "url": "https://images.unsplash.com/photo-1598289431512-b97b0917affc?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Resistance Bands Set with Handles",
+        "alt": "Vanguard Heavy-Duty Resistance Bands Set (5 Tube Levels) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-sf-4-2",
+        "id": "img-prod-sf-4-2",
         "url": "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Upper Body Workout with Bands",
+        "alt": "Vanguard Heavy-Duty Resistance Bands Set (5 Tube Levels) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-sf-4-3",
+        "url": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Heavy-Duty Resistance Bands Set (5 Tube Levels) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-sf-4-4",
+        "url": "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Heavy-Duty Resistance Bands Set (5 Tube Levels) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-sf-4-5",
+        "url": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Heavy-Duty Resistance Bands Set (5 Tube Levels) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4327,16 +5659,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-sf-5-1",
+        "id": "img-prod-sf-5-1",
         "url": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Insulated Sports Water Bottle",
+        "alt": "Nexora HydroShield 1000ml Insulated Stainless Steel Sports Bottle - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-sf-5-2",
+        "id": "img-prod-sf-5-2",
         "url": "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Gym Water Bottle Lifestyle",
+        "alt": "Nexora HydroShield 1000ml Insulated Stainless Steel Sports Bottle - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-sf-5-3",
+        "url": "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora HydroShield 1000ml Insulated Stainless Steel Sports Bottle - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-sf-5-4",
+        "url": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora HydroShield 1000ml Insulated Stainless Steel Sports Bottle - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-sf-5-5",
+        "url": "https://images.unsplash.com/photo-1598289431512-b97b0917affc?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora HydroShield 1000ml Insulated Stainless Steel Sports Bottle - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4388,16 +5738,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-auto-1-1",
+        "id": "img-prod-auto-1-1",
         "url": "https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Dual 4K Dash Camera for Car",
+        "alt": "Nexora DashCam 4K Dual Front & Rear HDR GPS Camera - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-auto-1-2",
+        "id": "img-prod-auto-1-2",
         "url": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Car Windshield Mount Setup",
+        "alt": "Nexora DashCam 4K Dual Front & Rear HDR GPS Camera - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-auto-1-3",
+        "url": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora DashCam 4K Dual Front & Rear HDR GPS Camera - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-auto-1-4",
+        "url": "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora DashCam 4K Dual Front & Rear HDR GPS Camera - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-auto-1-5",
+        "url": "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora DashCam 4K Dual Front & Rear HDR GPS Camera - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4439,16 +5807,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-auto-2-1",
+        "id": "img-prod-auto-2-1",
         "url": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Cordless Digital Tire Inflator",
+        "alt": "Apex TurboCharge 150PSI Cordless Digital Tire Inflator - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-auto-2-2",
+        "id": "img-prod-auto-2-2",
         "url": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Inflating Car Tire Valve",
+        "alt": "Apex TurboCharge 150PSI Cordless Digital Tire Inflator - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-auto-2-3",
+        "url": "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex TurboCharge 150PSI Cordless Digital Tire Inflator - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-auto-2-4",
+        "url": "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex TurboCharge 150PSI Cordless Digital Tire Inflator - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-auto-2-5",
+        "url": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex TurboCharge 150PSI Cordless Digital Tire Inflator - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4491,16 +5877,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-auto-3-1",
+        "id": "img-prod-auto-3-1",
         "url": "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1000&q=80",
-        "alt": "All Weather Heavy Duty Floor Mats",
+        "alt": "Vanguard Heavy-Duty All-Weather Deep Dish Floor Mats Set - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-auto-3-2",
+        "id": "img-prod-auto-3-2",
         "url": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Floor Mats in Car Interior",
+        "alt": "Vanguard Heavy-Duty All-Weather Deep Dish Floor Mats Set - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-auto-3-3",
+        "url": "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Heavy-Duty All-Weather Deep Dish Floor Mats Set - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-auto-3-4",
+        "url": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Heavy-Duty All-Weather Deep Dish Floor Mats Set - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-auto-3-5",
+        "url": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Heavy-Duty All-Weather Deep Dish Floor Mats Set - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4542,16 +5946,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-auto-4-1",
+        "id": "img-prod-auto-4-1",
         "url": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Magnetic Wireless Car Vent Mount",
+        "alt": "Nexora MagMount Qi2 15W Wireless Fast Car Charger - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-auto-4-2",
+        "id": "img-prod-auto-4-2",
         "url": "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Car Phone Charging on Dashboard",
+        "alt": "Nexora MagMount Qi2 15W Wireless Fast Car Charger - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-auto-4-3",
+        "url": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora MagMount Qi2 15W Wireless Fast Car Charger - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-auto-4-4",
+        "url": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora MagMount Qi2 15W Wireless Fast Car Charger - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-auto-4-5",
+        "url": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora MagMount Qi2 15W Wireless Fast Car Charger - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4594,16 +6016,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-auto-5-1",
+        "id": "img-prod-auto-5-1",
         "url": "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Microfiber Car Detailing Towels",
+        "alt": "Equinox Ultra-Dense Microfiber Car Drying Towels (Pack of 3, 800 GSM) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-auto-5-2",
+        "id": "img-prod-auto-5-2",
         "url": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Car Detailing Hood Wipe Down",
+        "alt": "Equinox Ultra-Dense Microfiber Car Drying Towels (Pack of 3, 800 GSM) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-auto-5-3",
+        "url": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Ultra-Dense Microfiber Car Drying Towels (Pack of 3, 800 GSM) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-auto-5-4",
+        "url": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Ultra-Dense Microfiber Car Drying Towels (Pack of 3, 800 GSM) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-auto-5-5",
+        "url": "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Ultra-Dense Microfiber Car Drying Towels (Pack of 3, 800 GSM) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4646,16 +6086,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-jw-1-1",
+        "id": "img-prod-jw-1-1",
         "url": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Apex Titanium Smartwatch Front",
+        "alt": "Apex Horizon Titanium Smartwatch - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-jw-1-2",
+        "id": "img-prod-jw-1-2",
         "url": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Watch on Wrist Profile",
+        "alt": "Apex Horizon Titanium Smartwatch - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-jw-1-3",
+        "url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Horizon Titanium Smartwatch - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-jw-1-4",
+        "url": "https://images.unsplash.com/photo-1611591475152-47355038b3a0?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Horizon Titanium Smartwatch - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-jw-1-5",
+        "url": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Horizon Titanium Smartwatch - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4707,16 +6165,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-jw-2-1",
+        "id": "img-prod-jw-2-1",
         "url": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Automatic Mechanical Diver Watch",
+        "alt": "Chrono Artisan Automatic Mechanical Diver Watch (300m) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-jw-2-2",
+        "id": "img-prod-jw-2-2",
         "url": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Watch Dial and Bezel Texture",
+        "alt": "Chrono Artisan Automatic Mechanical Diver Watch (300m) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-jw-2-3",
+        "url": "https://images.unsplash.com/photo-1611591475152-47355038b3a0?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Chrono Artisan Automatic Mechanical Diver Watch (300m) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-jw-2-4",
+        "url": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Chrono Artisan Automatic Mechanical Diver Watch (300m) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-jw-2-5",
+        "url": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Chrono Artisan Automatic Mechanical Diver Watch (300m) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4768,16 +6244,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-jw-3-1",
+        "id": "img-prod-jw-3-1",
         "url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=80",
-        "alt": "18K Gold Moissanite Pendant Necklace",
+        "alt": "Aura 18K Solid Gold Solitaire Moissanite Pendant Necklace - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-jw-3-2",
+        "id": "img-prod-jw-3-2",
         "url": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Pendant Sparkle on Neck",
+        "alt": "Aura 18K Solid Gold Solitaire Moissanite Pendant Necklace - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-jw-3-3",
+        "url": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Aura 18K Solid Gold Solitaire Moissanite Pendant Necklace - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-jw-3-4",
+        "url": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Aura 18K Solid Gold Solitaire Moissanite Pendant Necklace - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-jw-3-5",
+        "url": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Aura 18K Solid Gold Solitaire Moissanite Pendant Necklace - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4829,16 +6323,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-jw-4-1",
+        "id": "img-prod-jw-4-1",
         "url": "https://images.unsplash.com/photo-1611591475879-c5c7117c2763?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Sterling Silver Cuban Chain",
+        "alt": "Nexora Minimalist 925 Sterling Silver Cuban Link Chain (5mm) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-jw-4-2",
+        "id": "img-prod-jw-4-2",
         "url": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Silver Chain Jewelry Detail",
+        "alt": "Nexora Minimalist 925 Sterling Silver Cuban Link Chain (5mm) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-jw-4-3",
+        "url": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Minimalist 925 Sterling Silver Cuban Link Chain (5mm) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-jw-4-4",
+        "url": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Minimalist 925 Sterling Silver Cuban Link Chain (5mm) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-jw-4-5",
+        "url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Minimalist 925 Sterling Silver Cuban Link Chain (5mm) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4890,16 +6402,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-jw-5-1",
+        "id": "img-prod-jw-5-1",
         "url": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Titanium Damascus Inlay Band Ring",
+        "alt": "Equinox Grade-5 Titanium Damascus Inlay Band Ring - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-jw-5-2",
+        "id": "img-prod-jw-5-2",
         "url": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Ring Box Presentation",
+        "alt": "Equinox Grade-5 Titanium Damascus Inlay Band Ring - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-jw-5-3",
+        "url": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Grade-5 Titanium Damascus Inlay Band Ring - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-jw-5-4",
+        "url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Grade-5 Titanium Damascus Inlay Band Ring - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-jw-5-5",
+        "url": "https://images.unsplash.com/photo-1611591475152-47355038b3a0?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Grade-5 Titanium Damascus Inlay Band Ring - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -4957,16 +6487,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-ft-1-1",
+        "id": "img-prod-ft-1-1",
         "url": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Carbon Plate Marathon Running Shoes",
+        "alt": "Nexora AeroGlide Carbon-Plate Marathon Running Shoes - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-ft-1-2",
+        "id": "img-prod-ft-1-2",
         "url": "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Running Shoes Sole Detail",
+        "alt": "Nexora AeroGlide Carbon-Plate Marathon Running Shoes - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-ft-1-3",
+        "url": "https://images.unsplash.com/photo-1638247025967-b4e38f787b76?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora AeroGlide Carbon-Plate Marathon Running Shoes - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-ft-1-4",
+        "url": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora AeroGlide Carbon-Plate Marathon Running Shoes - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-ft-1-5",
+        "url": "https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora AeroGlide Carbon-Plate Marathon Running Shoes - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5027,16 +6575,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-ft-2-1",
+        "id": "img-prod-ft-2-1",
         "url": "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Goodyear Welted Leather Chelsea Boots",
+        "alt": "Apex Heritage Goodyear-Welted Full-Grain Leather Chelsea Boots - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-ft-2-2",
+        "id": "img-prod-ft-2-2",
         "url": "https://images.unsplash.com/photo-1638247025967-b4e38f787b76?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Boots Leather Texture Detail",
+        "alt": "Apex Heritage Goodyear-Welted Full-Grain Leather Chelsea Boots - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-ft-2-3",
+        "url": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Heritage Goodyear-Welted Full-Grain Leather Chelsea Boots - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-ft-2-4",
+        "url": "https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Heritage Goodyear-Welted Full-Grain Leather Chelsea Boots - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-ft-2-5",
+        "url": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Heritage Goodyear-Welted Full-Grain Leather Chelsea Boots - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5097,16 +6663,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-ft-3-1",
+        "id": "img-prod-ft-3-1",
         "url": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Knit Everyday Walking Sneakers",
+        "alt": "Kinesis CloudComfort Memory Foam Knit Everyday Sneakers - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-ft-3-2",
+        "id": "img-prod-ft-3-2",
         "url": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Sneakers Profile on Street",
+        "alt": "Kinesis CloudComfort Memory Foam Knit Everyday Sneakers - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-ft-3-3",
+        "url": "https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Kinesis CloudComfort Memory Foam Knit Everyday Sneakers - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-ft-3-4",
+        "url": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Kinesis CloudComfort Memory Foam Knit Everyday Sneakers - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-ft-3-5",
+        "url": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Kinesis CloudComfort Memory Foam Knit Everyday Sneakers - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5167,16 +6751,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-ft-4-1",
+        "id": "img-prod-ft-4-1",
         "url": "https://images.unsplash.com/photo-1520639888713-7851133b1ed0?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Vibram Mountain Trail Hiking Boots",
+        "alt": "Vanguard Waterproof Vibram-Sole Mountain Trail Hiking Boots - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-ft-4-2",
+        "id": "img-prod-ft-4-2",
         "url": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Hiking Boots on Mountain Trail",
+        "alt": "Vanguard Waterproof Vibram-Sole Mountain Trail Hiking Boots - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-ft-4-3",
+        "url": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Waterproof Vibram-Sole Mountain Trail Hiking Boots - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-ft-4-4",
+        "url": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Waterproof Vibram-Sole Mountain Trail Hiking Boots - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-ft-4-5",
+        "url": "https://images.unsplash.com/photo-1638247025967-b4e38f787b76?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Waterproof Vibram-Sole Mountain Trail Hiking Boots - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5228,16 +6830,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-ft-5-1",
+        "id": "img-prod-ft-5-1",
         "url": "https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Handcrafted Italian Leather Loafers",
+        "alt": "Nexora Minimalist Handcrafted Italian Leather Loafers - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-ft-5-2",
+        "id": "img-prod-ft-5-2",
         "url": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Loafers Pair on Wooden Floor",
+        "alt": "Nexora Minimalist Handcrafted Italian Leather Loafers - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-ft-5-3",
+        "url": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Minimalist Handcrafted Italian Leather Loafers - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-ft-5-4",
+        "url": "https://images.unsplash.com/photo-1638247025967-b4e38f787b76?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Minimalist Handcrafted Italian Leather Loafers - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-ft-5-5",
+        "url": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Minimalist Handcrafted Italian Leather Loafers - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5298,16 +6918,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bl-1-1",
+        "id": "img-prod-bl-1-1",
         "url": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Weatherproof Roll-Top Backpack",
+        "alt": "Nexora Apex Commuter Weatherproof Roll-Top Backpack (28L) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bl-1-2",
+        "id": "img-prod-bl-1-2",
         "url": "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Backpack Lifestyle City Carry",
+        "alt": "Nexora Apex Commuter Weatherproof Roll-Top Backpack (28L) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bl-1-3",
+        "url": "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Apex Commuter Weatherproof Roll-Top Backpack (28L) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bl-1-4",
+        "url": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Apex Commuter Weatherproof Roll-Top Backpack (28L) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bl-1-5",
+        "url": "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Apex Commuter Weatherproof Roll-Top Backpack (28L) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5359,16 +6997,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bl-2-1",
+        "id": "img-prod-bl-2-1",
         "url": "https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Aluminum Carry-On Suitcase",
+        "alt": "Vanguard Aviator Aerospace Aluminum Carry-On Spinner Suitcase - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bl-2-2",
+        "id": "img-prod-bl-2-2",
         "url": "https://images.unsplash.com/photo-1581553680321-4fffae59fccd?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Suitcase Rolling at Airport Gate",
+        "alt": "Vanguard Aviator Aerospace Aluminum Carry-On Spinner Suitcase - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bl-2-3",
+        "url": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Aviator Aerospace Aluminum Carry-On Spinner Suitcase - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bl-2-4",
+        "url": "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Aviator Aerospace Aluminum Carry-On Spinner Suitcase - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bl-2-5",
+        "url": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Aviator Aerospace Aluminum Carry-On Spinner Suitcase - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5420,16 +7076,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bl-3-1",
+        "id": "img-prod-bl-3-1",
         "url": "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Full Grain Leather Duffle Travel Bag",
+        "alt": "Artisan Full-Grain Leather Weekender Duffle Travel Bag (45L) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bl-3-2",
+        "id": "img-prod-bl-3-2",
         "url": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Duffle Bag Packed for Weekend Trip",
+        "alt": "Artisan Full-Grain Leather Weekender Duffle Travel Bag (45L) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bl-3-3",
+        "url": "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Full-Grain Leather Weekender Duffle Travel Bag (45L) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bl-3-4",
+        "url": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Full-Grain Leather Weekender Duffle Travel Bag (45L) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bl-3-5",
+        "url": "https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Artisan Full-Grain Leather Weekender Duffle Travel Bag (45L) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5481,16 +7155,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bl-4-1",
+        "id": "img-prod-bl-4-1",
         "url": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Modular Tech Organizer Pouch",
+        "alt": "TechOrganizer Modular Cable & Accessory Case - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bl-4-2",
+        "id": "img-prod-bl-4-2",
         "url": "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Opened Tech Organizer with Cables",
+        "alt": "TechOrganizer Modular Cable & Accessory Case - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bl-4-3",
+        "url": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1200&q=85",
+        "alt": "TechOrganizer Modular Cable & Accessory Case - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bl-4-4",
+        "url": "https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?auto=format&fit=crop&w=1200&q=85",
+        "alt": "TechOrganizer Modular Cable & Accessory Case - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bl-4-5",
+        "url": "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=1200&q=85",
+        "alt": "TechOrganizer Modular Cable & Accessory Case - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5540,16 +7232,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-bl-5-1",
+        "id": "img-prod-bl-5-1",
         "url": "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Waterproof Minimalist Crossbody Sling Bag",
+        "alt": "Nexora CitySling Waterproof Minimalist Crossbody Sling (4L) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-bl-5-2",
+        "id": "img-prod-bl-5-2",
         "url": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Crossbody Sling Worn Across Chest",
+        "alt": "Nexora CitySling Waterproof Minimalist Crossbody Sling (4L) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-bl-5-3",
+        "url": "https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora CitySling Waterproof Minimalist Crossbody Sling (4L) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-bl-5-4",
+        "url": "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora CitySling Waterproof Minimalist Crossbody Sling (4L) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-bl-5-5",
+        "url": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora CitySling Waterproof Minimalist Crossbody Sling (4L) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5601,16 +7311,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-pet-1-1",
+        "id": "img-prod-pet-1-1",
         "url": "https://images.unsplash.com/photo-1541599540903-216a46ca1dc0?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Orthopedic Memory Foam Pet Bed",
+        "alt": "Nexora Orthopedic Calming Memory Foam Dog Bed (Large) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-pet-1-2",
+        "id": "img-prod-pet-1-2",
         "url": "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Dog Sleeping on Memory Foam Bed",
+        "alt": "Nexora Orthopedic Calming Memory Foam Dog Bed (Large) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-pet-1-3",
+        "url": "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Orthopedic Calming Memory Foam Dog Bed (Large) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-pet-1-4",
+        "url": "https://images.unsplash.com/photo-1535294435445-d7249524ef2e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Orthopedic Calming Memory Foam Dog Bed (Large) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-pet-1-5",
+        "url": "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Orthopedic Calming Memory Foam Dog Bed (Large) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5662,16 +7390,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-pet-2-1",
+        "id": "img-prod-pet-2-1",
         "url": "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Smart Automatic Pet Feeder",
+        "alt": "Apex Smart Automatic WiFi Pet Feeder with HD Camera - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-pet-2-2",
+        "id": "img-prod-pet-2-2",
         "url": "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Happy Dog Waiting for Kibble",
+        "alt": "Apex Smart Automatic WiFi Pet Feeder with HD Camera - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-pet-2-3",
+        "url": "https://images.unsplash.com/photo-1535294435445-d7249524ef2e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Smart Automatic WiFi Pet Feeder with HD Camera - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-pet-2-4",
+        "url": "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Smart Automatic WiFi Pet Feeder with HD Camera - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-pet-2-5",
+        "url": "https://images.unsplash.com/photo-1541599540903-216a46ca1dc0?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Apex Smart Automatic WiFi Pet Feeder with HD Camera - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5714,16 +7460,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-pet-3-1",
+        "id": "img-prod-pet-3-1",
         "url": "https://images.unsplash.com/photo-1535294435445-d7249524ef2e?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Stainless Steel Pet Water Fountain",
+        "alt": "Vanguard Stainless Steel Ultra-Quiet Pet Water Fountain (3L) - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-pet-3-2",
+        "id": "img-prod-pet-3-2",
         "url": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Cat Drinking from Fresh Flowing Water",
+        "alt": "Vanguard Stainless Steel Ultra-Quiet Pet Water Fountain (3L) - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-pet-3-3",
+        "url": "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Stainless Steel Ultra-Quiet Pet Water Fountain (3L) - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-pet-3-4",
+        "url": "https://images.unsplash.com/photo-1541599540903-216a46ca1dc0?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Stainless Steel Ultra-Quiet Pet Water Fountain (3L) - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-pet-3-5",
+        "url": "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Vanguard Stainless Steel Ultra-Quiet Pet Water Fountain (3L) - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5766,16 +7530,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-pet-4-1",
+        "id": "img-prod-pet-4-1",
         "url": "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=1000&q=80",
-        "alt": "No-Pull Reflective Dog Harness",
+        "alt": "Equinox Reflective All-Weather No-Pull Ergonomic Dog Harness - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-pet-4-2",
+        "id": "img-prod-pet-4-2",
         "url": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Dog Wearing Tactical Harness",
+        "alt": "Equinox Reflective All-Weather No-Pull Ergonomic Dog Harness - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-pet-4-3",
+        "url": "https://images.unsplash.com/photo-1541599540903-216a46ca1dc0?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Reflective All-Weather No-Pull Ergonomic Dog Harness - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-pet-4-4",
+        "url": "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Reflective All-Weather No-Pull Ergonomic Dog Harness - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-pet-4-5",
+        "url": "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Equinox Reflective All-Weather No-Pull Ergonomic Dog Harness - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5827,16 +7609,34 @@ export const PRODUCTS = [
     },
     "images": [
       {
-        "id": "img-pet-5-1",
+        "id": "img-prod-pet-5-1",
         "url": "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Pet Grooming Clipper Set",
+        "alt": "Nexora Cordless Low-Noise Rechargeable Pet Grooming Clipper Kit - Main Front Angle",
         "sortOrder": 0
       },
       {
-        "id": "img-pet-5-2",
+        "id": "img-prod-pet-5-2",
         "url": "https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Dog Grooming Fur Trimming",
+        "alt": "Nexora Cordless Low-Noise Rechargeable Pet Grooming Clipper Kit - Detail & Texture View",
         "sortOrder": 1
+      },
+      {
+        "id": "img-prod-pet-5-3",
+        "url": "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Cordless Low-Noise Rechargeable Pet Grooming Clipper Kit - Perspective Angle View",
+        "sortOrder": 2
+      },
+      {
+        "id": "img-prod-pet-5-4",
+        "url": "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Cordless Low-Noise Rechargeable Pet Grooming Clipper Kit - Lifestyle & In-Use Setting",
+        "sortOrder": 3
+      },
+      {
+        "id": "img-prod-pet-5-5",
+        "url": "https://images.unsplash.com/photo-1535294435445-d7249524ef2e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Nexora Cordless Low-Noise Rechargeable Pet Grooming Clipper Kit - Accessories & Box Kit",
+        "sortOrder": 4
       }
     ],
     "variants": [
@@ -5861,8 +7661,3 @@ export const PRODUCTS = [
     ]
   }
 ];
-
-export default {
-  CATEGORIES,
-  PRODUCTS,
-};

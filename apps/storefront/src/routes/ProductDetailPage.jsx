@@ -133,9 +133,9 @@ export function ProductDetailPage({
       </nav>
 
       {/* Main 2-column Detail Presentation */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 relative">
         {/* Left: Gallery */}
-        <div>
+        <div className="relative">
           <ImageGallery images={product.images} productName={product.name} />
         </div>
 
