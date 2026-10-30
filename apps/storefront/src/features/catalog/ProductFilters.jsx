@@ -19,14 +19,21 @@ import { Checkbox } from '../../components/ui/checkbox';
 const POPULAR_BRANDS = [
   'Nexora',
   'Apex',
-  'Kinesis',
   'Vanguard',
   'Equinox',
+  'Kinesis',
   'Aura',
   'Lumina',
   'SoundPulse',
   'HyperDrive',
   'Chrono',
+  'Artisan',
+  'Sony',
+  'Dell',
+  'Dyson',
+  'Philips',
+  'LG',
+  'Heritage',
 ];
 
 const PRICE_MIN_OPTIONS = [

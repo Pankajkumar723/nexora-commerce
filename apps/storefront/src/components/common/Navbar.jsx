@@ -22,6 +22,21 @@ import {
   TrendingUp,
   Sun,
   Moon,
+  Smartphone,
+  Laptop,
+  Armchair,
+  Tv,
+  HeartPulse,
+  ShoppingBasket,
+  Coffee,
+  BookOpen,
+  Baby,
+  Dumbbell,
+  Car,
+  Footprints,
+  Luggage,
+  Dog,
+  Utensils,
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
@@ -32,15 +47,30 @@ import { formatPrice } from '../../lib/formatters';
 const getCategoryIcon = (slug = '', name = '') => {
   const s = (slug || '').toLowerCase();
   const n = (name || '').toLowerCase();
-  if (s.includes('audio') || n.includes('audio') || n.includes('acoustics') || n.includes('headphone')) return Headphones;
-  if (s.includes('wearable') || n.includes('wearable') || n.includes('watch')) return Watch;
-  if (s.includes('desk') || n.includes('desk') || n.includes('ergonomic') || n.includes('keyboard')) return Keyboard;
-  if (s.includes('travel') || s.includes('edc') || n.includes('carry') || n.includes('bag')) return Briefcase;
-  if (s.includes('apparel') || n.includes('clothing') || n.includes('apparel') || n.includes('wear')) return Shirt;
-  if (s.includes('smart-home') || n.includes('smart home') || n.includes('home')) return Home;
-  if (s.includes('photo') || n.includes('camera') || n.includes('creator')) return Camera;
-  if (s.includes('power') || n.includes('charging') || n.includes('charger') || n.includes('power')) return Zap;
-  if (s.includes('gaming') || n.includes('gaming') || n.includes('game')) return Gamepad2;
+  if (s.includes('fashion') || n.includes('fashion') || s.includes('apparel') || n.includes('clothing')) return Shirt;
+  if (s.includes('mobile') || n.includes('mobile') || s.includes('phone')) return Smartphone;
+  if (s.includes('computer') || n.includes('computer') || s.includes('laptop')) return Laptop;
+  if (s.includes('audio') || n.includes('audio') || s.includes('acoustics') || s.includes('headphone')) return Headphones;
+  if (s.includes('electronic') || n.includes('electronic')) return Tv;
+  if (s.includes('furniture') || n.includes('furniture') || s.includes('decor')) return Armchair;
+  if (s.includes('appliance') || n.includes('appliance')) return Zap;
+  if (s.includes('beauty') || n.includes('beauty') || s.includes('personal-care')) return Sparkles;
+  if (s.includes('health') || n.includes('health') || s.includes('wellness')) return HeartPulse;
+  if (s.includes('grocery') || n.includes('grocery') || s.includes('essential')) return ShoppingBasket;
+  if (s.includes('food') || n.includes('food') || s.includes('beverage')) return Coffee;
+  if (s.includes('book') || n.includes('book') || s.includes('stationery')) return BookOpen;
+  if (s.includes('toy') || n.includes('toy') || s.includes('game') || s.includes('gaming')) return Gamepad2;
+  if (s.includes('baby') || n.includes('baby') || s.includes('kid')) return Baby;
+  if (s.includes('sport') || n.includes('sport') || s.includes('fitness')) return Dumbbell;
+  if (s.includes('auto') || n.includes('auto') || s.includes('car')) return Car;
+  if (s.includes('jewel') || n.includes('jewel') || s.includes('watch') || s.includes('wearable')) return Watch;
+  if (s.includes('footwear') || n.includes('footwear') || s.includes('shoe')) return Footprints;
+  if (s.includes('bag') || n.includes('bag') || s.includes('luggage') || s.includes('travel')) return Luggage;
+  if (s.includes('pet') || n.includes('pet')) return Dog;
+  if (s.includes('kitchen') || n.includes('kitchen')) return Utensils;
+  if (s.includes('desk') || n.includes('desk') || s.includes('ergonomic')) return Keyboard;
+  if (s.includes('photo') || n.includes('camera')) return Camera;
+  if (s.includes('home') || n.includes('home')) return Home;
   return Layers;
 };
 
