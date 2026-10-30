@@ -4,6 +4,7 @@ import { ProductCard } from '../features/catalog/ProductCard';
 import { ProductGridSkeleton } from '../components/common/LoadingSkeleton';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
+import { AdsOfferSlider } from '../components/common/AdsOfferSlider';
 
 export function HomePage({
   products = [],
@@ -20,45 +21,13 @@ export function HomePage({
   const wishlistSet = new Set((wishlistItems || []).map((p) => p.id));
 
   return (
-    <div className="space-y-16 py-6 sm:py-8">
-      {/* 1. Hero Section */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-navy via-[#1e4a87] to-royal-blue text-white shadow-xl">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(18,184,166,0.15),transparent_50%)] pointer-events-none" />
-
-        <div className="relative max-w-5xl mx-auto px-6 py-16 sm:py-24 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-medium text-teal">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Introducing The 2026 Nexora Performance Collection</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-            Engineered for Precision, Sound, & Everyday Mobility.
-          </h1>
-
-          <p className="text-sm sm:text-base text-gray-200 max-w-2xl mx-auto leading-relaxed">
-            Discover beryllium-tuned ANC headphones, Grade-5 titanium biometrics, CNC ergonomic keyboards, and waterproof Cordura everyday carry.
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <Button
-              onClick={onExploreAll}
-              variant="default"
-              size="lg"
-              className="bg-white text-navy hover:bg-gray-100 shadow-md gap-2 font-bold text-sm h-12 px-6 rounded-xl"
-            >
-              <span>Explore Products</span>
-              <ArrowRight className="w-4 h-4 text-royal-blue" />
-            </Button>
-            <Button
-              onClick={() => onSelectCategory('audio-acoustics')}
-              variant="outline"
-              size="lg"
-              className="bg-white/10 hover:bg-white/20 text-white border-white/25 backdrop-blur-md font-semibold text-sm h-12 px-6 rounded-xl"
-            >
-              Audio Collection
-            </Button>
-          </div>
-        </div>
+    <div className="space-y-16 py-4 sm:py-6">
+      {/* 1. Ads & Offers Hero Slider (Side-by-Side Dual Sliders) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <AdsOfferSlider
+          onSelectCategory={onSelectCategory}
+          onExploreAll={onExploreAll}
+        />
       </section>
 
       {/* 2. Category Browse Grid */}
