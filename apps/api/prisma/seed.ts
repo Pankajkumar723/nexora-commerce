@@ -5,6 +5,12 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('🌱 Starting Nexora Commerce database seeding...');
 
+  const existingUsers = await prisma.user.count().catch(() => 0);
+  if (existingUsers > 0 && process.env.SEED_FORCE !== 'true') {
+    console.log(`ℹ️ Database already contains ${existingUsers} users. Skipping destructive seed to preserve data (set SEED_FORCE=true to force re-seed).`);
+    return;
+  }
+
   // 1. Clear existing seed data safely in order of foreign key dependencies
   await prisma.aIConversation.deleteMany();
   await prisma.inventoryMovement.deleteMany();

@@ -7,7 +7,7 @@
     "start": "nest start",
     "dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/src/main.js || node dist/main.js",
     "lint": "echo 'linting @nexora/api'",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -15,8 +15,9 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:deploy": "prisma migrate deploy",
+    "prisma:deploy": "prisma db push --accept-data-loss",
     "prisma:seed": "ts-node prisma/seed.ts",
+    "db:setup": "prisma db push --accept-data-loss && ts-node prisma/seed.ts",
     "clean": "rm -rf dist"
   },
   "dependencies": {
@@ -30,6 +31,7 @@
     "better-auth": "^1.7.14",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "express": "^5.3.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "swagger-ui-express": "^5.0.1"
