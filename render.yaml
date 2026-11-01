@@ -49,18 +49,14 @@ services:
           name: nexora-seller
           envVarKey: RENDER_EXTERNAL_URL
       - key: RAZORPAY_KEY_ID
-        sync: false
         value: rzp_test_sample
       - key: RAZORPAY_KEY_SECRET
-        sync: false
         value: secret_mock
       - key: RAZORPAY_WEBHOOK_SECRET
-        sync: false
         value: webhook_secret_mock
       - key: AI_MODEL
         value: gemini-1.5-flash
       - key: AI_PROVIDER_API_KEY
-        sync: false
 
   # -------------------------------------------------------------
   # 2. Storefront (Customer Web App) - Static Site
