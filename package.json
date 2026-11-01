@@ -6,6 +6,12 @@
   "packageManager": "pnpm@12.15.0",
   "scripts": {
     "build": "turbo run build",
+    "build:api": "pnpm --filter @nexora/api prisma:generate && pnpm --filter @nexora/api build",
+    "build:storefront": "pnpm --filter @nexora/storefront build",
+    "build:admin": "pnpm --filter @nexora/admin build",
+    "build:seller": "pnpm --filter @nexora/seller build",
+    "start:api": "pnpm --filter @nexora/api start:prod",
+    "db:setup": "pnpm --filter @nexora/api db:setup",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "test": "turbo run test",

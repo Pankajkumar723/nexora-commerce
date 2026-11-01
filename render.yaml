@@ -1,0 +1,120 @@
+databases:
+  - name: nexora-postgres
+    databaseName: nexora_commerce
+    user: nexora_user
+    plan: free
+    region: oregon
+
+services:
+  # -------------------------------------------------------------
+  # 1. NestJS Backend API Web Service
+  # -------------------------------------------------------------
+  - type: web
+    name: nexora-api
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm run build:api
+    startCommand: pnpm run db:setup && pnpm run start:api
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nexora-postgres
+          property: connectionString
+      - key: BETTER_AUTH_SECRET
+        generateValue: true
+      - key: BETTER_AUTH_URL
+        fromService:
+          type: web
+          name: nexora-api
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: STORE_URL
+        fromService:
+          type: web
+          name: nexora-storefront
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: ADMIN_URL
+        fromService:
+          type: web
+          name: nexora-admin
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: SELLER_URL
+        fromService:
+          type: web
+          name: nexora-seller
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: RAZORPAY_KEY_ID
+        sync: false
+        value: rzp_test_sample
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+        value: secret_mock
+      - key: RAZORPAY_WEBHOOK_SECRET
+        sync: false
+        value: webhook_secret_mock
+      - key: AI_MODEL
+        value: gemini-1.5-flash
+      - key: AI_PROVIDER_API_KEY
+        sync: false
+
+  # -------------------------------------------------------------
+  # 2. Storefront (Customer Web App) - Static Site
+  # -------------------------------------------------------------
+  - type: web
+    name: nexora-storefront
+    runtime: static
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm run build:storefront
+    staticPublishPath: ./apps/storefront/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: nexora-api
+          envVarKey: RENDER_EXTERNAL_URL
+
+  # -------------------------------------------------------------
+  # 3. Admin Console (Merchant / Admin Portal) - Static Site
+  # -------------------------------------------------------------
+  - type: web
+    name: nexora-admin
+    runtime: static
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm run build:admin
+    staticPublishPath: ./apps/admin/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: nexora-api
+          envVarKey: RENDER_EXTERNAL_URL
+
+  # -------------------------------------------------------------
+  # 4. Seller Portal (Vendor Dashboard) - Static Site
+  # -------------------------------------------------------------
+  - type: web
+    name: nexora-seller
+    runtime: static
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm run build:seller
+    staticPublishPath: ./apps/seller/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: nexora-api
+          envVarKey: RENDER_EXTERNAL_URL

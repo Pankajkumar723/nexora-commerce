@@ -33,8 +33,11 @@ export const auth = betterAuth({
     'http://127.0.0.1:3000',
     'http://127.0.0.1:3001',
     'http://127.0.0.1:3002',
-    process.env.STORE_URL || 'http://localhost:3000',
-    process.env.ADMIN_URL || 'http://localhost:3001',
-    process.env.SELLER_URL || 'http://localhost:3002',
+    (process.env.STORE_URL || 'http://localhost:3000').replace(/\/+$/, ''),
+    (process.env.ADMIN_URL || 'http://localhost:3001').replace(/\/+$/, ''),
+    (process.env.SELLER_URL || 'http://localhost:3002').replace(/\/+$/, ''),
+    ...(process.env.ADDITIONAL_CORS_ORIGINS
+      ? process.env.ADDITIONAL_CORS_ORIGINS.split(',').map((o) => o.trim().replace(/\/+$/, ''))
+      : []),
   ],
 });

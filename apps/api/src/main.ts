@@ -40,22 +40,36 @@ async function bootstrap() {
       // Allow requests with no origin (mobile apps, curl, server-to-server)
       if (!origin) return callback(null, true);
 
+      const cleanOrigin = origin.replace(/\/+$/, '');
       const explicitOrigins = [
-        storeUrl,
-        adminUrl,
-        sellerUrl,
+        storeUrl.replace(/\/+$/, ''),
+        adminUrl.replace(/\/+$/, ''),
+        sellerUrl.replace(/\/+$/, ''),
         'http://localhost:3000',
         'http://localhost:3001',
         'http://localhost:3002',
         'http://127.0.0.1:3000',
         'http://127.0.0.1:3001',
         'http://127.0.0.1:3002',
+        ...(process.env.ADDITIONAL_CORS_ORIGINS
+          ? process.env.ADDITIONAL_CORS_ORIGINS.split(',').map((o) => o.trim().replace(/\/+$/, ''))
+          : []),
       ];
 
-      if (
-        explicitOrigins.includes(origin) ||
-        /^http:\/\/(localhost|127\.0\.0\.1):[0-9]+$/.test(origin)
-      ) {
+      let isAllowed =
+        explicitOrigins.includes(cleanOrigin) ||
+        /^http:\/\/(localhost|127\.0\.0\.1):[0-9]+$/.test(cleanOrigin);
+
+      try {
+        const urlObj = new URL(cleanOrigin);
+        if (urlObj.hostname.endsWith('.onrender.com') || urlObj.hostname.endsWith('.vercel.app')) {
+          isAllowed = true;
+        }
+      } catch {
+        // invalid url
+      }
+
+      if (isAllowed) {
         return callback(null, true);
       }
 
