@@ -1364,7 +1364,7 @@ export const MOCK_PRODUCTS = [
     "images": [
       {
         "id": "img-comp-1-1",
-        "url": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=80",
+        "url": "/images/products/mechanical-keyboard-405x272.webp",
         "alt": "75% Mechanical Keyboard Angle",
         "sortOrder": 0
       },

@@ -1367,7 +1367,13 @@ export function ProfilePage({ user, onLogout, onNavigate, onAddToCart }) {
             <DialogHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <img src="/logo.png" alt="Nexora" className="w-7 h-7 object-contain" />
+                  <img
+                    src="/logo-40x40.webp"
+                    alt="Nexora"
+                    width={28}
+                    height={28}
+                    className="w-7 h-7 object-contain"
+                  />
                   <span className="font-extrabold text-sm tracking-tight text-foreground">
                     NEXORA COMMERCE TAX INVOICE
                   </span>

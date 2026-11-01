@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { formatPrice } from '../lib/formatters';
 import { couponApi, orderApi, paymentApi } from '../lib/apiClient';
+import { loadRazorpayScript } from '../lib/razorpay';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../components/ui/card';
@@ -333,7 +334,11 @@ export function CheckoutPage({
 
     // Razorpay Integration Flow
     if (paymentMethod === 'razorpay') {
-      if (typeof window !== 'undefined' && window.Razorpay) {
+      if (typeof window !== 'undefined') {
+        if (!window.Razorpay) {
+          await loadRazorpayScript();
+        }
+        if (window.Razorpay) {
         try {
           const options = {
             key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_placeholder',
@@ -378,6 +383,7 @@ export function CheckoutPage({
         }
       }
     }
+  }
 
     // Direct finalization for COD or simulated payment
     setTimeout(() => {

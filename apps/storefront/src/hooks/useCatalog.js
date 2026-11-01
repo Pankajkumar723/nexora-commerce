@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { catalogApi } from '../lib/apiClient';
-import { CATEGORIES, PRODUCTS } from '../data/catalogData';
-
-// Re-export full 20 categories and 100 products
-export const FALLBACK_CATEGORIES = CATEGORIES;
-export const FALLBACK_PRODUCTS = PRODUCTS;
+let fallbackPromise = null;
+async function getFallbackData() {
+  if (!fallbackPromise) {
+    fallbackPromise = import('../data/catalogData');
+  }
+  return fallbackPromise;
+}
 
 export function useProducts(params = {}) {
   return useQuery({
@@ -15,7 +17,8 @@ export function useProducts(params = {}) {
         return response;
       } catch (err) {
         console.warn('Backend API unreachable, using graceful client fallback:', err);
-        let filtered = [...FALLBACK_PRODUCTS];
+        const fallback = await getFallbackData();
+        let filtered = [...fallback.PRODUCTS];
 
         if (params.category) {
           filtered = filtered.filter((p) => p.category?.slug === params.category);
@@ -77,7 +80,8 @@ export function useProductDetail(slug) {
         return response.data;
       } catch (err) {
         console.warn(`Backend API unreachable for slug ${slug}, using client fallback:`, err);
-        const item = FALLBACK_PRODUCTS.find((p) => p.slug === slug);
+        const fallback = await getFallbackData();
+        const item = fallback.PRODUCTS.find((p) => p.slug === slug);
         if (!item) throw new Error('Product not found');
         return item;
       }
@@ -95,7 +99,8 @@ export function useCategories() {
         return response.data;
       } catch (err) {
         console.warn('Backend API unreachable for categories, using fallback:', err);
-        return FALLBACK_CATEGORIES;
+        const fallback = await getFallbackData();
+        return fallback.CATEGORIES;
       }
     },
   });

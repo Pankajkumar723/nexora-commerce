@@ -5,6 +5,7 @@ import {
   Boxes,
   Tag,
   Users,
+  Store,
   ShieldAlert,
   LogOut,
   Menu,
@@ -12,13 +13,14 @@ import {
   ExternalLink,
 } from 'lucide-react';
 
-export function AdminLayout({ activeTab, onSelectTab, children }) {
+export function AdminLayout({ activeTab, onSelectTab, onLogout, children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard & KPIs', icon: LayoutDashboard },
     { id: 'orders', label: 'Order Fulfillment', icon: ShoppingBag },
     { id: 'inventory', label: 'Inventory & SKUs', icon: Boxes },
+    { id: 'sellers', label: 'Sellers & Approvals', icon: Store },
     { id: 'coupons', label: 'Coupons & Promos', icon: Tag },
     { id: 'customers', label: 'Customers', icon: Users },
   ];
@@ -28,11 +30,19 @@ export function AdminLayout({ activeTab, onSelectTab, children }) {
       {/* Sidebar Desktop */}
       <aside className="hidden lg:flex lg:flex-col w-64 bg-navy text-white border-r border-navy/80 shrink-0">
         <div className="p-6 border-b border-white/10 flex items-center gap-3">
-          <img
-            src="/logo.png"
-            alt="Nexora Admin"
-            className="w-9 h-9 object-contain drop-shadow"
-          />
+          <picture>
+            <source
+              type="image/webp"
+              srcSet="/logo-40x40.webp 1x, /logo-80x80.webp 2x"
+            />
+            <img
+              src="/logo-40x40.png"
+              alt="Nexora Admin"
+              width={36}
+              height={36}
+              className="w-9 h-9 object-contain drop-shadow"
+            />
+          </picture>
           <div>
             <h1 className="font-extrabold text-sm tracking-tight leading-none text-white">
               NEXORA ADMIN
@@ -64,8 +74,17 @@ export function AdminLayout({ activeTab, onSelectTab, children }) {
           })}
         </nav>
 
-        {/* Bottom Storefront shortcut & Admin badge */}
+        {/* Bottom Storefront & Seller shortcuts & Admin badge */}
         <div className="p-4 border-t border-white/10 space-y-2">
+          <a
+            href="http://localhost:3002"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-gray-300 hover:bg-white/10 transition"
+          >
+            <span>Seller Portal</span>
+            <ExternalLink className="w-3.5 h-3.5 text-teal" />
+          </a>
           <a
             href="http://localhost:3000"
             target="_blank"
@@ -76,14 +95,25 @@ export function AdminLayout({ activeTab, onSelectTab, children }) {
             <ExternalLink className="w-3.5 h-3.5 text-teal" />
           </a>
 
-          <div className="p-3 bg-white/5 rounded-xl flex items-center gap-2.5 text-xs">
-            <div className="w-7 h-7 rounded-full bg-teal text-white flex items-center justify-center font-bold text-xs">
-              A
+          <div className="p-3 bg-white/5 rounded-xl flex items-center justify-between gap-2.5 text-xs">
+            <div className="flex items-center gap-2.5 overflow-hidden">
+              <div className="w-7 h-7 rounded-full bg-teal text-white flex items-center justify-center font-bold text-xs shrink-0">
+                A
+              </div>
+              <div className="overflow-hidden">
+                <span className="block font-semibold text-white truncate">Administrator</span>
+                <span className="block text-[10px] text-gray-400 truncate">admin@nexoracommerce.com</span>
+              </div>
             </div>
-            <div className="overflow-hidden">
-              <span className="block font-semibold text-white truncate">Administrator</span>
-              <span className="block text-[10px] text-gray-400">admin@nexoracommerce.com</span>
-            </div>
+            {onLogout && (
+              <button
+                onClick={onLogout}
+                title="Sign Out"
+                className="p-1.5 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition shrink-0"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
         </div>
       </aside>
@@ -128,7 +158,13 @@ export function AdminLayout({ activeTab, onSelectTab, children }) {
               <div>
                 <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
                   <div className="flex items-center gap-2.5">
-                    <img src="/logo.png" alt="Nexora Admin" className="w-8 h-8 object-contain" />
+                    <img
+                      src="/logo-40x40.webp"
+                      alt="Nexora Admin"
+                      width={32}
+                      height={32}
+                      className="w-8 h-8 object-contain"
+                    />
                     <span className="font-bold text-sm">Nexora Admin</span>
                   </div>
                   <button onClick={() => setSidebarOpen(false)}>

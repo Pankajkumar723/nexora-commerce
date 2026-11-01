@@ -110,6 +110,9 @@ describe('AuthGuard', () => {
       name: 'Customer Demo',
       role: Role.CUSTOMER,
       profileId: 'prof-456',
+      sellerId: null,
+      sellerStatus: null,
+      sellerProfile: null,
       sessionId: 'sess-active',
     });
   });

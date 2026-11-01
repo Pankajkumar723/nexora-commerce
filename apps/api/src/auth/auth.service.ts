@@ -113,7 +113,7 @@ export class AuthService {
       where: { email: dto.email.toLowerCase() },
       include: {
         accounts: {
-          where: { providerId: 'credentials' },
+          where: { providerId: { in: ['credentials', 'credential'] } },
         },
         profile: true,
       },

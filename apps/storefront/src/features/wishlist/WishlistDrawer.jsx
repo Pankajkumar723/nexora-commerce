@@ -43,6 +43,7 @@ export function WishlistDrawer({
               variant="ghost"
               size="icon"
               onClick={onClose}
+              aria-label="Close wishlist drawer"
               className="h-8 w-8 text-muted-foreground hover:text-foreground"
             >
               <X className="w-4 h-4" />
@@ -112,7 +113,8 @@ export function WishlistDrawer({
                           variant="ghost"
                           size="icon"
                           onClick={() => onRemoveItem(product.id)}
-                          className="h-6 w-6 text-muted-foreground hover:text-destructive"
+                          aria-label={`Remove ${product.name} from saved items`}
+                          className="h-7 w-7 text-muted-foreground hover:text-destructive"
                           title="Remove from saved items"
                         >
                           <Trash2 className="w-3.5 h-3.5" />

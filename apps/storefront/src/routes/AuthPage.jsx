@@ -89,7 +89,10 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
 
   // Initialize official Google Identity Services if client ID is configured
   useEffect(() => {
-    if (googleClientId && window.google?.accounts?.id) {
+    if (!googleClientId) return;
+
+    const setupGsi = () => {
+      if (!window.google?.accounts?.id) return;
       try {
         window.google.accounts.id.initialize({
           client_id: googleClientId,
@@ -122,6 +125,17 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
       } catch (err) {
         console.warn('Google Identity Services init warning:', err);
       }
+    };
+
+    if (!window.google?.accounts?.id) {
+      const script = document.createElement('script');
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.async = true;
+      script.defer = true;
+      script.onload = setupGsi;
+      document.body.appendChild(script);
+    } else {
+      setupGsi();
     }
   }, [googleClientId]);
 
@@ -390,11 +404,19 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
         {/* Main Shadcn Card */}
         <Card className="border-border shadow-lg">
           <CardHeader className="text-center pb-4">
-            <img
-              src="/logo.png"
-              alt="Nexora Commerce"
-              className="w-16 h-16 object-contain mx-auto mb-3 drop-shadow-md"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcSet="/logo-80x80.webp 1x, /logo-128x128.webp 2x"
+              />
+              <img
+                src="/logo-80x80.png"
+                alt="Nexora Commerce"
+                width={64}
+                height={64}
+                className="w-16 h-16 object-contain mx-auto mb-3 drop-shadow-md"
+              />
+            </picture>
             <CardTitle className="text-xl font-bold tracking-tight">
               {activeTab === 'login' ? 'Welcome Back to Nexora' : 'Create Your Nexora Account'}
             </CardTitle>

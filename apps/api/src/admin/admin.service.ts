@@ -258,4 +258,129 @@ export class AdminService {
       };
     });
   }
+
+  /**
+   * List all sellers with application status
+   */
+  async getAllSellers(status?: any, page: number = 1, limit: number = 20) {
+    const skip = (page - 1) * limit;
+    const where: any = status ? { status } : {};
+
+    const [items, total] = await Promise.all([
+      this.prisma.sellerProfile.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+        include: {
+          user: { select: { email: true, name: true, createdAt: true } },
+          _count: { select: { products: true, orderItems: true } },
+        },
+      }),
+      this.prisma.sellerProfile.count({ where }),
+    ]);
+
+    return {
+      items,
+      meta: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit) || 1,
+      },
+    };
+  }
+
+  /**
+   * Update seller application status (Approve, Reject, Suspend)
+   */
+  async updateSellerStatus(
+    sellerId: string,
+    status: any,
+    rejectionReason?: string,
+    commissionRate?: number,
+  ) {
+    const seller = await this.prisma.sellerProfile.findUnique({
+      where: { id: sellerId },
+    });
+
+    if (!seller) {
+      throw new NotFoundException(`Seller with ID "${sellerId}" not found.`);
+    }
+
+    return this.prisma.$transaction(async (tx) => {
+      const updated = await tx.sellerProfile.update({
+        where: { id: sellerId },
+        data: {
+          status,
+          rejectionReason: status === 'REJECTED' ? rejectionReason : null,
+          approvedAt: status === 'APPROVED' ? new Date() : seller.approvedAt,
+          ...(commissionRate !== undefined && { commissionRate }),
+        },
+      });
+
+      await tx.sellerNotification.create({
+        data: {
+          sellerId,
+          title: `Account Status: ${status}`,
+          message:
+            status === 'APPROVED'
+              ? 'Congratulations! Your seller application has been approved. You can now publish products and fulfill customer orders.'
+              : status === 'REJECTED'
+              ? `Your seller application was rejected. Reason: ${rejectionReason || 'Incomplete details'}`
+              : `Your seller account status has been updated to ${status}.`,
+          type: 'APPROVAL',
+        },
+      });
+
+      return updated;
+    });
+  }
+
+  /**
+   * Get products pending moderation review
+   */
+  async getPendingSellerProducts() {
+    return this.prisma.product.findMany({
+      where: { status: 'PENDING_APPROVAL' },
+      include: {
+        seller: { select: { id: true, storeName: true, storeSlug: true } },
+        category: { select: { name: true } },
+        images: true,
+        variants: true,
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  /**
+   * Moderate seller product (Approve or Reject)
+   */
+  async moderateSellerProduct(productId: string, status: any) {
+    const product = await this.prisma.product.findUnique({
+      where: { id: productId },
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Product with ID "${productId}" not found.`);
+    }
+
+    const updated = await this.prisma.product.update({
+      where: { id: productId },
+      data: { status },
+    });
+
+    if (product.sellerId) {
+      await this.prisma.sellerNotification.create({
+        data: {
+          sellerId: product.sellerId,
+          title: `Product Moderation: ${status}`,
+          message: `Your product "${product.name}" has been ${status === 'ACTIVE' ? 'approved and published' : 'rejected'}.`,
+          type: 'PRODUCT',
+        },
+      });
+    }
+
+    return updated;
+  }
 }

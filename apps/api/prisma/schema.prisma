@@ -14,12 +14,45 @@ datasource db {
 enum Role {
   CUSTOMER
   ADMIN
+  SELLER
+}
+
+enum SellerStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum FulfillmentStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum CommissionStatus {
+  PENDING
+  AVAILABLE
+  PAID
+  REFUNDED
+}
+
+enum PayoutStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
 }
 
 enum ProductStatus {
   DRAFT
   ACTIVE
   ARCHIVED
+  PENDING_APPROVAL
+  REJECTED
 }
 
 enum DiscountType {
@@ -65,6 +98,7 @@ model User {
   sessions      Session[]
   accounts      Account[]
   profile       CustomerProfile?
+  sellerProfile SellerProfile?
 
   @@index([email])
 }
@@ -120,13 +154,13 @@ model Verification {
 // -------------------------------------------------------------
 
 model CustomerProfile {
-  id         String     @id @default(uuid())
-  authUserId String     @unique
-  user       User       @relation(fields: [authUserId], references: [id], onDelete: Cascade)
+  id         String    @id @default(uuid())
+  authUserId String    @unique
+  user       User      @relation(fields: [authUserId], references: [id], onDelete: Cascade)
   name       String
   phone      String?
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
   addresses  Address[]
   orders     Order[]
   reviews    Review[]
@@ -137,19 +171,19 @@ model CustomerProfile {
 }
 
 model Address {
-  id          String          @id @default(uuid())
-  customerId  String
-  customer    CustomerProfile @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  label       String          @default("Home") // Home, Work, etc.
-  line1       String
-  line2       String?
-  city        String
-  state       String
-  postalCode  String
-  country     String          @default("India")
-  isDefault   Boolean         @default(false)
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
+  id         String          @id @default(uuid())
+  customerId String
+  customer   CustomerProfile @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  label      String          @default("Home") // Home, Work, etc.
+  line1      String
+  line2      String?
+  city       String
+  state      String
+  postalCode String
+  country    String          @default("India")
+  isDefault  Boolean         @default(false)
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
 
   @@index([customerId])
 }
@@ -176,24 +210,30 @@ model Category {
 }
 
 model Product {
-  id             String          @id @default(uuid())
+  id             String           @id @default(uuid())
   name           String
-  slug           String          @unique
+  slug           String           @unique
   description    String
-  price          Decimal         @db.Decimal(10, 2)
-  compareAtPrice Decimal?        @db.Decimal(10, 2)
-  status         ProductStatus   @default(ACTIVE)
+  price          Decimal          @db.Decimal(10, 2)
+  compareAtPrice Decimal?         @db.Decimal(10, 2)
+  status         ProductStatus    @default(ACTIVE)
   categoryId     String
-  category       Category        @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  category       Category         @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  sellerId       String?
+  seller         SellerProfile?   @relation(fields: [sellerId], references: [id], onDelete: SetNull)
   images         ProductImage[]
   variants       ProductVariant[]
   reviews        Review[]
   wishlistItems  WishlistItem[]
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  brand          String?
+  metadata       Json?
 
   @@index([slug])
   @@index([categoryId])
+  @@index([sellerId])
   @@index([status])
   @@index([createdAt])
 }
@@ -216,7 +256,7 @@ model ProductVariant {
   productId          String
   product            Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
   sku                String              @unique
-  attributes         Json                // e.g. {"size": "M", "color": "Navy"}
+  attributes         Json // e.g. {"size": "M", "color": "Navy"}
   priceOverride      Decimal?            @db.Decimal(10, 2)
   stockQuantity      Int                 @default(0)
   cartItems          CartItem[]
@@ -233,12 +273,12 @@ model ProductVariant {
 // -------------------------------------------------------------
 
 model Cart {
-  id         String     @id @default(uuid())
-  customerId String     @unique
+  id         String          @id @default(uuid())
+  customerId String          @unique
   customer   CustomerProfile @relation(fields: [customerId], references: [id], onDelete: Cascade)
   items      CartItem[]
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
 
   @@index([customerId])
 }
@@ -259,12 +299,12 @@ model CartItem {
 }
 
 model Wishlist {
-  id         String         @id @default(uuid())
-  customerId String         @unique
+  id         String          @id @default(uuid())
+  customerId String          @unique
   customer   CustomerProfile @relation(fields: [customerId], references: [id], onDelete: Cascade)
   items      WishlistItem[]
-  createdAt  DateTime       @default(now())
-  updatedAt  DateTime       @updatedAt
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
 
   @@index([customerId])
 }
@@ -313,7 +353,7 @@ model Order {
   orderNumber     String          @unique
   customerId      String
   customer        CustomerProfile @relation(fields: [customerId], references: [id], onDelete: Restrict)
-  addressSnapshot Json            // Complete shipping address snapshot
+  addressSnapshot Json // Complete shipping address snapshot
   subtotal        Decimal         @db.Decimal(10, 2)
   tax             Decimal         @db.Decimal(10, 2)
   shipping        Decimal         @db.Decimal(10, 2)
@@ -333,18 +373,28 @@ model Order {
 }
 
 model OrderItem {
-  id               String   @id @default(uuid())
-  orderId          String
-  order            Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  productVariantId String?
-  nameSnapshot     String
-  priceSnapshot    Decimal  @db.Decimal(10, 2)
-  quantity         Int
-  imageSnapshot    String?
-  skuSnapshot      String?
-  createdAt        DateTime @default(now())
+  id                String            @id @default(uuid())
+  orderId           String
+  order             Order             @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productVariantId  String?
+  nameSnapshot      String
+  priceSnapshot     Decimal           @db.Decimal(10, 2)
+  quantity          Int
+  imageSnapshot     String?
+  skuSnapshot       String?
+  sellerId          String?
+  seller            SellerProfile?    @relation(fields: [sellerId], references: [id], onDelete: SetNull)
+  fulfillmentStatus FulfillmentStatus @default(PENDING)
+  trackingNumber    String?
+  shippingCarrier   String?
+  shippedAt         DateTime?
+  deliveredAt       DateTime?
+  commission        CommissionRecord?
+  createdAt         DateTime          @default(now())
 
   @@index([orderId])
+  @@index([sellerId])
+  @@index([fulfillmentStatus])
 }
 
 model Payment {
@@ -388,7 +438,7 @@ model Review {
   customer         CustomerProfile @relation(fields: [customerId], references: [id], onDelete: Cascade)
   productId        String
   product          Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
-  rating           Int             // 1 to 5
+  rating           Int // 1 to 5
   comment          String
   moderationStatus ReviewStatus    @default(APPROVED)
   createdAt        DateTime        @default(now())
@@ -403,9 +453,9 @@ model InventoryMovement {
   id            String         @id @default(uuid())
   variantId     String
   variant       ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
-  quantityDelta Int            // Positive for restock, negative for deduction
-  reason        String         // "ORDER_FULFILLMENT", "RESTOCK", "ADMIN_ADJUSTMENT", "CANCELLED_RETURN"
-  referenceId   String?        // OrderId or Admin ID
+  quantityDelta Int // Positive for restock, negative for deduction
+  reason        String // "ORDER_FULFILLMENT", "RESTOCK", "ADMIN_ADJUSTMENT", "CANCELLED_RETURN"
+  referenceId   String? // OrderId or Admin ID
   createdAt     DateTime       @default(now())
 
   @@index([variantId])
@@ -415,9 +465,118 @@ model InventoryMovement {
 model AIConversation {
   id         String   @id @default(uuid())
   customerId String?
-  messages   Json     // Sanitized query and recommendation facts
+  messages   Json // Sanitized query and recommendation facts
   createdAt  DateTime @default(now())
 
   @@index([customerId])
   @@index([createdAt])
+}
+
+// -------------------------------------------------------------
+// SELLER MULTI-VENDOR ARCHITECTURE MODELS
+// -------------------------------------------------------------
+
+model SellerProfile {
+  id                String                 @id @default(uuid())
+  authUserId        String                 @unique
+  user              User                   @relation(fields: [authUserId], references: [id], onDelete: Cascade)
+  storeName         String
+  storeSlug         String                 @unique
+  storeDescription  String?
+  storeLogo         String?
+  storeBanner       String?
+  phone             String
+  businessAddress   String
+  taxId             String // GSTIN / PAN / Business Tax ID
+  bankAccountName   String
+  bankAccountNumber String
+  bankIfscCode      String
+  bankName          String
+  commissionRate    Decimal                @default(10.00) @db.Decimal(5, 2)
+  status            SellerStatus           @default(PENDING)
+  rejectionReason   String?
+  approvedAt        DateTime?
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
+  products          Product[]
+  orderItems        OrderItem[]
+  commissions       CommissionRecord[]
+  payouts           Payout[]
+  notifications     SellerNotification[]
+  supportRequests   SellerSupportRequest[]
+
+  @@index([authUserId])
+  @@index([storeSlug])
+  @@index([status])
+}
+
+model CommissionRecord {
+  id               String           @id @default(uuid())
+  sellerId         String
+  seller           SellerProfile    @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  orderItemId      String           @unique
+  orderItem        OrderItem        @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
+  grossAmount      Decimal          @db.Decimal(10, 2)
+  commissionRate   Decimal          @db.Decimal(5, 2)
+  commissionAmount Decimal          @db.Decimal(10, 2)
+  netSellerAmount  Decimal          @db.Decimal(10, 2)
+  status           CommissionStatus @default(PENDING)
+  payoutId         String?
+  payout           Payout?          @relation(fields: [payoutId], references: [id], onDelete: SetNull)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  @@index([sellerId])
+  @@index([status])
+  @@index([payoutId])
+}
+
+model Payout {
+  id            String             @id @default(uuid())
+  payoutNumber  String             @unique
+  sellerId      String
+  seller        SellerProfile      @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  amount        Decimal            @db.Decimal(10, 2)
+  status        PayoutStatus       @default(PENDING)
+  bankReference String?
+  requestedAt   DateTime           @default(now())
+  processedAt   DateTime?
+  notes         String?
+  commissions   CommissionRecord[]
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  @@index([sellerId])
+  @@index([payoutNumber])
+  @@index([status])
+}
+
+model SellerNotification {
+  id        String        @id @default(uuid())
+  sellerId  String
+  seller    SellerProfile @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String        @default("INFO") // INFO, ORDER, APPROVAL, PAYOUT, WARNING
+  read      Boolean       @default(false)
+  createdAt DateTime      @default(now())
+
+  @@index([sellerId])
+  @@index([read])
+}
+
+model SellerSupportRequest {
+  id            String        @id @default(uuid())
+  sellerId      String
+  seller        SellerProfile @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  subject       String
+  message       String
+  priority      String        @default("MEDIUM") // LOW, MEDIUM, HIGH, URGENT
+  status        String        @default("OPEN") // OPEN, IN_PROGRESS, RESOLVED, CLOSED
+  adminResponse String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([sellerId])
+  @@index([status])
 }

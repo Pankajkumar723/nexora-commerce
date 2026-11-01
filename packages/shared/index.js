@@ -3,6 +3,37 @@
 export const Role = {
   CUSTOMER: 'CUSTOMER',
   ADMIN: 'ADMIN',
+  SELLER: 'SELLER',
+};
+
+export const SellerStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  SUSPENDED: 'SUSPENDED',
+};
+
+export const FulfillmentStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  SHIPPED: 'SHIPPED',
+  DELIVERED: 'DELIVERED',
+  CANCELLED: 'CANCELLED',
+};
+
+export const CommissionStatus = {
+  PENDING: 'PENDING',
+  AVAILABLE: 'AVAILABLE',
+  PAID: 'PAID',
+  REFUNDED: 'REFUNDED',
+};
+
+export const PayoutStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED',
 };
 
 export const OrderStatus = {
@@ -25,6 +56,8 @@ export const ProductStatus = {
   DRAFT: 'DRAFT',
   ACTIVE: 'ACTIVE',
   ARCHIVED: 'ARCHIVED',
+  PENDING_APPROVAL: 'PENDING_APPROVAL',
+  REJECTED: 'REJECTED',
 };
 
 export const DiscountType = {
@@ -49,6 +82,13 @@ export const AppRoutes = {
   ADMIN_PRODUCTS: '/admin/products',
   ADMIN_ORDERS: '/admin/orders',
   ADMIN_COUPONS: '/admin/coupons',
+  ADMIN_SELLERS: '/admin/sellers',
+  SELLER_DASHBOARD: '/seller',
+  SELLER_PRODUCTS: '/seller/products',
+  SELLER_ORDERS: '/seller/orders',
+  SELLER_EARNINGS: '/seller/earnings',
+  SELLER_ANALYTICS: '/seller/analytics',
+  SELLER_SETTINGS: '/seller/settings',
 };
 
 export const formatCurrency = (amount) => {

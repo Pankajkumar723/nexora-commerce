@@ -6,6 +6,7 @@ export interface AppConfig {
   betterAuthUrl: string;
   storeUrl: string;
   adminUrl: string;
+  sellerUrl: string;
   razorpayKeyId: string;
   razorpayKeySecret: string;
   razorpayWebhookSecret: string;
@@ -22,6 +23,7 @@ export default (): { app: AppConfig } => ({
     betterAuthUrl: process.env.BETTER_AUTH_URL || 'http://localhost:4000',
     storeUrl: process.env.STORE_URL || 'http://localhost:3000',
     adminUrl: process.env.ADMIN_URL || 'http://localhost:3001',
+    sellerUrl: process.env.SELLER_URL || 'http://localhost:3002',
     razorpayKeyId: process.env.RAZORPAY_KEY_ID || 'rzp_test_sample',
     razorpayKeySecret: process.env.RAZORPAY_KEY_SECRET || 'secret_mock',
     razorpayWebhookSecret: process.env.RAZORPAY_WEBHOOK_SECRET || 'webhook_secret_mock',

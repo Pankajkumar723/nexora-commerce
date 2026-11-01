@@ -53,6 +53,7 @@ export function CartDrawer({
               variant="ghost"
               size="icon"
               onClick={onClose}
+              aria-label="Close Shopping Cart"
               className="h-8 w-8 text-muted-foreground hover:text-foreground"
             >
               <X className="w-4 h-4" />
@@ -146,7 +147,8 @@ export function CartDrawer({
                           variant="ghost"
                           size="icon"
                           onClick={() => onRemoveItem(item)}
-                          className="h-6 w-6 text-muted-foreground hover:text-destructive"
+                          aria-label={`Remove ${product.name} from cart`}
+                          className="h-7 w-7 text-muted-foreground hover:text-destructive"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </Button>
@@ -161,7 +163,8 @@ export function CartDrawer({
                           <button
                             type="button"
                             onClick={() => onUpdateQuantity(item, item.quantity - 1)}
-                            className="p-1 text-muted-foreground hover:text-foreground hover:bg-muted"
+                            aria-label={`Decrease quantity of ${product.name}`}
+                            className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
@@ -171,7 +174,8 @@ export function CartDrawer({
                           <button
                             type="button"
                             onClick={() => onUpdateQuantity(item, item.quantity + 1)}
-                            className="p-1 text-muted-foreground hover:text-foreground hover:bg-muted"
+                            aria-label={`Increase quantity of ${product.name}`}
+                            className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted"
                           >
                             <Plus className="w-3 h-3" />
                           </button>

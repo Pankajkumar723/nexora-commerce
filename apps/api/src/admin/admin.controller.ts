@@ -105,4 +105,68 @@ export class AdminController {
     const customers = await this.adminService.getAllCustomers();
     return apiSuccess(customers, null, 'Customers retrieved');
   }
+
+  @Get('sellers')
+  @ApiOperation({ summary: 'List all sellers with KYC and application status' })
+  @ApiQuery({ name: 'status', required: false })
+  @ApiQuery({ name: 'page', required: false, example: 1 })
+  @ApiQuery({ name: 'limit', required: false, example: 20 })
+  @ApiResponse({ status: 200, description: 'Sellers list' })
+  async getSellers(
+    @Query('status') status?: any,
+    @Query('page') page: string = '1',
+    @Query('limit') limit: string = '20',
+  ) {
+    const data = await this.adminService.getAllSellers(
+      status,
+      parseInt(page, 10) || 1,
+      parseInt(limit, 10) || 20,
+    );
+    return apiSuccess(data.items, data.meta, 'Sellers list retrieved');
+  }
+
+  @Patch('sellers/:id/status')
+  @ApiOperation({ summary: 'Approve, reject or suspend seller application' })
+  @ApiParam({ name: 'id', description: 'Seller profile UUID' })
+  @ApiResponse({ status: 200, description: 'Seller status updated' })
+  async updateSellerStatus(
+    @Param('id') sellerId: string,
+    @Body()
+    body: {
+      status: any;
+      rejectionReason?: string;
+      commissionRate?: number;
+    },
+  ) {
+    const updated = await this.adminService.updateSellerStatus(
+      sellerId,
+      body.status,
+      body.rejectionReason,
+      body.commissionRate,
+    );
+    return apiSuccess(updated, null, `Seller status updated to ${body.status}`);
+  }
+
+  @Get('products/pending')
+  @ApiOperation({ summary: 'List seller products pending moderation review' })
+  @ApiResponse({ status: 200, description: 'Pending products list' })
+  async getPendingProducts() {
+    const products = await this.adminService.getPendingSellerProducts();
+    return apiSuccess(products, null, 'Pending products retrieved');
+  }
+
+  @Patch('products/:id/moderation')
+  @ApiOperation({ summary: 'Moderate seller product (Approve ACTIVE or Reject)' })
+  @ApiParam({ name: 'id', description: 'Product UUID' })
+  @ApiResponse({ status: 200, description: 'Product moderated' })
+  async moderateProduct(
+    @Param('id') productId: string,
+    @Body() body: { status: any },
+  ) {
+    const product = await this.adminService.moderateSellerProduct(
+      productId,
+      body.status,
+    );
+    return apiSuccess(product, null, `Product status updated to ${body.status}`);
+  }
 }

@@ -33,6 +33,7 @@ export class AuthGuard implements CanActivate {
         user: {
           include: {
             profile: true,
+            sellerProfile: true,
           },
         },
       },
@@ -52,6 +53,9 @@ export class AuthGuard implements CanActivate {
       name: session.user.name,
       role: session.user.role,
       profileId: session.user.profile?.id || null,
+      sellerId: session.user.sellerProfile?.id || null,
+      sellerStatus: session.user.sellerProfile?.status || null,
+      sellerProfile: session.user.sellerProfile || null,
       sessionId: session.id,
     };
 

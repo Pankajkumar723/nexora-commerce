@@ -5,15 +5,23 @@ import { OrdersView } from './features/orders/OrdersView';
 import { InventoryView } from './features/inventory/InventoryView';
 import { CouponsView } from './features/coupons/CouponsView';
 import { CustomersView } from './features/customers/CustomersView';
-import { adminRequest } from './lib/apiClient';
+import { SellersManagementView } from './features/sellers/SellersManagementView';
+import { AdminLoginView } from './features/auth/AdminLoginView';
+import { adminRequest, getAdminToken, clearAdminAuth } from './lib/apiClient';
 
 export function App() {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [token, setToken] = useState(getAdminToken());
+  const [activeTab, setActiveTab] = useState('sellers'); // Default to sellers so admin lands directly on approvals!
   const [toast, setToast] = useState('');
 
   const showToast = (msg) => {
     setToast(msg);
     setTimeout(() => setToast(''), 3000);
+  };
+
+  const handleLogout = () => {
+    clearAdminAuth();
+    setToken(null);
   };
 
   const handleUpdateOrderStatus = async (orderId, newStatus) => {
@@ -52,8 +60,12 @@ export function App() {
     }
   };
 
+  if (!token) {
+    return <AdminLoginView onLoginSuccess={(data) => setToken(data.session.token)} />;
+  }
+
   return (
-    <AdminLayout activeTab={activeTab} onSelectTab={setActiveTab}>
+    <AdminLayout activeTab={activeTab} onSelectTab={setActiveTab} onLogout={handleLogout}>
       {/* Toast Notification */}
       {toast && (
         <div className="fixed bottom-6 right-6 z-50 bg-navy text-white px-4 py-3 rounded-xl shadow-xl text-xs font-semibold border border-royal-blue/30 animate-bounce">
@@ -71,6 +83,10 @@ export function App() {
 
       {activeTab === 'inventory' && (
         <InventoryView onAdjustStock={handleAdjustStock} />
+      )}
+
+      {activeTab === 'sellers' && (
+        <SellersManagementView />
       )}
 
       {activeTab === 'coupons' && (

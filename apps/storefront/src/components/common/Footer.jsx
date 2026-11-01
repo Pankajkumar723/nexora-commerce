@@ -13,7 +13,7 @@ export function Footer() {
                 <Truck className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-semibold text-foreground text-sm">Express Pan-India Delivery</h4>
+                <h3 className="font-semibold text-foreground text-sm">Express Pan-India Delivery</h3>
                 <p className="text-xs text-muted-foreground mt-1">Dispatched within 24 hours with real-time tracking.</p>
               </div>
             </div>
@@ -23,7 +23,7 @@ export function Footer() {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-semibold text-foreground text-sm">Verified Razorpay Checkout</h4>
+                <h3 className="font-semibold text-foreground text-sm">Verified Razorpay Checkout</h3>
                 <p className="text-xs text-muted-foreground mt-1">HMAC SHA-256 encrypted server verification.</p>
               </div>
             </div>
@@ -33,7 +33,7 @@ export function Footer() {
                 <RotateCcw className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-semibold text-foreground text-sm">Hassle-Free 14-Day Returns</h4>
+                <h3 className="font-semibold text-foreground text-sm">Hassle-Free 14-Day Returns</h3>
                 <p className="text-xs text-muted-foreground mt-1">Instant pickups and direct refunds to source account.</p>
               </div>
             </div>
@@ -43,7 +43,7 @@ export function Footer() {
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-semibold text-foreground text-sm">AI-Grounded Shopping</h4>
+                <h3 className="font-semibold text-foreground text-sm">AI-Grounded Shopping</h3>
                 <p className="text-xs text-muted-foreground mt-1">Real-time catalog intelligence powered by LLMs.</p>
               </div>
             </div>
@@ -56,24 +56,34 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <img
-                src="/logo.png"
-                alt="Nexora Commerce"
-                className="w-8 h-8 object-contain drop-shadow-xs"
-              />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet="/logo-40x40.webp 1x, /logo-80x80.webp 2x"
+                />
+                <img
+                  src="/logo-40x40.png"
+                  alt="Nexora Commerce"
+                  width={36}
+                  height={36}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-9 h-9 object-contain drop-shadow-xs"
+                />
+              </picture>
               <span className="font-bold text-lg tracking-tight text-foreground">NEXORA COMMERCE</span>
             </div>
             <p className="text-xs sm:text-sm text-muted-foreground max-w-sm leading-relaxed">
               Engineering high-performance consumer technology, minimalist ergonomic workstations, and technical everyday gear.
             </p>
-            <div className="flex items-center gap-2 text-xs text-teal font-medium">
+            <div className="flex items-center gap-2 text-xs text-teal-800 dark:text-teal-300 font-medium">
               <Sparkles className="w-4 h-4" />
               <span>Next-Gen Commerce Experience</span>
             </div>
           </div>
 
           <div>
-            <h5 className="text-xs font-bold uppercase tracking-wider text-foreground mb-4">Catalog</h5>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-foreground mb-4">Catalog</h3>
             <ul className="space-y-2.5 text-xs sm:text-sm text-muted-foreground">
               <li><a href="#audio" className="hover:text-primary transition-colors">Audio & Acoustics</a></li>
               <li><a href="#wearables" className="hover:text-primary transition-colors">Smart Wearables</a></li>
@@ -84,7 +94,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h5 className="text-xs font-bold uppercase tracking-wider text-foreground mb-4">Customer Care</h5>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-foreground mb-4">Customer Care</h3>
             <ul className="space-y-2.5 text-xs sm:text-sm text-muted-foreground">
               <li><a href="#track" className="hover:text-primary transition-colors">Track Your Order</a></li>
               <li><a href="#returns" className="hover:text-primary transition-colors">Returns & Exchanges</a></li>
@@ -94,7 +104,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h5 className="text-xs font-bold uppercase tracking-wider text-foreground mb-4">Trust & Security</h5>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-foreground mb-4">Trust & Security</h3>
             <ul className="space-y-2.5 text-xs sm:text-sm text-muted-foreground">
               <li className="flex items-center gap-1.5 text-foreground/80">
                 <CheckCircle2 className="w-3.5 h-3.5 text-teal shrink-0" />

@@ -222,7 +222,7 @@ async function main() {
       price: '11999.00',
       compareAtPrice: '14499.00',
       images: [
-        { url: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1000&q=80', alt: '75% Mechanical Keyboard Angle', sortOrder: 0 },
+        { url: '/images/products/mechanical-keyboard-405x272.webp', alt: '75% Mechanical Keyboard Angle', sortOrder: 0 },
         { url: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=1000&q=80', alt: 'Keycap Details Top View', sortOrder: 1 },
       ],
       variants: [

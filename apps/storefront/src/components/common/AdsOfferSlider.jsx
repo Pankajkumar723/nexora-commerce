@@ -33,7 +33,7 @@ const MAIN_SLIDES = [
     categorySlug: 'electronics',
     bgGradient: 'from-[#0b132b] via-[#1c2541] to-[#3a506b]',
     accentColor: '#38bdf8',
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=75',
     highlightBadge: 'Ends in 04h : 28m',
   },
   {
@@ -49,7 +49,7 @@ const MAIN_SLIDES = [
     categorySlug: 'fashion-clothing',
     bgGradient: 'from-[#2d122d] via-[#4a154b] to-[#6b2169]',
     accentColor: '#f472b6',
-    image: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=900&q=75',
     highlightBadge: 'Free Alterations Included',
   },
   {
@@ -65,7 +65,7 @@ const MAIN_SLIDES = [
     categorySlug: 'computers-accessories',
     bgGradient: 'from-[#062c30] via-[#05595b] to-[#0e3b43]',
     accentColor: '#34d399',
-    image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=900&q=75',
     highlightBadge: 'Free Leather Desk Mat',
   },
   {
@@ -81,7 +81,7 @@ const MAIN_SLIDES = [
     categorySlug: 'home-kitchen',
     bgGradient: 'from-[#371b12] via-[#542a1d] to-[#6d3928]',
     accentColor: '#fb923c',
-    image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=900&q=75',
     highlightBadge: 'Extra 10% on Cards',
   },
   {
@@ -97,7 +97,7 @@ const MAIN_SLIDES = [
     categorySlug: 'automotive',
     bgGradient: 'from-[#1a1c29] via-[#242b47] to-[#343e69]',
     accentColor: '#60a5fa',
-    image: 'https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&w=900&q=75',
     highlightBadge: '2-Year Warranty',
   },
 ];
@@ -283,6 +283,11 @@ export function AdsOfferSlider({ onSelectCategory, onExploreAll }) {
             <img
               src={currentSlide.image}
               alt={currentSlide.title}
+              width={1200}
+              height={500}
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
               className="w-full h-full object-cover object-center transform transition-transform duration-1000 scale-105 group-hover:scale-100"
             />
             <div className={`absolute inset-0 bg-gradient-to-r ${currentSlide.bgGradient} opacity-90 mix-blend-multiply`} />
@@ -305,9 +310,9 @@ export function AdsOfferSlider({ onSelectCategory, onExploreAll }) {
 
           {/* Center / Bottom Content */}
           <div className="relative z-10 p-5 sm:p-7 space-y-3 sm:space-y-4 max-w-2xl text-white">
-            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight text-white drop-shadow-md">
+            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight text-white drop-shadow-md">
               {currentSlide.title}
-            </h2>
+            </h1>
 
             <p className="text-xs sm:text-sm text-gray-200 line-clamp-2 sm:line-clamp-3 leading-relaxed">
               {currentSlide.description}
@@ -343,41 +348,45 @@ export function AdsOfferSlider({ onSelectCategory, onExploreAll }) {
 
           {/* Slide Navigation Controls & Progress Indicators */}
           <div className="relative z-10 px-5 sm:px-7 pb-4 pt-2 flex items-center justify-between border-t border-white/10 bg-black/20 backdrop-blur-xs">
-            {/* Dots / Number Indicators */}
-            <div className="flex items-center gap-1.5">
+            {/* Dots / Number Indicators with 44px Touch Targets */}
+            <div className="flex items-center gap-1">
               {MAIN_SLIDES.map((slide, idx) => (
                 <button
                   key={slide.id}
                   onClick={() => setCurrentSlideIndex(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    idx === currentSlideIndex
-                      ? 'w-7 bg-white shadow-xs'
-                      : 'w-2 bg-white/40 hover:bg-white/70'
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
+                  className="p-2.5 -m-1 flex items-center justify-center focus:outline-none"
+                  aria-label={`Go to slide ${idx + 1}: ${slide.title}`}
+                >
+                  <span
+                    className={`h-2 rounded-full transition-all duration-300 block ${
+                      idx === currentSlideIndex
+                        ? 'w-7 bg-white shadow-xs'
+                        : 'w-2 bg-white/40 hover:bg-white/70'
+                    }`}
+                  />
+                </button>
               ))}
             </div>
 
-            {/* Prev / Next Arrows */}
-            <div className="flex items-center gap-1.5">
+            {/* Prev / Next Arrows with 44px Touch Targets */}
+            <div className="flex items-center gap-2">
               <button
                 onClick={() =>
                   setCurrentSlideIndex((prev) => (prev === 0 ? MAIN_SLIDES.length - 1 : prev - 1))
                 }
-                className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition border border-white/20 active:scale-90"
+                className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition border border-white/20 active:scale-90"
                 aria-label="Previous slide"
               >
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={() =>
                   setCurrentSlideIndex((prev) => (prev + 1) % MAIN_SLIDES.length)
                 }
-                className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition border border-white/20 active:scale-90"
+                className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition border border-white/20 active:scale-90"
                 aria-label="Next slide"
               >
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-5 h-5" />
               </button>
             </div>
           </div>
@@ -392,7 +401,7 @@ export function AdsOfferSlider({ onSelectCategory, onExploreAll }) {
 
             {/* Card Header: Tag & Ticking Clock */}
             <div className="flex items-center justify-between gap-2 mb-3">
-              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">
+              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider">
                 <Flame className="w-3.5 h-3.5 fill-amber-500 text-amber-500 animate-bounce" />
                 {currentSideDeal.tag}
               </span>
@@ -414,6 +423,10 @@ export function AdsOfferSlider({ onSelectCategory, onExploreAll }) {
                 <img
                   src={currentSideDeal.image}
                   alt={currentSideDeal.productName}
+                  width={80}
+                  height={80}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -422,9 +435,9 @@ export function AdsOfferSlider({ onSelectCategory, onExploreAll }) {
                 <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">
                   {currentSideDeal.category}
                 </span>
-                <h4 className="text-xs font-bold text-foreground line-clamp-2 leading-tight">
+                <h2 className="text-xs font-bold text-foreground line-clamp-2 leading-tight">
                   {currentSideDeal.productName}
-                </h4>
+                </h2>
                 <div className="flex items-baseline gap-2">
                   <span className="text-base font-extrabold text-foreground">
                     {currentSideDeal.dealPrice}
@@ -433,7 +446,7 @@ export function AdsOfferSlider({ onSelectCategory, onExploreAll }) {
                     {currentSideDeal.originalPrice}
                   </span>
                 </div>
-                <Badge variant="secondary" className="text-[9px] bg-red-500/15 text-red-600 dark:text-red-400 font-bold border-none px-1.5 py-0">
+                <Badge variant="secondary" className="text-[9px] bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-200 font-bold border-none px-1.5 py-0">
                   {currentSideDeal.saveText}
                 </Badge>
               </div>
@@ -447,7 +460,8 @@ export function AdsOfferSlider({ onSelectCategory, onExploreAll }) {
               <Button
                 size="sm"
                 onClick={() => onSelectCategory(currentSideDeal.categorySlug)}
-                className="h-8 px-3.5 text-xs font-bold rounded-xl gap-1 shadow-xs"
+                className="h-9 px-3.5 text-xs font-bold rounded-xl gap-1 shadow-xs bg-navy text-white hover:bg-royal-blue"
+                aria-label={`Claim deal for ${currentSideDeal.productName}`}
               >
                 <span>Claim Deal</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -474,16 +488,21 @@ export function AdsOfferSlider({ onSelectCategory, onExploreAll }) {
                 </div>
               </div>
 
-              {/* Dot Indicators */}
-              <div className="flex items-center gap-1">
-                {BANK_OFFERS.map((_, idx) => (
+              {/* Dot Indicators with Proper Spacing */}
+              <div className="flex items-center gap-2">
+                {BANK_OFFERS.map((offer, idx) => (
                   <button
                     key={idx}
                     onClick={() => setBankOfferIndex(idx)}
-                    className={`w-1.5 h-1.5 rounded-full transition-all ${
-                      idx === bankOfferIndex ? 'w-4 bg-primary' : 'bg-muted-foreground/30'
-                    }`}
-                  />
+                    className="w-7 h-7 flex items-center justify-center focus:outline-none rounded-full"
+                    aria-label={`View ${offer.bank} discount offer`}
+                  >
+                    <span
+                      className={`h-1.5 rounded-full transition-all block ${
+                        idx === bankOfferIndex ? 'w-4 bg-primary' : 'w-1.5 bg-muted-foreground/30'
+                      }`}
+                    />
+                  </button>
                 ))}
               </div>
             </div>
@@ -502,7 +521,7 @@ export function AdsOfferSlider({ onSelectCategory, onExploreAll }) {
               <button
                 type="button"
                 onClick={() => handleCopy(currentBankOffer.code)}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-muted hover:bg-muted/80 text-[11px] font-semibold text-foreground border border-border transition active:scale-95"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted hover:bg-muted/80 text-[11px] font-semibold text-foreground border border-border transition active:scale-95"
               >
                 {copiedCode === currentBankOffer.code ? (
                   <>

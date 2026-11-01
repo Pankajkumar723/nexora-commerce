@@ -23,7 +23,7 @@ interface LayoutProps {
 
 export function Layout({
   children,
-  currentRoute = 'profile',
+  currentRoute = 'home',
   searchTerm = '',
   onSearchChange = () => {},
   onSearchSubmit = () => {},

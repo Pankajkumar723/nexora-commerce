@@ -32,6 +32,7 @@ export class OrdersService {
                 product: {
                   include: {
                     images: { orderBy: { sortOrder: 'asc' }, take: 1 },
+                    seller: true,
                   },
                 },
               },
@@ -82,6 +83,12 @@ export class OrdersService {
       const lineTotal = unitPrice.mul(new Prisma.Decimal(item.quantity));
       subtotalDecimal = subtotalDecimal.add(lineTotal);
 
+      const seller = product.seller;
+      const commissionRate = seller ? Number(seller.commissionRate) : 10.0;
+      const gross = Number(lineTotal);
+      const commissionAmount = Number(((gross * commissionRate) / 100).toFixed(2));
+      const netSellerAmount = Number((gross - commissionAmount).toFixed(2));
+
       orderItemsData.push({
         productVariantId: variant.id,
         nameSnapshot: product.name,
@@ -89,6 +96,21 @@ export class OrdersService {
         quantity: item.quantity,
         skuSnapshot: variant.sku,
         imageSnapshot: product.images?.[0]?.url || null,
+        sellerId: product.sellerId || null,
+        ...(product.sellerId
+          ? {
+              commission: {
+                create: {
+                  sellerId: product.sellerId,
+                  grossAmount: new Prisma.Decimal(gross),
+                  commissionRate: new Prisma.Decimal(commissionRate),
+                  commissionAmount: new Prisma.Decimal(commissionAmount),
+                  netSellerAmount: new Prisma.Decimal(netSellerAmount),
+                  status: 'PENDING',
+                },
+              },
+            }
+          : {}),
       });
     }
 

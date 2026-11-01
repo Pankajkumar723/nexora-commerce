@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Layout } from './components/layout/layout';
 import { HomePage } from './routes/HomePage';
-import { ProductsPage } from './routes/ProductsPage';
-import { ProductDetailPage } from './routes/ProductDetailPage';
-import { AuthPage } from './routes/AuthPage';
-import { ProfilePage } from './routes/ProfilePage';
-import { CheckoutPage } from './routes/CheckoutPage';
-import { OrderConfirmationPage } from './routes/OrderConfirmationPage';
-import { SavedItemsPage } from './routes/SavedItemsPage';
 import { CartDrawer } from './features/cart/CartDrawer';
 import { WishlistDrawer } from './features/wishlist/WishlistDrawer';
-import { AiAssistantDrawer, AiAssistantTrigger } from './features/ai-assistant/AiAssistantDrawer';
+import { AiAssistantTrigger } from './features/ai-assistant/AiAssistantTrigger';
 import { useProducts, useCategories } from './hooks/useCatalog';
 import { authClient } from './lib/auth-client';
+
+// Code-split secondary routes to maximize initial render performance (FCP/LCP)
+const ProductsPage = lazy(() => import('./routes/ProductsPage').then((m) => ({ default: m.ProductsPage })));
+const ProductDetailPage = lazy(() => import('./routes/ProductDetailPage').then((m) => ({ default: m.ProductDetailPage })));
+const AuthPage = lazy(() => import('./routes/AuthPage').then((m) => ({ default: m.AuthPage })));
+const ProfilePage = lazy(() => import('./routes/ProfilePage').then((m) => ({ default: m.ProfilePage })));
+const CheckoutPage = lazy(() => import('./routes/CheckoutPage').then((m) => ({ default: m.CheckoutPage })));
+const OrderConfirmationPage = lazy(() => import('./routes/OrderConfirmationPage').then((m) => ({ default: m.OrderConfirmationPage })));
+const SavedItemsPage = lazy(() => import('./routes/SavedItemsPage').then((m) => ({ default: m.SavedItemsPage })));
+const AiAssistantDrawer = lazy(() => import('./features/ai-assistant/AiAssistantDrawer').then((m) => ({ default: m.AiAssistantDrawer })));
 
 const getInitialRoute = () => {
   if (typeof window !== 'undefined') {
@@ -25,7 +28,7 @@ const getInitialRoute = () => {
       return saved;
     }
   }
-  return 'profile';
+  return 'home';
 };
 
 export function App() {
@@ -341,107 +344,109 @@ export function App() {
         />
       )}
 
-      {currentRoute === 'products' && (
-        <ProductsPage
-          products={products}
-          meta={meta}
-          categories={categories}
-          isLoading={isProductsLoading}
-          searchTerm={appliedSearch}
-          onSearchChange={setAppliedSearch}
-          selectedCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
-          minPrice={minPrice}
-          maxPrice={maxPrice}
-          onPriceChange={(min, max) => {
-            setMinPrice(min);
-            setMaxPrice(max);
-          }}
-          currentSort={currentSort}
-          onSortChange={setCurrentSort}
-          currentPage={currentPage}
-          onPageChange={setCurrentPage}
-          onResetFilters={handleResetFilters}
-          onSelectProduct={handleSelectProduct}
-          onAddToCart={(product) => handleAddToCart({ product, variant: product.variants?.[0], quantity: 1 })}
-          wishlistItems={wishlistItems}
-          onToggleWishlist={handleToggleWishlist}
-        />
-      )}
+      <Suspense fallback={<div className="min-h-[40vh] flex items-center justify-center py-12"><div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" /></div>}>
+        {currentRoute === 'products' && (
+          <ProductsPage
+            products={products}
+            meta={meta}
+            categories={categories}
+            isLoading={isProductsLoading}
+            searchTerm={appliedSearch}
+            onSearchChange={setAppliedSearch}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+            minPrice={minPrice}
+            maxPrice={maxPrice}
+            onPriceChange={(min, max) => {
+              setMinPrice(min);
+              setMaxPrice(max);
+            }}
+            currentSort={currentSort}
+            onSortChange={setCurrentSort}
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+            onResetFilters={handleResetFilters}
+            onSelectProduct={handleSelectProduct}
+            onAddToCart={(product) => handleAddToCart({ product, variant: product.variants?.[0], quantity: 1 })}
+            wishlistItems={wishlistItems}
+            onToggleWishlist={handleToggleWishlist}
+          />
+        )}
 
-      {currentRoute === 'product-detail' && (
-        <ProductDetailPage
-          slug={activeSlug}
-          onBack={() => handleNavigate('products')}
-          onAddToCart={handleAddToCart}
-          onDirectCheckout={() => setIsCartOpen(true)}
-          wishlistItems={wishlistItems}
-          onToggleWishlist={handleToggleWishlist}
-        />
-      )}
+        {currentRoute === 'product-detail' && (
+          <ProductDetailPage
+            slug={activeSlug}
+            onBack={() => handleNavigate('products')}
+            onAddToCart={handleAddToCart}
+            onDirectCheckout={() => setIsCartOpen(true)}
+            wishlistItems={wishlistItems}
+            onToggleWishlist={handleToggleWishlist}
+          />
+        )}
 
-      {(currentRoute === 'login' || currentRoute === 'signup') && (
-        <AuthPage
-          initialMode={currentRoute === 'signup' ? 'signup' : 'login'}
-          onNavigate={handleNavigate}
-          onLoginSuccess={(user) => {
-            setCurrentUser(user);
-          }}
-        />
-      )}
+        {(currentRoute === 'login' || currentRoute === 'signup') && (
+          <AuthPage
+            initialMode={currentRoute === 'signup' ? 'signup' : 'login'}
+            onNavigate={handleNavigate}
+            onLoginSuccess={(user) => {
+              setCurrentUser(user);
+            }}
+          />
+        )}
 
-      {currentRoute === 'profile' && (
-        <ProfilePage
-          user={currentUser}
-          onLogout={handleLogout}
-          onNavigate={handleNavigate}
-          onAddToCart={(product, variant) =>
-            handleAddToCart({ product, variant: variant || product.variants?.[0], quantity: 1 })
-          }
-        />
-      )}
-
-      {currentRoute === 'checkout' && (
-        <CheckoutPage
-          cartItems={cartItems}
-          user={currentUser}
-          onNavigate={handleNavigate}
-          onOrderSuccess={(order) => {
-            setConfirmedOrder(order);
-            try {
-              localStorage.setItem('nexora_last_order', JSON.stringify(order));
-            } catch (e) {
-              console.warn('Failed to save last order:', e);
+        {currentRoute === 'profile' && (
+          <ProfilePage
+            user={currentUser}
+            onLogout={handleLogout}
+            onNavigate={handleNavigate}
+            onAddToCart={(product, variant) =>
+              handleAddToCart({ product, variant: variant || product.variants?.[0], quantity: 1 })
             }
-            setCartItems([]);
-            setCurrentRoute('order-confirmation');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-        />
-      )}
+          />
+        )}
 
-      {currentRoute === 'order-confirmation' && (
-        <OrderConfirmationPage
-          order={confirmedOrder}
-          onNavigate={handleNavigate}
-        />
-      )}
+        {currentRoute === 'checkout' && (
+          <CheckoutPage
+            cartItems={cartItems}
+            user={currentUser}
+            onNavigate={handleNavigate}
+            onOrderSuccess={(order) => {
+              setConfirmedOrder(order);
+              try {
+                localStorage.setItem('nexora_last_order', JSON.stringify(order));
+              } catch (e) {
+                console.warn('Failed to save last order:', e);
+              }
+              setCartItems([]);
+              setCurrentRoute('order-confirmation');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        )}
 
-      {currentRoute === 'wishlist' && (
-        <SavedItemsPage
-          items={wishlistItems}
-          onRemoveItem={handleRemoveFromWishlist}
-          onMoveToCart={(product) => handleAddToCart({ product, variant: product.variants?.[0], quantity: 1 })}
-          onMoveAllToCart={handleMoveAllWishlistToCart}
-          onClearAll={handleClearWishlist}
-          onDirectOrder={(product) => {
-            handleAddToCart({ product, variant: product.variants?.[0], quantity: 1 });
-            handleNavigate('checkout');
-          }}
-          onSelectProduct={handleSelectProduct}
-          onExploreAll={() => handleNavigate('products')}
-        />
-      )}
+        {currentRoute === 'order-confirmation' && (
+          <OrderConfirmationPage
+            order={confirmedOrder}
+            onNavigate={handleNavigate}
+          />
+        )}
+
+        {currentRoute === 'wishlist' && (
+          <SavedItemsPage
+            items={wishlistItems}
+            onRemoveItem={handleRemoveFromWishlist}
+            onMoveToCart={(product) => handleAddToCart({ product, variant: product.variants?.[0], quantity: 1 })}
+            onMoveAllToCart={handleMoveAllWishlistToCart}
+            onClearAll={handleClearWishlist}
+            onDirectOrder={(product) => {
+              handleAddToCart({ product, variant: product.variants?.[0], quantity: 1 });
+              handleNavigate('checkout');
+            }}
+            onSelectProduct={handleSelectProduct}
+            onExploreAll={() => handleNavigate('products')}
+          />
+        )}
+      </Suspense>
 
       {/* Slide-over Cart Drawer */}
       <CartDrawer
@@ -478,12 +483,16 @@ export function App() {
 
       {/* Floating AI Assistant Trigger & Drawer */}
       <AiAssistantTrigger onClick={() => setIsAiOpen(true)} />
-      <AiAssistantDrawer
-        isOpen={isAiOpen}
-        onClose={() => setIsAiOpen(false)}
-        onAddToCart={(product) => handleAddToCart({ product, variant: product.variants?.[0], quantity: 1 })}
-        onSelectProduct={handleSelectProduct}
-      />
+      {isAiOpen && (
+        <Suspense fallback={null}>
+          <AiAssistantDrawer
+            isOpen={isAiOpen}
+            onClose={() => setIsAiOpen(false)}
+            onAddToCart={(product) => handleAddToCart({ product, variant: product.variants?.[0], quantity: 1 })}
+            onSelectProduct={handleSelectProduct}
+          />
+        </Suspense>
+      )}
     </Layout>
   );
 }

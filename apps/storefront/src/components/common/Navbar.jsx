@@ -302,18 +302,29 @@ export function Navbar({
           <div className="flex items-center gap-3">
             <button
               onClick={() => onNavigate('home')}
-              className="flex items-center gap-2.5 text-left focus:outline-none group"
+              className="flex items-center gap-2.5 text-left focus:outline-none group p-1 -m-1"
             >
-              <img
-                src="/logo.png"
-                alt="Nexora Commerce"
-                className="w-10 h-10 object-contain drop-shadow-sm group-hover:scale-105 transition-transform"
-              />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet="/logo-40x40.webp 1x, /logo-80x80.webp 2x"
+                />
+                <img
+                  src="/logo-40x40.png"
+                  srcSet="/logo-40x40.png 1x, /logo-80x80.png 2x"
+                  alt="Nexora Commerce Logo"
+                  width={40}
+                  height={40}
+                  loading="eager"
+                  fetchPriority="high"
+                  className="w-10 h-10 object-contain drop-shadow-sm group-hover:scale-105 transition-transform"
+                />
+              </picture>
               <div>
                 <span className="text-xl font-bold tracking-tight text-foreground block leading-none">
                   NEXORA
                 </span>
-                <span className="text-[10px] tracking-widest uppercase font-semibold text-primary block">
+                <span className="text-[10px] tracking-widest uppercase font-semibold text-royal-blue block">
                   Commerce
                 </span>
               </div>
@@ -345,7 +356,8 @@ export function Navbar({
                 <button
                   type="button"
                   onClick={handleClearSearch}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-muted-foreground hover:text-foreground bg-muted/60 px-1.5 py-0.5 rounded cursor-pointer"
+                  aria-label="Clear search query"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-muted-foreground hover:text-foreground bg-muted/60 px-2 py-1 rounded cursor-pointer min-h-[28px]"
                 >
                   Clear
                 </button>
@@ -363,8 +375,9 @@ export function Navbar({
               variant="outline"
               size="icon"
               onClick={() => onNavigate('wishlist')}
-              className="relative h-9 w-9 rounded-xl border border-border/80 bg-background hover:bg-muted/60 hover:border-red-300 dark:hover:border-red-800 text-foreground transition-all duration-200 shadow-2xs hover:shadow-xs active:scale-95 flex items-center justify-center shrink-0"
+              className="relative h-10 w-10 min-w-[40px] min-h-[40px] rounded-xl border border-border/80 bg-background hover:bg-muted/60 hover:border-red-300 dark:hover:border-red-800 text-foreground transition-all duration-200 shadow-2xs hover:shadow-xs active:scale-95 flex items-center justify-center shrink-0"
               title="Saved items (Wishlist)"
+              aria-label={`View Wishlist, ${wishlistCount} saved items`}
             >
               <Heart className={`w-4 h-4 transition-colors ${wishlistCount > 0 ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`} />
               {wishlistCount > 0 && (
@@ -377,7 +390,7 @@ export function Navbar({
             {/* AI Assistant Quick Trigger - Modern gradient pill */}
             <Button
               onClick={onOpenAi}
-              className="gap-1.5 h-9 px-3.5 text-xs font-semibold rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-600 text-white shadow-sm hover:shadow active:scale-95 transition-all duration-200 border border-white/10 shrink-0"
+              className="gap-1.5 h-10 px-3.5 text-xs font-semibold rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-600 text-white shadow-sm hover:shadow active:scale-95 transition-all duration-200 border border-white/10 shrink-0"
               title="Open AI Shopping Assistant"
             >
               <Sparkles className="w-3.5 h-3.5 animate-pulse text-amber-200" />
@@ -388,8 +401,9 @@ export function Navbar({
             <Button
               variant="outline"
               onClick={onOpenCart}
-              className="relative gap-2 h-9 px-3.5 text-xs font-semibold rounded-xl border border-border/80 bg-background hover:bg-muted/60 text-foreground shadow-2xs hover:shadow-xs active:scale-95 transition-all duration-200 shrink-0 group"
+              className="relative gap-2 h-10 px-3.5 text-xs font-semibold rounded-xl border border-border/80 bg-background hover:bg-muted/60 text-foreground shadow-2xs hover:shadow-xs active:scale-95 transition-all duration-200 shrink-0 group"
               title="View Shopping Cart"
+              aria-label={`View Shopping Cart, ${cartCount} items`}
             >
               <ShoppingBag className="w-4 h-4 text-foreground/80 group-hover:text-primary transition-colors" />
               <span className="hidden sm:inline">Cart</span>
@@ -405,7 +419,7 @@ export function Navbar({
               variant={currentRoute === 'profile' ? 'default' : 'outline'}
               size="sm"
               onClick={() => onNavigate('profile')}
-              className={`gap-2 h-9 px-3.5 text-xs font-semibold rounded-xl border shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0 ${
+              className={`gap-2 h-10 px-3.5 text-xs font-semibold rounded-xl border shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0 ${
                 currentRoute === 'profile'
                   ? 'bg-primary text-primary-foreground border-primary shadow-sm ring-2 ring-primary/20'
                   : 'border-border/80 bg-background hover:bg-muted/60 text-foreground'
@@ -435,9 +449,9 @@ export function Navbar({
                 variant="outline"
                 size="icon"
                 onClick={onToggleTheme}
-                className="h-9 w-9 rounded-xl border border-border/80 bg-background hover:bg-muted/60 text-foreground shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0"
+                className="h-10 w-10 min-w-[40px] min-h-[40px] rounded-xl border border-border/80 bg-background hover:bg-muted/60 text-foreground shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0"
                 title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                aria-label="Toggle theme"
+                aria-label={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
               >
                 {isDarkMode ? (
                   <Sun className="w-4 h-4 text-amber-400" />
@@ -452,7 +466,8 @@ export function Navbar({
               variant="ghost"
               size="icon"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-muted-foreground hover:text-foreground"
+              className="md:hidden text-muted-foreground hover:text-foreground h-10 w-10 min-w-[40px] min-h-[40px]"
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
@@ -587,7 +602,11 @@ export function Navbar({
             variant={currentRoute === 'home' ? 'default' : 'outline'}
             size="sm"
             onClick={() => onNavigate('home')}
-            className="rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-medium shrink-0 shadow-2xs"
+            className={`rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-medium shrink-0 shadow-2xs ${
+              currentRoute === 'home'
+                ? 'bg-navy text-white hover:bg-royal-blue border-navy'
+                : 'hover:border-primary/50 text-foreground'
+            }`}
           >
             <Home className="w-3.5 h-3.5 shrink-0" />
             <span>Home</span>
@@ -600,7 +619,11 @@ export function Navbar({
               onSelectCategory('');
               onNavigate('products');
             }}
-            className="rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-medium shrink-0 shadow-2xs"
+            className={`rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-medium shrink-0 shadow-2xs ${
+              currentRoute === 'products' && !activeCategory
+                ? 'bg-navy text-white hover:bg-royal-blue border-navy'
+                : 'hover:border-primary/50 text-foreground'
+            }`}
           >
             <LayoutGrid className="w-3.5 h-3.5 shrink-0" />
             <span>All Products</span>
@@ -612,7 +635,7 @@ export function Navbar({
             onClick={() => onNavigate('profile')}
             className={`rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-semibold shrink-0 shadow-2xs ${
               currentRoute === 'profile'
-                ? 'bg-primary text-primary-foreground shadow-xs'
+                ? 'bg-navy text-white hover:bg-royal-blue border-navy'
                 : 'hover:border-primary/50 text-foreground'
             }`}
           >

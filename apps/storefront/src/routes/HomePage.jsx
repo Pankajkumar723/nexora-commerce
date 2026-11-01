@@ -5,6 +5,7 @@ import { ProductGridSkeleton } from '../components/common/LoadingSkeleton';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 import { AdsOfferSlider } from '../components/common/AdsOfferSlider';
+import { optimizeImageUrl } from '../lib/formatters';
 
 export function HomePage({
   products = [],
@@ -49,15 +50,19 @@ export function HomePage({
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          {categories.map((cat) => (
+          {categories.slice(0, 10).map((cat) => (
             <button
               key={cat.id || cat.slug}
               onClick={() => onSelectCategory(cat.slug)}
               className="group relative rounded-2xl overflow-hidden aspect-[4/5] bg-muted border border-border text-left shadow-sm hover:shadow-lg transition-all"
             >
               <img
-                src={cat.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80'}
+                src={optimizeImageUrl(cat.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=75', 300)}
                 alt={cat.name}
+                width={300}
+                height={375}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-4">
@@ -77,7 +82,7 @@ export function HomePage({
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <div className="flex items-center gap-2 text-teal text-xs font-bold uppercase tracking-wider mb-1">
+            <div className="flex items-center gap-2 text-teal-800 dark:text-teal-400 text-xs font-bold uppercase tracking-wider mb-1">
               <Zap className="w-4 h-4" />
               <span>Trending Gear</span>
             </div>
@@ -116,12 +121,12 @@ export function HomePage({
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-r from-blue-900 via-navy to-royal-blue rounded-3xl p-8 sm:p-12 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md relative overflow-hidden">
           <div className="space-y-2 max-w-xl text-center md:text-left">
-            <span className="text-xs font-bold uppercase tracking-widest text-teal">
+            <span className="text-xs font-bold uppercase tracking-widest text-teal-300">
               Limited Welcome Offer
             </span>
-            <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Enjoy 10% Off Your Initial Order
-            </h3>
+            </h2>
             <p className="text-xs sm:text-sm text-gray-200">
               Apply coupon <code className="bg-white/20 text-white font-mono px-2 py-0.5 rounded font-bold">NEXORA10</code> during checkout. Free express dispatch guaranteed.
             </p>
@@ -129,7 +134,7 @@ export function HomePage({
 
           <Button
             onClick={onExploreAll}
-            className="bg-teal hover:bg-teal-600 text-white text-xs font-bold rounded-xl shadow transition shrink-0 h-11 px-6"
+            className="bg-teal-800 hover:bg-teal-900 text-white text-xs font-bold rounded-xl shadow transition shrink-0 h-11 px-6"
           >
             Claim Discount Now
           </Button>

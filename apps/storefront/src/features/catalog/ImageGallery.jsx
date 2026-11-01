@@ -11,6 +11,7 @@ import {
   RotateCw,
 } from 'lucide-react';
 import { Button } from '../../components/ui/button';
+import { optimizeImageUrl } from '../../lib/formatters';
 
 export function ImageGallery({ images = [], productName = 'Product' }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -140,8 +141,10 @@ export function ImageGallery({ images = [], productName = 'Product' }) {
                 title={`View Angle ${idx + 1}: ${img.alt || productName}`}
               >
                 <img
-                  src={img.url}
+                  src={optimizeImageUrl(img.url, 120)}
                   alt={img.alt || `${productName} thumbnail ${idx + 1}`}
+                  width={80}
+                  height={80}
                   className="w-full h-full object-cover object-center"
                   loading="lazy"
                 />
@@ -165,8 +168,10 @@ export function ImageGallery({ images = [], productName = 'Product' }) {
           >
             {/* Main Product Image */}
             <img
-              src={currentImage.url}
+              src={optimizeImageUrl(currentImage.url, 800)}
               alt={currentImage.alt || productName}
+              width={600}
+              height={600}
               className="w-full h-full object-contain p-4 transition-transform duration-200"
               draggable={false}
             />
