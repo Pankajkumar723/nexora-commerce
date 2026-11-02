@@ -18,14 +18,25 @@ import { LoginDto } from './dto/login.dto';
 import { AuthGuard } from '../common/guards/auth.guard';
 import { CurrentUser } from '../common/guards/current-user.decorator';
 import { apiSuccess } from '../common/dto/api-response.dto';
-import { toNodeHandler } from 'better-auth/node';
 import { auth } from './better-auth.instance';
 import { Request, Response } from 'express';
+
+// Lazy loader for better-auth/node to avoid ERR_REQUIRE_ESM in CommonJS runtime
+let cachedBetterAuthHandler: ((req: Request, res: Response) => Promise<any>) | null = null;
+async function getBetterAuthHandler() {
+  if (!cachedBetterAuthHandler) {
+    const dynamicImport = new Function('specifier', 'return import(specifier)');
+    const { toNodeHandler } = (await dynamicImport('better-auth/node')) as {
+      toNodeHandler: (authInstance: any) => (req: Request, res: Response) => Promise<any>;
+    };
+    cachedBetterAuthHandler = toNodeHandler(auth);
+  }
+  return cachedBetterAuthHandler;
+}
 
 @ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
-  private readonly betterAuthHandler = toNodeHandler(auth);
 
   constructor(private readonly authService: AuthService) {}
 
@@ -85,6 +96,7 @@ export class AuthController {
   @All('*')
   @ApiOperation({ summary: 'Better Auth native endpoint handler' })
   async handleBetterAuth(@Req() req: Request, @Res() res: Response) {
-    return this.betterAuthHandler(req, res);
+    const handler = await getBetterAuthHandler();
+    return handler(req, res);
   }
 }
