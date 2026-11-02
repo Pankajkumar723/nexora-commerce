@@ -14,10 +14,12 @@ services:
     runtime: node
     plan: free
     region: oregon
-    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm run build:api
+    buildCommand: pnpm install && pnpm run build:api
     startCommand: pnpm run db:setup && pnpm run start:api
     healthCheckPath: /api/v1/health
     envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
       - key: NODE_ENV
         value: production
       - key: PORT
@@ -36,8 +38,16 @@ services:
         value: https://nexora-admin.onrender.com
       - key: SELLER_URL
         value: https://nexora-seller.onrender.com
+      - key: RAZORPAY_KEY_ID
+        value: rzp_test_sample
+      - key: RAZORPAY_KEY_SECRET
+        value: secret_mock
+      - key: RAZORPAY_WEBHOOK_SECRET
+        value: webhook_secret_mock
       - key: AI_MODEL
         value: gemini-1.5-flash
+      - key: AI_PROVIDER_API_KEY
+        value: ""
 
   # -------------------------------------------------------------
   # 2. Storefront (Customer Web App) - Static Site
@@ -45,13 +55,15 @@ services:
   - type: web
     name: nexora-storefront
     runtime: static
-    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm run build:storefront
+    buildCommand: pnpm install && pnpm run build:storefront
     staticPublishPath: ./apps/storefront/dist
     routes:
       - type: rewrite
         source: /*
         destination: /index.html
     envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
       - key: VITE_API_URL
         value: https://nexora-api.onrender.com
 
@@ -61,13 +73,15 @@ services:
   - type: web
     name: nexora-admin
     runtime: static
-    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm run build:admin
+    buildCommand: pnpm install && pnpm run build:admin
     staticPublishPath: ./apps/admin/dist
     routes:
       - type: rewrite
         source: /*
         destination: /index.html
     envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
       - key: VITE_API_URL
         value: https://nexora-api.onrender.com
 
@@ -77,12 +91,14 @@ services:
   - type: web
     name: nexora-seller
     runtime: static
-    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm run build:seller
+    buildCommand: pnpm install && pnpm run build:seller
     staticPublishPath: ./apps/seller/dist
     routes:
       - type: rewrite
         source: /*
         destination: /index.html
     envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
       - key: VITE_API_URL
         value: https://nexora-api.onrender.com
