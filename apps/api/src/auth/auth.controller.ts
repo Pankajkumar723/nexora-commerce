@@ -18,18 +18,21 @@ import { LoginDto } from './dto/login.dto';
 import { AuthGuard } from '../common/guards/auth.guard';
 import { CurrentUser } from '../common/guards/current-user.decorator';
 import { apiSuccess } from '../common/dto/api-response.dto';
-import { auth } from './better-auth.instance';
+import { getBetterAuth } from './better-auth.instance';
 import { Request, Response } from 'express';
 
-// Lazy loader for better-auth/node to avoid ERR_REQUIRE_ESM in CommonJS runtime
+// Lazy loader for better-auth and better-auth/node to avoid ERR_REQUIRE_ESM in CommonJS runtime
 let cachedBetterAuthHandler: ((req: Request, res: Response) => Promise<any>) | null = null;
 async function getBetterAuthHandler() {
   if (!cachedBetterAuthHandler) {
     const dynamicImport = new Function('specifier', 'return import(specifier)');
-    const { toNodeHandler } = (await dynamicImport('better-auth/node')) as {
-      toNodeHandler: (authInstance: any) => (req: Request, res: Response) => Promise<any>;
-    };
-    cachedBetterAuthHandler = toNodeHandler(auth);
+    const [{ toNodeHandler }, authInstance] = await Promise.all([
+      (dynamicImport('better-auth/node') as Promise<{
+        toNodeHandler: (authInstance: any) => (req: Request, res: Response) => Promise<any>;
+      }>),
+      getBetterAuth(),
+    ]);
+    cachedBetterAuthHandler = toNodeHandler(authInstance);
   }
   return cachedBetterAuthHandler;
 }

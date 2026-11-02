@@ -3,6 +3,7 @@ jest.mock('better-auth/node', () => ({
 }));
 jest.mock('./better-auth.instance', () => ({
   auth: { handler: jest.fn() },
+  getBetterAuth: jest.fn().mockResolvedValue({ handler: jest.fn() }),
 }));
 
 import { Test, TestingModule } from '@nestjs/testing';
