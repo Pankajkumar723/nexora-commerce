@@ -93,8 +93,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api/docs', app, document);
 
-  await app.listen(port);
-  logger.log(`🚀 Nexora API server running at: http://localhost:${port}/api/v1`);
+  await app.listen(port, '0.0.0.0');
+  logger.log(`🚀 Nexora API server running at: http://0.0.0.0:${port}/api/v1`);
   logger.log(`📚 OpenAPI / Swagger documentation at: http://localhost:${port}/api/docs`);
 }
 
