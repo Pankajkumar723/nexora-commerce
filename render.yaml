@@ -21,7 +21,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: 10000
+        value: "10000"
       - key: DATABASE_URL
         fromDatabase:
           name: nexora-postgres
@@ -29,35 +29,15 @@ services:
       - key: BETTER_AUTH_SECRET
         generateValue: true
       - key: BETTER_AUTH_URL
-        fromService:
-          type: web
-          name: nexora-api
-          envVarKey: RENDER_EXTERNAL_URL
+        value: https://nexora-api.onrender.com
       - key: STORE_URL
-        fromService:
-          type: web
-          name: nexora-storefront
-          envVarKey: RENDER_EXTERNAL_URL
+        value: https://nexora-storefront.onrender.com
       - key: ADMIN_URL
-        fromService:
-          type: web
-          name: nexora-admin
-          envVarKey: RENDER_EXTERNAL_URL
+        value: https://nexora-admin.onrender.com
       - key: SELLER_URL
-        fromService:
-          type: web
-          name: nexora-seller
-          envVarKey: RENDER_EXTERNAL_URL
-      - key: RAZORPAY_KEY_ID
-        sync: false
-      - key: RAZORPAY_KEY_SECRET
-        sync: false
-      - key: RAZORPAY_WEBHOOK_SECRET
-        sync: false
+        value: https://nexora-seller.onrender.com
       - key: AI_MODEL
         value: gemini-1.5-flash
-      - key: AI_PROVIDER_API_KEY
-        sync: false
 
   # -------------------------------------------------------------
   # 2. Storefront (Customer Web App) - Static Site
@@ -73,10 +53,7 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: nexora-api
-          envVarKey: RENDER_EXTERNAL_URL
+        value: https://nexora-api.onrender.com
 
   # -------------------------------------------------------------
   # 3. Admin Console (Merchant / Admin Portal) - Static Site
@@ -92,10 +69,7 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: nexora-api
-          envVarKey: RENDER_EXTERNAL_URL
+        value: https://nexora-api.onrender.com
 
   # -------------------------------------------------------------
   # 4. Seller Portal (Vendor Dashboard) - Static Site
@@ -111,7 +85,4 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: nexora-api
-          envVarKey: RENDER_EXTERNAL_URL
+        value: https://nexora-api.onrender.com
