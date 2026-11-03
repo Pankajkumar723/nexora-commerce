@@ -1,7 +1,18 @@
-const rawBase = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/v1';
-const API_BASE_URL = rawBase.endsWith('/api/v1')
-  ? rawBase
-  : `${rawBase.replace(/\/+$/, '')}/api/v1`;
+function resolveAdminApiUrl() {
+  const envUrl = import.meta.env.VITE_API_URL;
+  const isBrowser = typeof window !== 'undefined';
+  const isRender = isBrowser && window.location.hostname.includes('onrender.com');
+
+  let raw = envUrl;
+  if (isRender && (!raw || raw.includes('localhost') || raw.includes('nexora-api.onrender.com'))) {
+    raw = 'https://nexora-api-hizw.onrender.com';
+  }
+  raw = raw || (isRender ? 'https://nexora-api-hizw.onrender.com' : 'http://localhost:4000/api/v1');
+  const clean = raw.replace(/\/+$/, '');
+  return clean.endsWith('/api/v1') ? clean : `${clean}/api/v1`;
+}
+
+const API_BASE_URL = resolveAdminApiUrl();
 
 export const TOKEN_KEY = 'nexora_admin_token';
 export const USER_KEY = 'nexora_admin_user';

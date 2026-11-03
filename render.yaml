@@ -31,9 +31,9 @@ services:
       - key: BETTER_AUTH_SECRET
         generateValue: true
       - key: BETTER_AUTH_URL
-        value: https://nexora-api.onrender.com
+        value: https://nexora-api-hizw.onrender.com
       - key: STORE_URL
-        value: https://nexora-storefront.onrender.com
+        value: https://nexora-storefront-wn8v.onrender.com
       - key: ADMIN_URL
         value: https://nexora-admin.onrender.com
       - key: SELLER_URL
@@ -65,7 +65,7 @@ services:
       - key: NODE_VERSION
         value: 20.18.0
       - key: VITE_API_URL
-        value: https://nexora-api.onrender.com
+        value: https://nexora-api-hizw.onrender.com
 
   # -------------------------------------------------------------
   # 3. Admin Console (Merchant / Admin Portal) - Static Site
@@ -83,7 +83,7 @@ services:
       - key: NODE_VERSION
         value: 20.18.0
       - key: VITE_API_URL
-        value: https://nexora-api.onrender.com
+        value: https://nexora-api-hizw.onrender.com
 
   # -------------------------------------------------------------
   # 4. Seller Portal (Vendor Dashboard) - Static Site
@@ -101,4 +101,4 @@ services:
       - key: NODE_VERSION
         value: 20.18.0
       - key: VITE_API_URL
-        value: https://nexora-api.onrender.com
+        value: https://nexora-api-hizw.onrender.com

@@ -1,6 +1,28 @@
-const RAW_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/v1';
-const cleanUrl = RAW_URL.replace(/\/+$/, '');
-const API_BASE_URL = cleanUrl.endsWith('/api/v1') ? cleanUrl : `${cleanUrl}/api/v1`;
+function resolveApiBaseUrl() {
+  const envUrl = import.meta.env.VITE_API_URL;
+  const isBrowser = typeof window !== 'undefined';
+  const isRender = isBrowser && window.location.hostname.includes('onrender.com');
+
+  let raw = envUrl;
+
+  // If deployed on Render and pointing to wrong/non-functional nexora-api or localhost, auto-route to actual backend
+  if (isRender) {
+    if (
+      !raw ||
+      raw.includes('localhost') ||
+      raw === 'https://nexora-api.onrender.com' ||
+      raw === 'https://nexora-api.onrender.com/api/v1'
+    ) {
+      raw = 'https://nexora-api-hizw.onrender.com';
+    }
+  }
+
+  raw = raw || (isRender ? 'https://nexora-api-hizw.onrender.com' : 'http://localhost:4000/api/v1');
+  const cleanUrl = raw.replace(/\/+$/, '');
+  return cleanUrl.endsWith('/api/v1') ? cleanUrl : `${cleanUrl}/api/v1`;
+}
+
+const API_BASE_URL = resolveApiBaseUrl();
 
 export async function apiRequest(endpoint, options = {}) {
   const url = `${API_BASE_URL}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
@@ -11,8 +33,14 @@ export async function apiRequest(endpoint, options = {}) {
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
   };
 
+  // Add 6s request timeout to prevent hanging UI on network hiccups
+  const controller = new AbortController();
+  const timeoutMs = options.timeout || 6000;
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
   const config = {
     ...options,
+    signal: options.signal || controller.signal,
     headers: {
       ...defaultHeaders,
       ...options.headers,
@@ -35,6 +63,8 @@ export async function apiRequest(endpoint, options = {}) {
   } catch (error) {
     console.error(`[API Error] ${endpoint}:`, error);
     throw error;
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 

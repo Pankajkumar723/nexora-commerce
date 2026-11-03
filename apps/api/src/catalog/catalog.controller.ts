@@ -9,6 +9,7 @@ import {
   Body,
   HttpCode,
   HttpStatus,
+  Header,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags, ApiParam } from '@nestjs/swagger';
 import { CatalogService } from './catalog.service';
@@ -24,6 +25,7 @@ export class CatalogController {
   constructor(private readonly catalogService: CatalogService) {}
 
   @Get('products')
+  @Header('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=600')
   @ApiOperation({ summary: 'Search, filter, sort and paginate catalog products' })
   @ApiResponse({ status: 200, description: 'Paginated product list' })
   async getProducts(@Query() query: QueryProductsDto) {
@@ -32,6 +34,7 @@ export class CatalogController {
   }
 
   @Get('products/:slug')
+  @Header('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=600')
   @ApiOperation({ summary: 'Get full product detail by URL slug' })
   @ApiParam({ name: 'slug', description: 'Product unique slug' })
   @ApiResponse({ status: 200, description: 'Product detail' })
@@ -42,6 +45,7 @@ export class CatalogController {
   }
 
   @Get('categories')
+  @Header('Cache-Control', 'public, max-age=120, s-maxage=600, stale-while-revalidate=1200')
   @ApiOperation({ summary: 'List all categories with product counts' })
   @ApiResponse({ status: 200, description: 'Category list' })
   async getCategories() {
