@@ -330,7 +330,7 @@ export function App() {
         <HomePage
           products={products}
           categories={categories}
-          isLoading={isProductsLoading}
+          isLoading={isProductsLoading && products.length === 0}
           onSelectProduct={handleSelectProduct}
           onSelectCategory={(cat) => {
             setSelectedCategory(cat);
@@ -350,7 +350,7 @@ export function App() {
             products={products}
             meta={meta}
             categories={categories}
-            isLoading={isProductsLoading}
+            isLoading={isProductsLoading && products.length === 0}
             searchTerm={appliedSearch}
             onSearchChange={setAppliedSearch}
             selectedCategory={selectedCategory}
