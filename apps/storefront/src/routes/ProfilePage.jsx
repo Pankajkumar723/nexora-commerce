@@ -49,6 +49,37 @@ import {
 import { OrderTrackingModal } from '../components/common/OrderTrackingModal';
 
 export function ProfilePage({ user, onLogout, onNavigate, onAddToCart }) {
+  if (!user) {
+    return (
+      <div className="max-w-md mx-auto py-20 px-4 text-center space-y-6">
+        <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary mx-auto flex items-center justify-center shadow-inner">
+          <User className="w-8 h-8" />
+        </div>
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold text-foreground">You are signed out</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Please sign in with your email or Google account to view your orders, saved addresses, and profile details.
+          </p>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+          <Button
+            onClick={() => onNavigate('login')}
+            className="rounded-xl px-6 font-semibold h-11"
+          >
+            Sign In / Register
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => onNavigate('home')}
+            className="rounded-xl px-6 font-semibold h-11"
+          >
+            Explore Catalog
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'orders' | 'addresses' | 'rewards'
   const [selectedTrackingOrder, setSelectedTrackingOrder] = useState(null);
 
@@ -61,13 +92,23 @@ export function ProfilePage({ user, onLogout, onNavigate, onAddToCart }) {
       console.warn(e);
     }
     return {
-      name: user?.name || 'Aryan Sharma',
-      email: user?.email || 'customer@nexora.com',
-      phone: '+91 98765 43210',
+      name: user.name || 'Verified Customer',
+      email: user.email || '',
+      phone: user.phone || '+91 98765 43210',
       city: 'Bengaluru, India',
-      bio: 'Audiophile & tech hardware enthusiast',
+      bio: 'Nexora Commerce verified shopper',
     };
   });
+
+  useEffect(() => {
+    if (user) {
+      setProfileData((prev) => ({
+        ...prev,
+        name: user.name || prev.name,
+        email: user.email || prev.email,
+      }));
+    }
+  }, [user]);
 
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [editName, setEditName] = useState(profileData.name);

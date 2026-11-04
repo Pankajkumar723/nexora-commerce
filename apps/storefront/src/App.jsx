@@ -6,6 +6,7 @@ import { WishlistDrawer } from './features/wishlist/WishlistDrawer';
 import { AiAssistantTrigger } from './features/ai-assistant/AiAssistantTrigger';
 import { useProducts, useCategories } from './hooks/useCatalog';
 import { authClient } from './lib/auth-client';
+import { authApi } from './lib/apiClient';
 
 // Code-split secondary routes to maximize initial render performance (FCP/LCP)
 const ProductsPage = lazy(() => import('./routes/ProductsPage').then((m) => ({ default: m.ProductsPage })));
@@ -71,22 +72,14 @@ export function App() {
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const saved = localStorage.getItem('nexora_user');
-      if (saved) return JSON.parse(saved);
+      if (saved && saved !== 'null' && saved !== 'undefined') {
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === 'object') return parsed;
+      }
     } catch {
       // fallback
     }
-    const defaultUser = {
-      id: 'usr-customer-1',
-      name: 'Aryan Sharma',
-      email: 'customer@nexora.com',
-      role: 'CUSTOMER',
-    };
-    try {
-      localStorage.setItem('nexora_user', JSON.stringify(defaultUser));
-    } catch (e) {
-      console.warn(e);
-    }
-    return defaultUser;
+    return null;
   });
 
   // Confirmed Order State (Persisted in localStorage)
@@ -146,15 +139,28 @@ export function App() {
   }, [currentRoute]);
 
   const handleLogout = async () => {
-    try {
-      await authClient.signOut();
-    } catch (e) {
-      console.warn('Better Auth sign out warning:', e);
-    }
+    const token = localStorage.getItem('nexora_auth_token');
+    // Clear storage immediately so UI reflects signed-out state in 0ms
     localStorage.removeItem('nexora_auth_token');
     localStorage.removeItem('nexora_user');
+    localStorage.removeItem('nexora_user_profile');
+    localStorage.removeItem('nexora_active_session');
     setCurrentUser(null);
     setCurrentRoute('home');
+    if (typeof window !== 'undefined') {
+      window.location.hash = 'home';
+    }
+
+    // Invalidate session on backend & Better Auth with 2s safety timeout
+    try {
+      await Promise.race([
+        authClient.signOut().catch(() => {}),
+        token ? authApi.logout().catch(() => {}) : Promise.resolve(),
+        new Promise((resolve) => setTimeout(resolve, 2000)),
+      ]);
+    } catch (e) {
+      console.warn('Sign out notice:', e);
+    }
   };
 
   useEffect(() => {
@@ -322,6 +328,7 @@ export function App() {
       onOpenWishlist={() => setIsWishlistOpen(true)}
       onNavigate={handleNavigate}
       user={currentUser}
+      onLogout={handleLogout}
       onOpenAi={() => setIsAiOpen(true)}
       onSelectProduct={handleSelectProduct}
     >

@@ -15,6 +15,7 @@ import {
   KeyRound
 } from 'lucide-react';
 import { authClient, signIn, signUp } from '../lib/auth-client';
+import { authApi } from '../lib/apiClient';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../components/ui/card';
@@ -166,7 +167,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
   };
 
   /**
-   * Complete Google OAuth Sign-in/Sign-up with a REAL Google email
+   * Complete Google OAuth Sign-in/Sign-up with a verified Google account
    */
   const handleGoogleAccountSubmit = async (account) => {
     const email = account.email.trim().toLowerCase();
@@ -179,7 +180,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
     }
 
     if (!userName || userName.length < 2) {
-      setErrorMessage('Please enter your real full name.');
+      setErrorMessage('Please enter your full name.');
       return;
     }
 
@@ -189,8 +190,15 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
     setShowGoogleModal(false);
 
     try {
-      // Authenticate via Better Auth Social / Google
-      const authUser = {
+      // 1. Authenticate with backend database using Google account details
+      const res = await authApi.googleAuth({
+        name: userName,
+        email,
+        googleId: account.googleId || `g-${Date.now()}`,
+        image: account.image || null,
+      });
+
+      const user = res?.data?.user || {
         id: `usr-${Date.now()}`,
         name: userName,
         email,
@@ -199,16 +207,17 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
         provider: 'google',
       };
 
-      const sessionToken = `nexora-ba-google-${Date.now()}`;
-      localStorage.setItem('nexora_auth_token', sessionToken);
-      localStorage.setItem('nexora_user', JSON.stringify(authUser));
+      const token = res?.data?.session?.token || `ba-google-${Date.now()}`;
+      localStorage.setItem('nexora_auth_token', token);
+      localStorage.setItem('nexora_user', JSON.stringify(user));
 
       setSuccessMessage(`Signed in with verified Google account: ${email}! Redirecting...`);
       setTimeout(() => {
-        if (onLoginSuccess) onLoginSuccess(authUser);
+        if (onLoginSuccess) onLoginSuccess(user);
         onNavigate('home');
-      }, 700);
+      }, 500);
     } catch (err) {
+      console.warn('Google auth error:', err);
       setErrorMessage(err.message || 'Failed to authenticate Google account.');
     } finally {
       setIsGoogleLoading(false);
@@ -224,7 +233,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
   };
 
   /**
-   * Handle Sign-In with Better Auth Client
+   * Handle Sign-In with Better Auth Client & API fallback
    */
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -239,58 +248,59 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
     setIsLoading(true);
 
     try {
-      // Better Auth client call
-      const res = await authClient.signIn.email({
-        email: loginEmail,
-        password: loginPassword,
-      });
+      let user = null;
+      let token = null;
 
-      if (res?.error) {
-        throw new Error(res.error.message || 'Invalid email or password.');
+      // 1. Try Better Auth client first
+      try {
+        const baRes = await authClient.signIn.email({
+          email: loginEmail.trim().toLowerCase(),
+          password: loginPassword,
+        });
+
+        if (baRes?.data?.user) {
+          user = baRes.data.user;
+          token = baRes.data.session?.token;
+        } else if (baRes?.error) {
+          throw new Error(baRes.error.message || 'Better Auth login failed');
+        }
+      } catch (baErr) {
+        // 2. Direct API call to /auth/login
+        const apiRes = await authApi.login({
+          email: loginEmail.trim().toLowerCase(),
+          password: loginPassword,
+        });
+
+        if (apiRes?.data?.user) {
+          user = apiRes.data.user;
+          token = apiRes.data.session?.token;
+        } else {
+          throw new Error(apiRes?.message || baErr.message || 'Invalid email or password.');
+        }
       }
 
-      const user = res?.data?.user || {
-        id: 'usr-customer-1',
-        name: loginEmail.split('@')[0],
-        email: loginEmail,
-        role: 'CUSTOMER',
-      };
+      if (!user) {
+        throw new Error('Invalid email or password.');
+      }
 
-      const token = res?.data?.session?.token || `ba-token-${Date.now()}`;
-      localStorage.setItem('nexora_auth_token', token);
+      const sessionToken = token || `ba-token-${Date.now()}`;
+      localStorage.setItem('nexora_auth_token', sessionToken);
       localStorage.setItem('nexora_user', JSON.stringify(user));
 
-      setSuccessMessage('Successfully signed in with Better Auth! Redirecting...');
+      setSuccessMessage(`Welcome back, ${user.name || user.email}! Redirecting...`);
       setTimeout(() => {
         if (onLoginSuccess) onLoginSuccess(user);
         onNavigate('home');
-      }, 700);
+      }, 500);
     } catch (err) {
-      // Fallback for offline demo mode
-      if (loginEmail === 'customer@nexora.com' || err.message?.includes('Failed to fetch') || err.message?.includes('Can\'t reach database')) {
-        const demoUser = {
-          id: 'usr-customer-1',
-          name: 'Aryan Sharma',
-          email: loginEmail,
-          role: 'CUSTOMER',
-        };
-        localStorage.setItem('nexora_auth_token', 'demo-ba-session-token');
-        localStorage.setItem('nexora_user', JSON.stringify(demoUser));
-        setSuccessMessage('Signed in in demo mode! Redirecting...');
-        setTimeout(() => {
-          if (onLoginSuccess) onLoginSuccess(demoUser);
-          onNavigate('home');
-        }, 700);
-      } else {
-        setErrorMessage(err.message || 'Sign in failed. Please check your credentials.');
-      }
+      setErrorMessage(err.message || 'Sign in failed. Please check your credentials.');
     } finally {
       setIsLoading(false);
     }
   };
 
   /**
-   * Handle Sign-Up with Better Auth Client
+   * Handle Sign-Up with Better Auth Client & API fallback
    */
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
@@ -321,52 +331,54 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
     setIsLoading(true);
 
     try {
-      // Better Auth client call
-      const res = await authClient.signUp.email({
-        email: signupEmail.trim().toLowerCase(),
-        password: signupPassword,
-        name: name.trim(),
-      });
+      let user = null;
+      let token = null;
 
-      if (res?.error) {
-        throw new Error(res.error.message || 'Registration failed.');
+      // 1. Try Better Auth client first
+      try {
+        const baRes = await authClient.signUp.email({
+          email: signupEmail.trim().toLowerCase(),
+          password: signupPassword,
+          name: name.trim(),
+        });
+
+        if (baRes?.data?.user) {
+          user = baRes.data.user;
+          token = baRes.data.session?.token;
+        } else if (baRes?.error) {
+          throw new Error(baRes.error.message || 'Better Auth registration failed');
+        }
+      } catch (baErr) {
+        // 2. Direct API call to /auth/register
+        const apiRes = await authApi.register({
+          name: name.trim(),
+          email: signupEmail.trim().toLowerCase(),
+          password: signupPassword,
+        });
+
+        if (apiRes?.data?.user) {
+          user = apiRes.data.user;
+          token = apiRes.data.session?.token;
+        } else {
+          throw new Error(apiRes?.message || baErr.message || 'Registration failed.');
+        }
       }
 
-      const user = res?.data?.user || {
-        id: `usr-${Date.now()}`,
-        name: name.trim(),
-        email: signupEmail.trim().toLowerCase(),
-        role: 'CUSTOMER',
-      };
+      if (!user) {
+        throw new Error('Registration failed. Please try again.');
+      }
 
-      const token = res?.data?.session?.token || `ba-token-${Date.now()}`;
-      localStorage.setItem('nexora_auth_token', token);
+      const sessionToken = token || `ba-token-${Date.now()}`;
+      localStorage.setItem('nexora_auth_token', sessionToken);
       localStorage.setItem('nexora_user', JSON.stringify(user));
 
-      setSuccessMessage('Account created successfully with Better Auth! Redirecting...');
+      setSuccessMessage(`Account created successfully! Welcome to Nexora, ${user.name}!`);
       setTimeout(() => {
         if (onLoginSuccess) onLoginSuccess(user);
         onNavigate('home');
-      }, 700);
+      }, 500);
     } catch (err) {
-      // Graceful offline fallback
-      if (err.message?.includes('Failed to fetch') || err.message?.includes('Can\'t reach database')) {
-        const newUser = {
-          id: `usr-${Date.now()}`,
-          name: name.trim(),
-          email: signupEmail.trim().toLowerCase(),
-          role: 'CUSTOMER',
-        };
-        localStorage.setItem('nexora_auth_token', `demo-ba-token-${Date.now()}`);
-        localStorage.setItem('nexora_user', JSON.stringify(newUser));
-        setSuccessMessage('Account registered in demo mode! Redirecting...');
-        setTimeout(() => {
-          if (onLoginSuccess) onLoginSuccess(newUser);
-          onNavigate('home');
-        }, 700);
-      } else {
-        setErrorMessage(err.message || 'Registration failed. Please try again.');
-      }
+      setErrorMessage(err.message || 'Registration failed. Please try again.');
     } finally {
       setIsLoading(false);
     }

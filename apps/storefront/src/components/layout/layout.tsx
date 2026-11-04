@@ -16,6 +16,7 @@ interface LayoutProps {
   wishlistCount?: number;
   onOpenWishlist?: () => void;
   user?: any;
+  onLogout?: () => void;
   onNavigate?: (route: string) => void;
   onOpenAi?: () => void;
   onSelectProduct?: (slug: string) => void;
@@ -35,6 +36,7 @@ export function Layout({
   wishlistCount = 0,
   onOpenWishlist = () => {},
   user,
+  onLogout,
   onNavigate = () => {},
   onOpenAi = () => {},
   onSelectProduct = () => {},
@@ -84,6 +86,7 @@ export function Layout({
         onOpenWishlist={onOpenWishlist}
         onNavigate={onNavigate}
         user={user}
+        onLogout={onLogout}
         onOpenAi={onOpenAi}
         onSelectProduct={onSelectProduct}
         isDarkMode={isDarkMode}

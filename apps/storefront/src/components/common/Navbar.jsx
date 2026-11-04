@@ -35,8 +35,8 @@ import {
   Car,
   Footprints,
   Luggage,
-  Dog,
   Utensils,
+  LogOut,
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
@@ -88,6 +88,7 @@ export function Navbar({
   onOpenWishlist,
   onNavigate,
   user,
+  onLogout,
   onOpenAi,
   onSelectProduct,
   isDarkMode = false,
@@ -415,33 +416,61 @@ export function Navbar({
             </Button>
 
             {/* Customer Account Button / Pill */}
-            <Button
-              variant={currentRoute === 'profile' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => onNavigate('profile')}
-              className={`gap-2 h-10 px-3.5 text-xs font-semibold rounded-xl border shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0 ${
-                currentRoute === 'profile'
-                  ? 'bg-primary text-primary-foreground border-primary shadow-sm ring-2 ring-primary/20'
-                  : 'border-border/80 bg-background hover:bg-muted/60 text-foreground'
-              }`}
-              title="View Customer Profile & Orders"
-            >
-              <Avatar className="w-5 h-5">
-                <AvatarFallback
-                  className={
+            {user ? (
+              <div className="flex items-center gap-1 shrink-0">
+                <Button
+                  variant={currentRoute === 'profile' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => onNavigate('profile')}
+                  className={`gap-2 h-10 px-3.5 text-xs font-semibold rounded-xl border shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0 ${
                     currentRoute === 'profile'
-                      ? 'bg-primary-foreground text-primary text-[10px] font-bold'
-                      : 'bg-primary text-primary-foreground text-[10px] font-bold'
-                  }
+                      ? 'bg-primary text-primary-foreground border-primary shadow-sm ring-2 ring-primary/20'
+                      : 'border-border/80 bg-background hover:bg-muted/60 text-foreground'
+                  }`}
+                  title="View Customer Profile & Orders"
                 >
-                  {user?.name?.charAt(0)?.toUpperCase() || 'A'}
-                </AvatarFallback>
-              </Avatar>
-              <span className="font-semibold">My Profile</span>
-              <span className="hidden xl:inline text-[11px] opacity-80 font-normal">
-                ({user?.name?.split(' ')[0] || 'Aryan'})
-              </span>
-            </Button>
+                  <Avatar className="w-5 h-5">
+                    <AvatarFallback
+                      className={
+                        currentRoute === 'profile'
+                          ? 'bg-primary-foreground text-primary text-[10px] font-bold'
+                          : 'bg-primary text-primary-foreground text-[10px] font-bold'
+                      }
+                    >
+                      {user.name?.charAt(0)?.toUpperCase() || 'U'}
+                    </AvatarFallback>
+                  </Avatar>
+                  <span className="font-semibold">{user.name?.split(' ')[0] || 'Profile'}</span>
+                </Button>
+                {onLogout && (
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={onLogout}
+                    className="h-10 w-10 rounded-xl border border-border/80 bg-background hover:bg-destructive/10 hover:text-destructive hover:border-destructive/30 text-muted-foreground shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0"
+                    title="Sign Out"
+                    aria-label="Sign Out"
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </Button>
+                )}
+              </div>
+            ) : (
+              <Button
+                variant={currentRoute === 'login' || currentRoute === 'signup' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => onNavigate('login')}
+                className={`gap-1.5 h-10 px-4 text-xs font-semibold rounded-xl border shadow-2xs hover:shadow-xs active:scale-95 transition-all shrink-0 ${
+                  currentRoute === 'login' || currentRoute === 'signup'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-sm ring-2 ring-primary/20'
+                    : 'border-border/80 bg-background hover:bg-muted/60 text-foreground hover:border-primary/50'
+                }`}
+                title="Sign In or Create Account"
+              >
+                <User className="w-4 h-4" />
+                <span>Sign In</span>
+              </Button>
+            )}
 
             {/* Dark / Light Theme Toggle */}
             {onToggleTheme && (
@@ -547,25 +576,52 @@ export function Navbar({
               </Badge>
             )}
           </button>
-          <button
-            onClick={() => {
-              onNavigate('profile');
-              setMobileMenuOpen(false);
-            }}
-            className={`flex items-center justify-between w-full text-left py-2 font-medium border-b border-border/50 ${
-              currentRoute === 'profile' ? 'text-primary font-bold' : 'text-foreground'
-            }`}
-          >
-            <div className="flex items-center gap-2">
-              <User className="w-4 h-4 text-primary" />
-              <span>My Profile & Orders ({user?.name?.split(' ')[0] || 'Aryan'})</span>
-            </div>
-            {currentRoute === 'profile' && (
-              <Badge variant="default" className="text-[10px]">
-                Active
-              </Badge>
-            )}
-          </button>
+          {user ? (
+            <>
+              <button
+                onClick={() => {
+                  onNavigate('profile');
+                  setMobileMenuOpen(false);
+                }}
+                className={`flex items-center justify-between w-full text-left py-2 font-medium border-b border-border/50 ${
+                  currentRoute === 'profile' ? 'text-primary font-bold' : 'text-foreground'
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <User className="w-4 h-4 text-primary" />
+                  <span>My Profile & Orders ({user.name?.split(' ')[0] || 'User'})</span>
+                </div>
+                {currentRoute === 'profile' && (
+                  <Badge variant="default" className="text-[10px]">
+                    Active
+                  </Badge>
+                )}
+              </button>
+              {onLogout && (
+                <button
+                  onClick={() => {
+                    onLogout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center gap-2 w-full text-left py-2 font-medium text-destructive border-b border-border/50"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Sign Out</span>
+                </button>
+              )}
+            </>
+          ) : (
+            <button
+              onClick={() => {
+                onNavigate('login');
+                setMobileMenuOpen(false);
+              }}
+              className="flex items-center gap-2 w-full text-left py-2 font-semibold text-primary border-b border-border/50"
+            >
+              <User className="w-4 h-4" />
+              <span>Sign In / Create Account</span>
+            </button>
+          )}
 
           <button
             onClick={() => {
@@ -629,19 +685,35 @@ export function Navbar({
             <span>All Products</span>
           </Button>
 
-          <Button
-            variant={currentRoute === 'profile' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => onNavigate('profile')}
-            className={`rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-semibold shrink-0 shadow-2xs ${
-              currentRoute === 'profile'
-                ? 'bg-navy text-white hover:bg-royal-blue border-navy'
-                : 'hover:border-primary/50 text-foreground'
-            }`}
-          >
-            <User className="w-3.5 h-3.5 shrink-0" />
-            <span>My Profile & Orders</span>
-          </Button>
+          {user ? (
+            <Button
+              variant={currentRoute === 'profile' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => onNavigate('profile')}
+              className={`rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-semibold shrink-0 shadow-2xs ${
+                currentRoute === 'profile'
+                  ? 'bg-navy text-white hover:bg-royal-blue border-navy'
+                  : 'hover:border-primary/50 text-foreground'
+              }`}
+            >
+              <User className="w-3.5 h-3.5 shrink-0" />
+              <span>My Profile & Orders</span>
+            </Button>
+          ) : (
+            <Button
+              variant={currentRoute === 'login' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => onNavigate('login')}
+              className={`rounded-full text-xs h-8 px-3.5 whitespace-nowrap gap-1.5 font-semibold shrink-0 shadow-2xs ${
+                currentRoute === 'login'
+                  ? 'bg-navy text-white hover:bg-royal-blue border-navy'
+                  : 'hover:border-primary/50 text-foreground'
+              }`}
+            >
+              <User className="w-3.5 h-3.5 shrink-0" />
+              <span>Sign In / Register</span>
+            </Button>
+          )}
 
           <div className="h-4 w-px bg-border/80 shrink-0 mx-1" />
           {categories.map((cat) => {
