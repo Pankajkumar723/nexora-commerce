@@ -131,6 +131,24 @@ export const authApi = {
       body: JSON.stringify(data),
     });
   },
+  sendOtp: (data) => {
+    return apiRequest('/auth/send-otp', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+  verifyOtp: (data) => {
+    return apiRequest('/auth/verify-otp', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+  registerWithOtp: (data) => {
+    return apiRequest('/auth/register-with-otp', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
 };
 
 export const couponApi = {

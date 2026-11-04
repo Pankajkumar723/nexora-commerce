@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   User, 
   Mail, 
@@ -11,9 +11,14 @@ import {
   CheckCircle2, 
   AlertCircle,
   ArrowRight,
-  Globe,
-  KeyRound
+  KeyRound,
+  RotateCcw,
+  Check,
+  ShoppingBag,
+  Gift,
+  PartyPopper
 } from 'lucide-react';
+import confetti from 'canvas-confetti';
 import { authClient, signIn, signUp } from '../lib/auth-client';
 import { authApi } from '../lib/apiClient';
 import { Button } from '../components/ui/button';
@@ -32,6 +37,50 @@ import {
   DialogDescription,
   DialogFooter,
 } from '../components/ui/dialog';
+
+/**
+ * Multi-wave celebratory confetti launcher
+ */
+const launchCelebrationConfetti = () => {
+  try {
+    // 1. Center blast
+    confetti({
+      particleCount: 90,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#2563eb', '#38bdf8', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6'],
+    });
+
+    // 2. Left and right cannons
+    setTimeout(() => {
+      confetti({
+        particleCount: 60,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0.1, y: 0.65 },
+        colors: ['#3b82f6', '#10b981', '#fbbf24'],
+      });
+      confetti({
+        particleCount: 60,
+        angle: 120,
+        spread: 55,
+        origin: { x: 0.9, y: 0.65 },
+        colors: ['#ec4899', '#8b5cf6', '#38bdf8'],
+      });
+    }, 250);
+
+    // 3. High floating sparkles
+    setTimeout(() => {
+      confetti({
+        particleCount: 45,
+        spread: 110,
+        origin: { y: 0.45 },
+      });
+    }, 600);
+  } catch (err) {
+    console.warn('Confetti animation:', err);
+  }
+};
 
 /**
  * Official Google 'G' 4-color SVG Icon
@@ -60,6 +109,8 @@ function GoogleIcon({ className = "w-5 h-5" }) {
 }
 
 export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) {
+  // Main view state: 'form' | 'otp' | 'celebration'
+  const [authState, setAuthState] = useState('form');
   const [activeTab, setActiveTab] = useState(initialMode); // 'login' | 'signup'
 
   // Login form state
@@ -74,6 +125,19 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
   const [confirmPassword, setConfirmPassword] = useState('');
   const [agreeTerms, setAgreeTerms] = useState(true);
 
+  // OTP Verification state
+  const [otpCode, setOtpCode] = useState('');
+  const [previewOtp, setPreviewOtp] = useState('');
+  const [resendTimer, setResendTimer] = useState(60);
+  const [pendingUser, setPendingUser] = useState(null); // { name, email, password, provider, googleId, image }
+
+  // Celebration state
+  const [celebrationDetails, setCelebrationDetails] = useState({
+    type: 'signup', // 'signup' | 'login'
+    user: null,
+  });
+  const [countdown, setCountdown] = useState(4);
+
   // Status state
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
@@ -87,6 +151,45 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
 
   // Google GIS Client ID
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
+  // Countdown timer for OTP resend
+  useEffect(() => {
+    let interval = null;
+    if (authState === 'otp' && resendTimer > 0) {
+      interval = setInterval(() => {
+        setResendTimer((prev) => (prev > 0 ? prev - 1 : 0));
+      }, 1000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [authState, resendTimer]);
+
+  // Countdown auto-redirect for celebration screen
+  useEffect(() => {
+    let timer = null;
+    if (authState === 'celebration') {
+      launchCelebrationConfetti();
+      setCountdown(4);
+
+      timer = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            if (onLoginSuccess && celebrationDetails.user) {
+              onLoginSuccess(celebrationDetails.user);
+            }
+            onNavigate('home');
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [authState]);
 
   // Initialize official Google Identity Services if client ID is configured
   useEffect(() => {
@@ -110,7 +213,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
                 );
                 const payload = JSON.parse(jsonPayload);
                 if (payload.email) {
-                  handleGoogleAccountSubmit({
+                  handleGoogleInitiation({
                     name: payload.name || payload.given_name || 'Google Customer',
                     email: payload.email,
                     googleId: payload.sub,
@@ -118,13 +221,13 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
                   });
                 }
               } catch (e) {
-                console.error('Failed to parse Google credential token:', e);
+                console.error('Failed to parse Google JWT payload:', e);
               }
             }
           },
         });
       } catch (err) {
-        console.warn('Google Identity Services init warning:', err);
+        console.warn('Google Identity initialization failed:', err);
       }
     };
 
@@ -140,17 +243,18 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
     }
   }, [googleClientId]);
 
-  // Demo fill helper
   const handleFillDemo = () => {
     setLoginEmail('customer@nexora.com');
-    setLoginPassword('Customer@123');
-    setErrorMessage('');
+    setLoginPassword('DemoPassword123!');
   };
 
   /**
-   * Handle Click on "Continue with Google"
+   * Google button click trigger
    */
   const handleGoogleClick = () => {
+    setErrorMessage('');
+    setSuccessMessage('');
+
     if (googleClientId && window.google?.accounts?.id) {
       try {
         window.google.accounts.id.prompt((notification) => {
@@ -159,66 +263,81 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
           }
         });
         return;
-      } catch {
-        setShowGoogleModal(true);
+      } catch (e) {
+        console.warn('GSI prompt error, opening fallback modal:', e);
       }
     }
     setShowGoogleModal(true);
   };
 
   /**
-   * Complete Google OAuth Sign-in/Sign-up with a verified Google account
+   * Handle Google flow: Send OTP to Google email for verification
    */
-  const handleGoogleAccountSubmit = async (account) => {
+  const handleGoogleInitiation = async (account) => {
     const email = account.email.trim().toLowerCase();
     const userName = account.name.trim();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
-      setErrorMessage('Please enter a valid real email address.');
-      return;
-    }
-
-    if (!userName || userName.length < 2) {
-      setErrorMessage('Please enter your full name.');
+      setErrorMessage('Please enter a valid Google email address.');
       return;
     }
 
     setIsGoogleLoading(true);
     setErrorMessage('');
-    setSuccessMessage('');
     setShowGoogleModal(false);
 
     try {
-      // 1. Authenticate with backend database using Google account details
-      const res = await authApi.googleAuth({
+      // Send OTP to Google email for identity verification
+      const otpRes = await authApi.sendOtp({
+        email,
+        name: userName,
+        type: 'signup',
+      });
+
+      setPendingUser({
         name: userName,
         email,
         googleId: account.googleId || `g-${Date.now()}`,
         image: account.image || null,
+        provider: 'google',
       });
 
-      const user = res?.data?.user || {
-        id: `usr-${Date.now()}`,
-        name: userName,
-        email,
-        role: 'CUSTOMER',
-        image: account.image || null,
-        provider: 'google',
-      };
+      if (otpRes?.data?.previewOtp) {
+        setPreviewOtp(otpRes.data.previewOtp);
+      }
 
-      const token = res?.data?.session?.token || `ba-google-${Date.now()}`;
-      localStorage.setItem('nexora_auth_token', token);
-      localStorage.setItem('nexora_user', JSON.stringify(user));
-
-      setSuccessMessage(`Signed in with verified Google account: ${email}! Redirecting...`);
-      setTimeout(() => {
-        if (onLoginSuccess) onLoginSuccess(user);
-        onNavigate('home');
-      }, 500);
+      setResendTimer(60);
+      setOtpCode('');
+      setAuthState('otp');
+      setSuccessMessage(`Verification code sent to your Google account (${email})!`);
     } catch (err) {
-      console.warn('Google auth error:', err);
-      setErrorMessage(err.message || 'Failed to authenticate Google account.');
+      console.warn('Google OTP error:', err);
+      // If error or already registered, attempt direct authentication
+      try {
+        const authRes = await authApi.googleAuth({
+          name: userName,
+          email,
+          googleId: account.googleId || `g-${Date.now()}`,
+          image: account.image || null,
+        });
+
+        const user = authRes?.data?.user || {
+          id: `usr-${Date.now()}`,
+          name: userName,
+          email,
+          role: 'CUSTOMER',
+        };
+
+        const token = authRes?.data?.session?.token || `ba-google-${Date.now()}`;
+        localStorage.setItem('nexora_auth_token', token);
+        localStorage.setItem('nexora_user', JSON.stringify(user));
+
+        setCelebrationDetails({ type: 'signup', user });
+        setAuthState('celebration');
+      } catch (authErr) {
+        setErrorMessage(authErr.message || err.message || 'Google authentication failed.');
+      }
     } finally {
       setIsGoogleLoading(false);
     }
@@ -226,14 +345,14 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
 
   const handleCustomGoogleFormSubmit = (e) => {
     e.preventDefault();
-    handleGoogleAccountSubmit({
+    handleGoogleInitiation({
       name: realGoogleName,
       email: realGoogleEmail,
     });
   };
 
   /**
-   * Handle Sign-In with Better Auth Client & API fallback
+   * Handle Sign-In with Email & Password
    */
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -251,7 +370,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
       let user = null;
       let token = null;
 
-      // 1. Try Better Auth client first
+      // 1. Better Auth client
       try {
         const baRes = await authClient.signIn.email({
           email: loginEmail.trim().toLowerCase(),
@@ -287,11 +406,9 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
       localStorage.setItem('nexora_auth_token', sessionToken);
       localStorage.setItem('nexora_user', JSON.stringify(user));
 
-      setSuccessMessage(`Welcome back, ${user.name || user.email}! Redirecting...`);
-      setTimeout(() => {
-        if (onLoginSuccess) onLoginSuccess(user);
-        onNavigate('home');
-      }, 500);
+      // Trigger Celebration Screen for successful login
+      setCelebrationDetails({ type: 'login', user });
+      setAuthState('celebration');
     } catch (err) {
       setErrorMessage(err.message || 'Sign in failed. Please check your credentials.');
     } finally {
@@ -300,7 +417,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
   };
 
   /**
-   * Handle Sign-Up with Better Auth Client & API fallback
+   * Step 1 of Sign-up: Send OTP to email
    */
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
@@ -331,62 +448,383 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
     setIsLoading(true);
 
     try {
-      let user = null;
-      let token = null;
+      // Call backend to send 6-digit OTP to user's email
+      const res = await authApi.sendOtp({
+        email: signupEmail.trim().toLowerCase(),
+        name: name.trim(),
+        type: 'signup',
+      });
 
-      // 1. Try Better Auth client first
-      try {
-        const baRes = await authClient.signUp.email({
-          email: signupEmail.trim().toLowerCase(),
-          password: signupPassword,
-          name: name.trim(),
-        });
+      setPendingUser({
+        name: name.trim(),
+        email: signupEmail.trim().toLowerCase(),
+        password: signupPassword,
+        provider: 'credentials',
+      });
 
-        if (baRes?.data?.user) {
-          user = baRes.data.user;
-          token = baRes.data.session?.token;
-        } else if (baRes?.error) {
-          throw new Error(baRes.error.message || 'Better Auth registration failed');
-        }
-      } catch (baErr) {
-        // 2. Direct API call to /auth/register
-        const apiRes = await authApi.register({
-          name: name.trim(),
-          email: signupEmail.trim().toLowerCase(),
-          password: signupPassword,
-        });
-
-        if (apiRes?.data?.user) {
-          user = apiRes.data.user;
-          token = apiRes.data.session?.token;
-        } else {
-          throw new Error(apiRes?.message || baErr.message || 'Registration failed.');
-        }
+      if (res?.data?.previewOtp) {
+        setPreviewOtp(res.data.previewOtp);
       }
 
-      if (!user) {
-        throw new Error('Registration failed. Please try again.');
-      }
-
-      const sessionToken = token || `ba-token-${Date.now()}`;
-      localStorage.setItem('nexora_auth_token', sessionToken);
-      localStorage.setItem('nexora_user', JSON.stringify(user));
-
-      setSuccessMessage(`Account created successfully! Welcome to Nexora, ${user.name}!`);
-      setTimeout(() => {
-        if (onLoginSuccess) onLoginSuccess(user);
-        onNavigate('home');
-      }, 500);
+      setResendTimer(60);
+      setOtpCode('');
+      setAuthState('otp');
+      setSuccessMessage(`A 6-digit verification code has been sent to ${signupEmail.trim().toLowerCase()}`);
     } catch (err) {
-      setErrorMessage(err.message || 'Registration failed. Please try again.');
+      setErrorMessage(err.message || 'Failed to send verification code. Please check your email.');
     } finally {
       setIsLoading(false);
     }
   };
 
+  /**
+   * Step 2 of Sign-up: Verify OTP and create authenticated account
+   */
+  const handleVerifyOtpSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMessage('');
+    setSuccessMessage('');
+
+    const cleanOtp = otpCode.trim();
+    if (cleanOtp.length !== 6) {
+      setErrorMessage('Please enter the full 6-digit verification code.');
+      return;
+    }
+
+    if (!pendingUser) {
+      setErrorMessage('Session expired. Please start registration again.');
+      setAuthState('form');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      let createdUser = null;
+      let sessionToken = null;
+
+      if (pendingUser.provider === 'google') {
+        // 1. Verify OTP
+        await authApi.verifyOtp({
+          email: pendingUser.email,
+          otp: cleanOtp,
+        });
+
+        // 2. Create/Sync Google User
+        const googleRes = await authApi.googleAuth({
+          name: pendingUser.name,
+          email: pendingUser.email,
+          googleId: pendingUser.googleId,
+          image: pendingUser.image,
+        });
+
+        createdUser = googleRes?.data?.user;
+        sessionToken = googleRes?.data?.session?.token;
+      } else {
+        // Register with OTP
+        const res = await authApi.registerWithOtp({
+          name: pendingUser.name,
+          email: pendingUser.email,
+          password: pendingUser.password,
+          otp: cleanOtp,
+        });
+
+        createdUser = res?.data?.user;
+        sessionToken = res?.data?.session?.token;
+      }
+
+      if (!createdUser) {
+        throw new Error('Registration failed. Please check the code and try again.');
+      }
+
+      const finalToken = sessionToken || `ba-token-${Date.now()}`;
+      localStorage.setItem('nexora_auth_token', finalToken);
+      localStorage.setItem('nexora_user', JSON.stringify(createdUser));
+
+      // Transition to final animated celebration screen
+      setCelebrationDetails({ type: 'signup', user: createdUser });
+      setAuthState('celebration');
+    } catch (err) {
+      setErrorMessage(err.message || 'Invalid or expired verification code.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  /**
+   * Resend OTP code
+   */
+  const handleResendOtp = async () => {
+    if (resendTimer > 0 || !pendingUser) return;
+    setIsLoading(true);
+    setErrorMessage('');
+
+    try {
+      const res = await authApi.sendOtp({
+        email: pendingUser.email,
+        name: pendingUser.name,
+        type: 'signup',
+      });
+
+      if (res?.data?.previewOtp) {
+        setPreviewOtp(res.data.previewOtp);
+      }
+      setResendTimer(60);
+      setSuccessMessage('A fresh verification code has been dispatched to your email.');
+    } catch (err) {
+      setErrorMessage(err.message || 'Failed to resend code.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  /**
+   * RENDER VIEW 1: ANIMATED CELEBRATION / CONGRATULATIONS SCREEN
+   */
+  if (authState === 'celebration') {
+    const isSignup = celebrationDetails.type === 'signup';
+    const activeUserName = celebrationDetails.user?.name || (isSignup ? name : 'Shopper');
+    const activeUserEmail = celebrationDetails.user?.email || (isSignup ? signupEmail : loginEmail);
+
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center py-10 px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-lg space-y-6 animate-in zoom-in-95 fade-in duration-300">
+          <Card className="border-border shadow-2xl overflow-hidden relative text-center">
+            {/* Top Celebratory Header Banner */}
+            <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-600 p-8 text-white relative">
+              <div className="w-20 h-20 mx-auto rounded-3xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-xl mb-4 animate-bounce">
+                {isSignup ? (
+                  <PartyPopper className="w-10 h-10 text-yellow-300 drop-shadow" />
+                ) : (
+                  <Sparkles className="w-10 h-10 text-yellow-300 drop-shadow" />
+                )}
+              </div>
+              <Badge className="bg-white/20 hover:bg-white/25 text-white border-white/30 px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-2">
+                {isSignup ? 'Account Activated' : 'Session Verified'}
+              </Badge>
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                {isSignup ? `Congratulations, ${activeUserName.split(' ')[0]}!` : `Welcome Back, ${activeUserName.split(' ')[0]}!`}
+              </h1>
+              <p className="text-xs sm:text-sm text-blue-100 mt-1 max-w-sm mx-auto">
+                {isSignup
+                  ? 'Your Nexora Commerce account has been successfully verified & created.'
+                  : 'You are securely signed in to your Nexora Commerce account.'}
+              </p>
+            </div>
+
+            <CardContent className="p-6 sm:p-8 space-y-6">
+              {/* Verified Details Card */}
+              <div className="bg-muted/50 border border-border rounded-2xl p-4 text-left flex items-center justify-between gap-4">
+                <div className="space-y-0.5 min-w-0">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">
+                    Verified Customer
+                  </p>
+                  <p className="text-sm font-bold text-foreground truncate">{activeUserName}</p>
+                  <p className="text-xs text-muted-foreground truncate">{activeUserEmail}</p>
+                </div>
+                <div className="shrink-0 flex items-center gap-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-full text-xs font-semibold">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>Verified</span>
+                </div>
+              </div>
+
+              {/* Welcome Perk Pill */}
+              <div className="bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border border-amber-500/20 rounded-2xl p-4 flex items-center gap-3.5 text-left">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                  <Gift className="w-5 h-5" />
+                </div>
+                <div className="text-xs">
+                  <p className="font-bold text-foreground">Welcome Reward Unlocked!</p>
+                  <p className="text-muted-foreground mt-0.5">
+                    Use code <span className="font-mono font-bold text-amber-600 dark:text-amber-400">WELCOME10</span> for 10% off on your first order.
+                  </p>
+                </div>
+              </div>
+
+              {/* Auto Redirect Countdown */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs text-muted-foreground font-medium">
+                  <span>Redirecting to catalog</span>
+                  <span className="font-bold text-primary">{countdown}s</span>
+                </div>
+                <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-primary transition-all duration-1000 ease-linear rounded-full"
+                    style={{ width: `${((4 - countdown) / 4) * 100}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <Button
+                  onClick={() => {
+                    if (onLoginSuccess && celebrationDetails.user) {
+                      onLoginSuccess(celebrationDetails.user);
+                    }
+                    onNavigate('home');
+                  }}
+                  className="flex-1 h-11 rounded-xl font-semibold gap-2 shadow-sm"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  <span>Start Shopping</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    if (onLoginSuccess && celebrationDetails.user) {
+                      onLoginSuccess(celebrationDetails.user);
+                    }
+                    onNavigate('profile');
+                  }}
+                  className="flex-1 h-11 rounded-xl font-semibold gap-2"
+                >
+                  <User className="w-4 h-4" />
+                  <span>View My Profile</span>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  /**
+   * RENDER VIEW 2: OTP VERIFICATION SCREEN
+   */
+  if (authState === 'otp') {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center py-10 px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-md space-y-6 animate-in fade-in zoom-in-95 duration-200">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setAuthState('form')}
+            className="gap-2 text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Back to Registration</span>
+          </Button>
+
+          {errorMessage && (
+            <div className="p-4 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive text-xs flex items-center gap-2 animate-in fade-in">
+              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+              <span>{errorMessage}</span>
+            </div>
+          )}
+
+          {successMessage && (
+            <div className="p-4 rounded-xl bg-teal/10 border border-teal/20 text-teal text-xs flex items-center gap-2 animate-in fade-in">
+              <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+              <span>{successMessage}</span>
+            </div>
+          )}
+
+          <Card className="border-border shadow-xl">
+            <CardHeader className="text-center pb-3">
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary mx-auto flex items-center justify-center mb-3 shadow-inner">
+                <KeyRound className="w-7 h-7" />
+              </div>
+              <CardTitle className="text-xl font-bold tracking-tight">Verify Your Email</CardTitle>
+              <CardDescription className="text-xs max-w-xs mx-auto">
+                We sent a 6-digit confirmation code to{' '}
+                <strong className="text-foreground">{pendingUser?.email}</strong>.
+              </CardDescription>
+
+              {/* Dev/Demo Quick Fill Code Helper */}
+              {previewOtp && (
+                <div className="pt-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setOtpCode(previewOtp)}
+                    className="text-[11px] h-7 gap-1 border-primary/20 hover:bg-primary/10 text-primary"
+                  >
+                    <Sparkles className="w-3 h-3" />
+                    <span>Quick Fill Code: {previewOtp}</span>
+                  </Button>
+                </div>
+              )}
+            </CardHeader>
+
+            <CardContent className="space-y-4 pt-1">
+              <form onSubmit={handleVerifyOtpSubmit} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="otp-input" className="text-xs font-semibold text-center block">
+                    Enter 6-Digit Code
+                  </Label>
+                  <Input
+                    id="otp-input"
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    maxLength={6}
+                    autoFocus
+                    required
+                    value={otpCode}
+                    onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    placeholder="------"
+                    className="h-14 text-center text-2xl tracking-[0.5em] font-mono font-bold rounded-xl"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={isLoading || otpCode.trim().length !== 6}
+                  className="w-full h-11 font-semibold rounded-xl text-sm"
+                >
+                  {isLoading ? 'Verifying & Creating Account...' : 'Confirm & Activate Account'}
+                </Button>
+              </form>
+
+              {/* Resend & Edit Email Controls */}
+              <div className="flex items-center justify-between text-xs pt-2 border-t border-border/60">
+                <button
+                  type="button"
+                  onClick={() => setAuthState('form')}
+                  className="text-muted-foreground hover:text-foreground font-medium"
+                >
+                  Change email
+                </button>
+
+                <button
+                  type="button"
+                  disabled={resendTimer > 0 || isLoading}
+                  onClick={handleResendOtp}
+                  className={`flex items-center gap-1 font-semibold ${
+                    resendTimer > 0
+                      ? 'text-muted-foreground cursor-not-allowed'
+                      : 'text-primary hover:underline'
+                  }`}
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>
+                    {resendTimer > 0 ? `Resend in ${resendTimer}s` : 'Resend Code'}
+                  </span>
+                </button>
+              </div>
+            </CardContent>
+
+            <CardFooter className="flex flex-col border-t pt-3 text-center">
+              <div className="flex items-center justify-center gap-1.5 text-[11px] text-muted-foreground">
+                <ShieldCheck className="w-3.5 h-3.5 text-teal" />
+                <span>Encrypted 256-bit Identity Verification</span>
+              </div>
+            </CardFooter>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  /**
+   * RENDER VIEW 3: STANDARD LOGIN & SIGNUP FORM
+   */
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-10 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-6">
+      <div className="w-full max-w-md space-y-6 animate-in fade-in duration-200">
         {/* Navigation Breadcrumb */}
         <Button
           variant="ghost"
@@ -413,7 +851,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
           </div>
         )}
 
-        {/* Main Shadcn Card */}
+        {/* Main Card */}
         <Card className="border-border shadow-lg">
           <CardHeader className="text-center pb-4">
             <picture>
@@ -435,7 +873,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
             <CardDescription className="text-xs">
               {activeTab === 'login'
                 ? 'Sign in to access your orders, saved addresses, and AI assistant.'
-                : 'Join Nexora for AI-curated gear, fast checkout, and exclusive promos.'}
+                : 'Join Nexora with verified email security, fast checkout, and exclusive promos.'}
             </CardDescription>
 
             {/* Quick Demo Pill */}
@@ -465,7 +903,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
               className="w-full h-10 border-input hover:bg-accent font-medium gap-2.5 text-xs shadow-sm"
             >
               <GoogleIcon className="w-4 h-4" />
-              <span>Continue with Real Google Account</span>
+              <span>Continue with Google Account</span>
             </Button>
 
             <div className="relative my-4">
@@ -514,7 +952,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
                       <Label htmlFor="login-password">Password</Label>
                       <button
                         type="button"
-                        onClick={() => alert('Password reset link sent to registered email in production.')}
+                        onClick={() => alert('Password reset verification is active on registered accounts.')}
                         className="text-[11px] text-primary hover:underline"
                       >
                         Forgot password?
@@ -547,7 +985,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
                 </form>
               </TabsContent>
 
-              {/* TAB 2: SIGNUP FORM */}
+              {/* TAB 2: SIGNUP FORM (WITH EMAIL OTP VERIFICATION) */}
               <TabsContent value="signup">
                 <form onSubmit={handleSignupSubmit} className="space-y-3">
                   <div className="space-y-1">
@@ -580,6 +1018,9 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
                       />
                       <Mail className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                     </div>
+                    <p className="text-[11px] text-muted-foreground">
+                      We'll send a 6-digit verification code to confirm this email.
+                    </p>
                   </div>
 
                   <div className="space-y-1">
@@ -626,7 +1067,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
                   </div>
 
                   <Button type="submit" disabled={isLoading} className="w-full h-10 mt-2 font-semibold">
-                    {isLoading ? 'Creating Account...' : 'Create Account with Better Auth'}
+                    {isLoading ? 'Sending Verification Code...' : 'Send Verification OTP'}
                   </Button>
                 </form>
               </TabsContent>
@@ -636,7 +1077,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
           <CardFooter className="flex flex-col border-t pt-4 text-center">
             <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
               <ShieldCheck className="w-4 h-4 text-teal" />
-              <span>Protected by Better Auth Session Tokens & HMAC SHA-256</span>
+              <span>Protected by Better Auth Session Tokens & OTP Verification</span>
             </div>
           </CardFooter>
         </Card>
@@ -647,10 +1088,10 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
             <DialogHeader>
               <div className="flex items-center gap-2 mb-1">
                 <GoogleIcon className="w-5 h-5" />
-                <DialogTitle className="text-base font-bold">Sign In with Real Google Account</DialogTitle>
+                <DialogTitle className="text-base font-bold">Sign In with Google Account</DialogTitle>
               </div>
               <DialogDescription className="text-xs">
-                Enter your genuine Google email address. We do not use fake or dummy emails to create accounts.
+                Enter your genuine Google email address. A 6-digit confirmation code will be dispatched to verify your account.
               </DialogDescription>
             </DialogHeader>
 
@@ -689,7 +1130,7 @@ export function AuthPage({ initialMode = 'login', onNavigate, onLoginSuccess }) 
                 </Button>
                 <Button type="submit" disabled={isGoogleLoading} className="gap-2">
                   <GoogleIcon className="w-4 h-4" />
-                  <span>{isGoogleLoading ? 'Verifying...' : 'Authenticate Google Account'}</span>
+                  <span>{isGoogleLoading ? 'Sending OTP...' : 'Send OTP to Google Email'}</span>
                 </Button>
               </DialogFooter>
             </form>

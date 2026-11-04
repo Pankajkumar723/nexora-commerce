@@ -15,6 +15,7 @@ import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagg
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { SendOtpDto, VerifyOtpDto, RegisterWithOtpDto } from './dto/otp.dto';
 import { AuthGuard } from '../common/guards/auth.guard';
 import { CurrentUser } from '../common/guards/current-user.decorator';
 import { apiSuccess } from '../common/dto/api-response.dto';
@@ -94,6 +95,33 @@ export class AuthController {
   async googleAuth(@Body() body: { email: string; name: string; googleId?: string; image?: string }) {
     const result = await this.authService.googleAuth(body);
     return apiSuccess(result, null, 'Google authentication successful');
+  }
+
+  @Post('send-otp')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Send a 6-digit OTP to user email for verification' })
+  @ApiResponse({ status: 200, description: 'OTP sent successfully' })
+  async sendOtp(@Body() dto: SendOtpDto) {
+    const result = await this.authService.sendOtp(dto);
+    return apiSuccess(result, null, result.message);
+  }
+
+  @Post('verify-otp')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Verify 6-digit OTP code' })
+  @ApiResponse({ status: 200, description: 'OTP verified successfully' })
+  async verifyOtp(@Body() dto: VerifyOtpDto) {
+    const result = await this.authService.verifyOtp(dto);
+    return apiSuccess(result, null, result.message);
+  }
+
+  @Post('register-with-otp')
+  @HttpCode(HttpStatus.CREATED)
+  @ApiOperation({ summary: 'Complete registration after OTP verification' })
+  @ApiResponse({ status: 201, description: 'Account created and verified' })
+  async registerWithOtp(@Body() dto: RegisterWithOtpDto) {
+    const result = await this.authService.registerWithOtp(dto);
+    return apiSuccess(result, null, result.message);
   }
 
   @All('*')
