@@ -35,6 +35,7 @@ import {
   Car,
   Footprints,
   Luggage,
+  Dog,
   Utensils,
   LogOut,
 } from 'lucide-react';
@@ -317,7 +318,7 @@ export function Navbar({
                   width={40}
                   height={40}
                   loading="eager"
-                  fetchPriority="high"
+                  fetchpriority="high"
                   className="w-10 h-10 object-contain drop-shadow-sm group-hover:scale-105 transition-transform"
                 />
               </picture>
@@ -717,7 +718,7 @@ export function Navbar({
 
           <div className="h-4 w-px bg-border/80 shrink-0 mx-1" />
           {categories.map((cat) => {
-            const IconComponent = getCategoryIcon(cat.slug, cat.name);
+            const IconComponent = getCategoryIcon(cat.slug, cat.name) || Layers;
             const isSelected = activeCategory === cat.slug;
             return (
               <Button
